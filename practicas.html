@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 IGOREXCEL · Prácticas Avanzadas</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --eg: #217346; --egm: #2e8b57; --egl: #3daa6e; --egp: #e8f5ee;
+  --ed: #1a2e1a; --eg2: #c8e6c9; --gold: #f4c430; --red: #e53935;
+  --gray1: #f4f6f4; --gray2: #e8ece8; --gray3: #c8d4c8; --gray5: #6b8f6b;
+  --r: 12px; --rs: 8px; --sh: 0 4px 20px rgba(33,115,70,.12);
+  --sh2: 0 8px 40px rgba(33,115,70,.18);
+  --font: 'Plus Jakarta Sans', sans-serif; --mono: 'JetBrains Mono', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:var(--gray1); color:var(--ed); }
+
+.topnav {
+  background: var(--eg); color:white; padding:12px 24px;
+  display:flex; align-items:center; gap:16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  position:sticky; top:0; z-index:100;
+}
+.topnav a { color:white; text-decoration:none; font-size:13px; opacity:.8; }
+.topnav a:hover { opacity:1; text-decoration:underline; }
+.topnav .brand { font-size:18px; font-weight:800; }
+.topnav .sep { opacity:.3; }
+
+.page { max-width:1100px; margin:0 auto; padding:32px 24px; }
+
+h1.page-title {
+  font-size:28px; font-weight:800; color:var(--ed);
+  margin-bottom:8px; display:flex; align-items:center; gap:10px;
+}
+.page-subtitle { font-size:14px; color:var(--gray5); margin-bottom:28px; }
+
+/* ── TABS ── */
+.tabs { display:flex; gap:0; margin-bottom:24px; border-radius:var(--r); overflow:hidden; border:1px solid var(--gray3); background:white; }
+.tab { flex:1; padding:13px 8px; text-align:center; cursor:pointer; font-size:13px; font-weight:600; color:var(--gray5); border-right:1px solid var(--gray3); transition:all .15s; }
+.tab:last-child { border-right:none; }
+.tab:hover { background:var(--egp); color:var(--eg); }
+.tab.active { background:var(--eg); color:white; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ── CARDS ── */
+.card {
+  background:white; border-radius:var(--r);
+  border:1px solid var(--gray2); box-shadow:var(--sh);
+  margin-bottom:20px; overflow:hidden;
+}
+.card-header {
+  padding:18px 22px; display:flex; align-items:center; gap:12px;
+  border-bottom:1px solid var(--gray2);
+  background:linear-gradient(135deg,var(--egp),var(--gray1));
+}
+.card-icon { font-size:26px; }
+.card-title { font-size:16px; font-weight:700; color:var(--ed); }
+.card-meta { font-size:11px; color:var(--gray5); margin-top:2px; }
+.card-body { padding:22px; }
+
+/* ── BADGE ── */
+.badge { display:inline-block; font-size:10px; font-weight:700; padding:3px 8px; border-radius:10px; text-transform:uppercase; letter-spacing:.5px; margin-right:4px; }
+.b-green { background:var(--egp); color:var(--eg); }
+.b-orange { background:#fff3e0; color:#e65100; }
+.b-red { background:#fce4ec; color:#c62828; }
+.b-blue { background:#e3f2fd; color:#1565c0; }
+.b-gold { background:#fff8e1; color:#5a3e00; }
+
+/* ── FORMULA BOX ── */
+.fbox {
+  background:var(--ed); color:#88f7b0; font-family:var(--mono);
+  font-size:13px; padding:14px 18px; border-radius:var(--rs);
+  margin:12px 0; overflow-x:auto; line-height:1.7;
+  border:1px solid rgba(61,170,110,.15);
+}
+.fbox .c { color:rgba(255,255,255,.4); }
+.fbox .k { color:var(--gold); }
+.fbox .s { color:#ff9f7e; }
+
+kbd { background:var(--gray1); border:1px solid var(--gray3); border-radius:4px; padding:2px 6px; font-family:var(--mono); font-size:11px; }
+
+/* ── CHALLENGE CARDS ── */
+.challenge {
+  background:white; border-radius:var(--r);
+  border:2px solid var(--gray2); padding:22px;
+  margin-bottom:16px; transition:all .2s;
+}
+.challenge:hover { border-color:var(--egl); box-shadow:var(--sh); }
+.challenge-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
+.ch-num { width:36px; height:36px; background:var(--eg); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; flex-shrink:0; }
+.ch-title { font-size:16px; font-weight:700; margin-bottom:4px; }
+.ch-desc { font-size:13px; color:#555; line-height:1.6; }
+
+.challenge-data {
+  background:var(--gray1); border-radius:var(--rs);
+  padding:14px; margin:12px 0; font-family:var(--mono); font-size:12px;
+  border-left:3px solid var(--eg);
+}
+
+.hint-box {
+  background:#fff8e1; border:1px solid #ffe082;
+  border-radius:var(--rs); padding:12px 14px;
+  font-size:12.5px; color:#5a3e00; margin:10px 0;
+  display:none;
+}
+.hint-box.show { display:block; }
+.hint-btn {
+  background:none; border:1px dashed var(--gray3); border-radius:var(--rs);
+  padding:6px 14px; font-family:var(--font); font-size:12px;
+  cursor:pointer; color:var(--gray5); transition:all .15s; margin-right:8px;
+}
+.hint-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+.solution-box {
+  background:var(--egp); border:1px solid var(--egl);
+  border-radius:var(--rs); padding:14px; margin-top:10px; display:none;
+}
+.solution-box.show { display:block; }
+
+/* ── MINI QUIZ ── */
+.quiz-wrap { margin-top:14px; }
+.q-opt {
+  padding:10px 14px; border-radius:var(--rs);
+  border:2px solid var(--gray2); cursor:pointer;
+  font-size:13px; margin-bottom:8px; display:flex; gap:10px; align-items:center;
+  background:white; transition:all .15s;
+}
+.q-opt:hover { border-color:var(--egl); background:var(--egp); }
+.q-opt.correct { border-color:var(--eg); background:var(--egp); color:var(--eg); font-weight:600; }
+.q-opt.wrong { border-color:var(--red); background:#fce4ec; color:var(--red); }
+.q-letter { width:24px; height:24px; background:var(--gray1); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; flex-shrink:0; }
+.q-fb { font-size:12.5px; font-weight:600; padding:8px 12px; border-radius:var(--rs); margin-top:6px; display:none; }
+.q-fb.show { display:block; }
+.q-fb.c { background:var(--egp); color:var(--eg); }
+.q-fb.w { background:#fce4ec; color:var(--red); }
+
+/* ── FILL BLANK ── */
+.fill-q { font-size:14px; line-height:2; }
+.fill-q input {
+  border:2px solid var(--egl); border-radius:var(--rs);
+  padding:5px 10px; font-family:var(--mono); font-size:13px;
+  outline:none; margin:0 4px; min-width:130px; background:white;
+}
+.fill-q input:focus { border-color:var(--eg); box-shadow:0 0 0 3px rgba(33,115,70,.15); }
+.fill-q input.c { border-color:var(--eg); background:var(--egp); }
+.fill-q input.w { border-color:var(--red); background:#fce4ec; }
+
+/* ── TABLE ── */
+.dtable { width:100%; border-collapse:collapse; font-size:13px; margin:12px 0; }
+.dtable th { background:var(--eg); color:white; padding:9px 13px; text-align:left; font-weight:700; }
+.dtable td { padding:8px 13px; border-bottom:1px solid var(--gray2); }
+.dtable tr:nth-child(even) td { background:var(--gray1); }
+.dtable tr:hover td { background:var(--egp); }
+
+/* ── CALLOUT ── */
+.callout { border-radius:var(--rs); padding:12px 14px; margin:12px 0; font-size:13px; border-left:4px solid; display:flex; gap:10px; }
+.c-tip { background:var(--egp); border-color:var(--eg); color:var(--egm); }
+.c-warn { background:#fff8e1; border-color:#f9a825; color:#6d4c00; }
+.c-info { background:#e3f2fd; border-color:#1976d2; color:#0d47a1; }
+
+/* ── PROGRESS ── */
+.progress-section {
+  background:white; border-radius:var(--r);
+  border:1px solid var(--gray2); box-shadow:var(--sh);
+  padding:22px; margin-bottom:20px;
+}
+.prog-title { font-size:15px; font-weight:700; margin-bottom:14px; }
+.prog-item { margin-bottom:12px; }
+.prog-label { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
+.prog-bar { height:8px; background:var(--gray2); border-radius:8px; overflow:hidden; }
+.prog-fill { height:100%; background:linear-gradient(90deg,var(--eg),var(--egl)); border-radius:8px; transition:width .5s; }
+
+/* ── LOGROS ── */
+.logros-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; }
+.logro-card {
+  background:white; border-radius:var(--r); padding:18px;
+  text-align:center; border:2px solid var(--gray2);
+  transition:all .25s; position:relative; overflow:hidden;
+}
+.logro-card.desbloqueado { border-color:var(--gold); box-shadow:0 0 18px rgba(244,196,48,.2); }
+.logro-card.bloqueado { opacity:.5; filter:grayscale(.6); }
+.logro-icon { font-size:36px; margin-bottom:8px; display:block; }
+.logro-name { font-size:13px; font-weight:700; margin-bottom:4px; }
+.logro-desc { font-size:11px; color:var(--gray5); line-height:1.4; }
+.logro-stamp { position:absolute; top:6px; right:6px; font-size:16px; }
+
+/* ── NOTIFY ── */
+.notif {
+  position:fixed; bottom:20px; right:20px;
+  background:var(--ed); color:white; border-radius:var(--r);
+  padding:12px 18px; font-size:14px; font-weight:600;
+  box-shadow:var(--sh2); border-left:4px solid var(--eg);
+  transform:translateY(80px); opacity:0; transition:all .3s;
+  z-index:999; display:flex; align-items:center; gap:8px; min-width:240px;
+}
+.notif.show { transform:translateY(0); opacity:1; }
+
+/* ── BTN ── */
+.btn { padding:9px 18px; border-radius:var(--rs); font-family:var(--font); font-size:13px; font-weight:700; cursor:pointer; border:none; transition:all .2s; display:inline-flex; align-items:center; gap:6px; }
+.btn-g { background:var(--eg); color:white; }
+.btn-g:hover { background:#1a5e38; transform:translateY(-1px); }
+.btn-o { background:transparent; color:var(--eg); border:2px solid var(--eg); }
+.btn-o:hover { background:var(--egp); }
+
+.section-h { font-size:19px; font-weight:800; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px) { .tabs { flex-direction:column; } .tab { border-right:none; border-bottom:1px solid var(--gray3); } .tab:last-child { border-bottom:none; } }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="brand">📊 IGOREXCEL</span>
+  <span class="sep">|</span>
+  <a href="index.html">🏠 Inicio</a>
+  <span class="sep">›</span>
+  <span>Prácticas Avanzadas</span>
+  <span style="margin-left:auto;font-size:12px;opacity:.7;">v1.0</span>
+</nav>
+
+<div class="page">
+  <h1 class="page-title">🧪 Prácticas Avanzadas de Excel</h1>
+  <p class="page-subtitle">Ejercicios prácticos, retos de fórmulas, casos reales y logros desbloqueables. Completa cada sección para ganar coins en la plataforma principal.</p>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('retos')">⚔️ Retos prácticos</div>
+    <div class="tab" onclick="switchTab('formulas')">🔢 Quiz de fórmulas</div>
+    <div class="tab" onclick="switchTab('fillblank')">✏️ Rellena los huecos</div>
+    <div class="tab" onclick="switchTab('casos')">💼 Casos reales</div>
+    <div class="tab" onclick="switchTab('logros')">🏅 Logros</div>
+    <div class="tab" onclick="switchTab('referencia')">📖 Referencia rápida</div>
+  </div>
+
+  <!-- ═══ RETOS ═══ -->
+  <div id="tab-retos" class="tab-panel active">
+    <div class="section-h">⚔️ Retos prácticos por nivel</div>
+
+    <!-- PRINCIPIANTE -->
+    <div style="margin-bottom:10px;font-size:12px;font-weight:700;color:var(--eg);text-transform:uppercase;letter-spacing:1px;">🟢 Principiante</div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">1</div>
+        <div>
+          <div class="ch-title">Calculadora de factura con IVA</div>
+          <div class="ch-desc">Tienes los precios netos de 5 productos. Crea una hoja que calcule: precio con IVA (21%), el total de la factura y la base imponible total.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        A1: Producto | B1: Precio neto | C1: IVA (21%) | D1: Precio total<br>
+        A2: Monitor   | B2: 250<br>
+        A3: Teclado   | B3: 45<br>
+        A4: Ratón     | B4: 22<br>
+        A5: Webcam    | B5: 78<br>
+        A6: Auriculares | B6: 65<br>
+        A8: TOTAL BASE | A9: TOTAL IVA | A10: TOTAL FACTURA
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h1')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s1')">✅ Ver solución</button>
+        <span class="badge b-gold">+20 coins al completar en simulador</span>
+      </div>
+      <div class="hint-box" id="h1">
+        C2: <code>=B2*0.21</code> o <code>=B2*21%</code><br>
+        D2: <code>=B2+C2</code> o <code>=B2*1.21</code><br>
+        Usa referencia absoluta si el IVA está en una celda aparte: <code>=B2*$F$1</code>
+      </div>
+      <div class="solution-box" id="s1">
+        <strong>Solución completa:</strong><br><br>
+        <code>C2 = =B2*0.21</code> (copiar hasta C6)<br>
+        <code>D2 = =B2*1.21</code> (copiar hasta D6)<br>
+        <code>B8 = =SUMA(B2:B6)</code><br>
+        <code>B9 = =SUMA(C2:C6)</code><br>
+        <code>B10 = =SUMA(D2:D6)</code> o <code>=B8+B9</code>
+      </div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">2</div>
+        <div>
+          <div class="ch-title">Control de asistencia</div>
+          <div class="ch-desc">Crea una tabla de asistencia para 6 alumnos durante 5 días. Calcula el total de días asistidos por alumno y el porcentaje de asistencia.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        Columnas: Nombre | Lunes | Martes | Miércoles | Jueves | Viernes | Total | %<br>
+        Valores: 1 = asistió, 0 = faltó<br>
+        El % es sobre 5 días posibles.
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h2')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s2')">✅ Ver solución</button>
+      </div>
+      <div class="hint-box" id="h2">
+        Total días: <code>=SUMA(B2:F2)</code><br>
+        Porcentaje: <code>=G2/5</code> o <code>=G2/5*100</code> y aplica formato %<br>
+        Para poner el texto "Presente"/"Ausente" según el resultado: <code>=SI(G2=5,"Completo",SI(G2>=3,"Parcial","Bajo"))</code>
+      </div>
+      <div class="solution-box" id="s2">
+        <code>G2 = =SUMA(B2:F2)</code> (días asistidos)<br>
+        <code>H2 = =G2/5</code> (formateado como % con 0 decimales)<br>
+        <code>I2 = =SI(H2=1,"Perfecto",SI(H2>=0.6,"Bien","Mejorar"))</code><br>
+        Al final: <code>=PROMEDIO(H2:H7)</code> para la media de asistencia del grupo.
+      </div>
+    </div>
+
+    <!-- INTERMEDIO -->
+    <div style="margin:20px 0 10px;font-size:12px;font-weight:700;color:#e65100;text-transform:uppercase;letter-spacing:1px;">🟡 Intermedio</div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">3</div>
+        <div>
+          <div class="ch-title">Clasificador de ventas con SI anidado</div>
+          <div class="ch-desc">Tienes una tabla de vendedores con sus ventas mensuales. Clasifica su rendimiento: &lt;500€ = Bajo, 500-999€ = Medio, 1000-1999€ = Bueno, ≥2000€ = Excelente. Calcula también su comisión: 5% si Medio, 8% si Bueno, 12% si Excelente.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        A: Vendedor | B: Ventas | C: Clasificación | D: % Comisión | E: Importe comisión<br>
+        Datos: Ana=1850, Luis=490, Sara=2300, Carlos=750, Elena=1100
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h3')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s3')">✅ Ver solución</button>
+        <span class="badge b-orange">Intermedio</span>
+      </div>
+      <div class="hint-box" id="h3">
+        Usa SI anidado o la función IFS:<br>
+        <code>=SI(B2&lt;500,"Bajo",SI(B2&lt;1000,"Medio",SI(B2&lt;2000,"Bueno","Excelente")))</code><br>
+        Para la comisión puedes usar otro SI anidado o BUSCARV con una tabla auxiliar.
+      </div>
+      <div class="solution-box" id="s3">
+        <code>C2 = =SI(B2&lt;500,"Bajo",SI(B2&lt;1000,"Medio",SI(B2&lt;2000,"Bueno","Excelente")))</code><br><br>
+        <code>D2 = =SI(C2="Bajo",0,SI(C2="Medio",0.05,SI(C2="Bueno",0.08,0.12)))</code><br><br>
+        <code>E2 = =B2*D2</code><br><br>
+        Alternativa moderna con IFS:<br>
+        <code>=IFS(B2&lt;500,"Bajo",B2&lt;1000,"Medio",B2&lt;2000,"Bueno",VERDADERO,"Excelente")</code>
+      </div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">4</div>
+        <div>
+          <div class="ch-title">BUSCARV: Catálogo de precios</div>
+          <div class="ch-desc">Crea un sistema de facturación simple. Tienes una tabla de productos (código, nombre, precio) y en otra zona una factura donde al escribir el código se rellenen automáticamente el nombre y el precio.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        CATÁLOGO (G1:I6):<br>
+        G1:Código | H1:Producto | I1:Precio<br>
+        G2:P001 | H2:Monitor | I2:299<br>
+        G3:P002 | H3:Teclado | I3:49<br>
+        G4:P003 | H4:Ratón | I4:25<br>
+        G5:P004 | H5:Hub USB | I5:18<br>
+        G6:P005 | H6:Alfombrilla | I6:12<br><br>
+        FACTURA (A1:D6):<br>
+        A1:Código | B1:Producto | C1:Precio | D1:Cantidad | E1:Total<br>
+        A2: (el usuario escribe el código)
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h4')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s4')">✅ Ver solución</button>
+        <span class="badge b-orange">Intermedio</span>
+        <span class="badge b-gold">+30 coins</span>
+      </div>
+      <div class="hint-box" id="h4">
+        BUSCARV busca en la primera columna de la tabla:<br>
+        Para el nombre: <code>=BUSCARV(A2, $G$2:$I$6, 2, FALSO)</code> — devuelve la columna 2<br>
+        Para el precio: <code>=BUSCARV(A2, $G$2:$I$6, 3, FALSO)</code> — devuelve la columna 3<br>
+        Envuelve con SI.ERROR para evitar #N/A cuando la celda esté vacía.
+      </div>
+      <div class="solution-box" id="s4">
+        <code>B2 = =SI.ERROR(BUSCARV(A2,$G$2:$I$6,2,FALSO),"")</code><br>
+        <code>C2 = =SI.ERROR(BUSCARV(A2,$G$2:$I$6,3,FALSO),"")</code><br>
+        <code>E2 = =SI(C2="","",C2*D2)</code><br><br>
+        Con XLOOKUP (Excel 365):<br>
+        <code>B2 = =XLOOKUP(A2,$G$2:$G$6,$H$2:$H$6,"No encontrado")</code><br>
+        <code>C2 = =XLOOKUP(A2,$G$2:$G$6,$I$2:$I$6,"")</code>
+      </div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">5</div>
+        <div>
+          <div class="ch-title">Análisis de ventas con SUMAR.SI y CONTAR.SI</div>
+          <div class="ch-desc">Tienes un registro de 20 ventas con columnas: Vendedor, Región, Mes, Importe. Calcula: total vendido por cada región, número de ventas de cada vendedor, y la venta media por mes.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        Columnas: A=Vendedor, B=Región, C=Mes, D=Importe<br>
+        Regiones: Norte, Sur, Este, Oeste<br>
+        Vendedores: Ana, Luis, Sara, Carlos<br><br>
+        Resumen a calcular (en G:H):<br>
+        G1:Región | H1:Total ventas<br>
+        G5:Vendedor | H5:Nº ventas<br>
+        G9:Mes | H9:Media mensual
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h5')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s5')">✅ Ver solución</button>
+        <span class="badge b-orange">Intermedio</span>
+      </div>
+      <div class="hint-box" id="h5">
+        Total por región: <code>=SUMAR.SI($B$2:$B$21, G2, $D$2:$D$21)</code><br>
+        Nº ventas por vendedor: <code>=CONTAR.SI($A$2:$A$21, G6)</code><br>
+        Media mensual: <code>=PROMEDIO.SI($C$2:$C$21, G10, $D$2:$D$21)</code>
+      </div>
+      <div class="solution-box" id="s5">
+        <code>H2 (Norte) = =SUMAR.SI($B$2:$B$21,"Norte",$D$2:$D$21)</code><br>
+        → O dinámico: <code>=SUMAR.SI($B$2:$B$21,G2,$D$2:$D$21)</code> (copiar hacia abajo)<br><br>
+        <code>H6 (Ana) = =CONTAR.SI($A$2:$A$21,G6)</code><br><br>
+        Para múltiples criterios (ej: ventas de Ana en Norte &gt;500):<br>
+        <code>=SUMAR.SI.CONJUNTO($D:$D,$A:$A,"Ana",$B:$B,"Norte",$D:$D,"&gt;500")</code>
+      </div>
+    </div>
+
+    <!-- AVANZADO -->
+    <div style="margin:20px 0 10px;font-size:12px;font-weight:700;color:#c62828;text-transform:uppercase;letter-spacing:1px;">🔴 Avanzado</div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">6</div>
+        <div>
+          <div class="ch-title">Dashboard de KPIs con fórmulas dinámicas</div>
+          <div class="ch-desc">Construye un mini-dashboard de seguimiento empresarial. Calcula KPIs dinámicos: variación mes anterior (%), semáforo de estado, top 3 productos, y alerta si algún valor cae por debajo del umbral.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        Datos (A:C): Producto | Ventas Mes Actual | Ventas Mes Anterior<br>
+        KPIs a calcular:<br>
+        • Variación %: (actual - anterior) / anterior<br>
+        • Estado: "🟢 Subida" / "🔴 Bajada" / "⚪ Igual"<br>
+        • Alerta: SI variación &lt; -10%, mostrar "⚠️ ALERTA"<br>
+        • Ranking: K.ESIMO.MAYOR para el top 3
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h6')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s6')">✅ Ver solución</button>
+        <span class="badge b-red">Avanzado</span>
+        <span class="badge b-gold">+50 coins</span>
+      </div>
+      <div class="hint-box" id="h6">
+        Variación %: <code>=(B2-C2)/C2</code> → formatea como %<br>
+        Estado: <code>=SI(D2&gt;0,"🟢 Subida",SI(D2&lt;0,"🔴 Bajada","⚪ Igual"))</code><br>
+        Top 3: <code>=K.ESIMO.MAYOR($B$2:$B$20,1)</code>, cambiar 1 por 2 y 3<br>
+        Para mostrar el nombre del top: <code>=INDICE($A$2:$A$20,COINCIDIR(G2,$B$2:$B$20,0))</code>
+      </div>
+      <div class="solution-box" id="s6">
+        <code>D2 (Variación%) = =(B2-C2)/C2</code> → formato: Porcentaje con 1 decimal<br><br>
+        <code>E2 (Estado) = =SI(D2&gt;0.01,"🟢 Subida",SI(D2&lt;-0.01,"🔴 Bajada","⚪ Estable"))</code><br><br>
+        <code>F2 (Alerta) = =SI(D2&lt;-0.1,"⚠️ ALERTA","")</code><br><br>
+        Top 3 en I2:I4:<br>
+        <code>I2 = =K.ESIMO.MAYOR($B$2:$B$20,1)</code><br>
+        <code>J2 = =INDICE($A$2:$A$20,COINCIDIR(I2,$B$2:$B$20,0))</code><br><br>
+        Con formato condicional: regla con fórmula <code>=D2&lt;-0.1</code> → fondo rojo en toda la fila.
+      </div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">7</div>
+        <div>
+          <div class="ch-title">Amortización de préstamo (funciones financieras)</div>
+          <div class="ch-desc">Crea una tabla de amortización completa para un préstamo. Calcula: cuota mensual (PAGO), intereses de cada período (PAGOINT), capital amortizado (PAGOPRIN) y saldo pendiente.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        Datos del préstamo (en celdas separadas):<br>
+        Capital: 15.000 €<br>
+        Tipo interés anual: 6%<br>
+        Plazo: 36 meses<br><br>
+        Tabla: Período | Cuota | Intereses | Capital | Saldo pendiente
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h7')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s7')">✅ Ver solución</button>
+        <span class="badge b-red">Avanzado</span>
+        <span class="badge b-gold">+60 coins</span>
+      </div>
+      <div class="hint-box" id="h7">
+        Tasa mensual = tipo_anual / 12<br>
+        Cuota: <code>=PAGO(tasa_mensual, nper, -capital)</code> → resultado positivo<br>
+        Intereses período n: <code>=PAGOINT(tasa, n, nper, -capital)</code><br>
+        Capital período n: <code>=PAGOPRIN(tasa, n, nper, -capital)</code>
+      </div>
+      <div class="solution-box" id="s7">
+        Configuración (F1:F3):<br>
+        <code>F1=15000</code> (capital), <code>F2=6%/12</code> (tasa mensual), <code>F3=36</code> (meses)<br><br>
+        <code>Cuota fija = =PAGO($F$2,$F$3,-$F$1)</code> → ≈ 456,33 €/mes<br><br>
+        Tabla (fila 5 en adelante):<br>
+        <code>A5=1 (período)</code><br>
+        <code>B5 = =$B$2</code> (cuota fija, siempre igual)<br>
+        <code>C5 = =PAGOINT($F$2,A5,$F$3,-$F$1)</code> (intereses periodo 1)<br>
+        <code>D5 = =PAGOPRIN($F$2,A5,$F$3,-$F$1)</code> (capital amortizado)<br>
+        <code>E5 = =$F$1-SUMA($D$5:D5)</code> (saldo pendiente)<br><br>
+        Copia la fila hacia abajo hasta el período 36. El saldo final debe ser ≈ 0.
+      </div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge-header">
+        <div class="ch-num">8</div>
+        <div>
+          <div class="ch-title">Macro básica con VBA: Formatear informe</div>
+          <div class="ch-desc">Escribe una macro en VBA que aplique automáticamente formato profesional a cualquier tabla de datos: cabecera en verde con texto blanco, filas alternas en gris claro, bordes en todas las celdas, y añada la fecha de creación en la celda A1 del informe.</div>
+        </div>
+      </div>
+      <div class="challenge-data">
+        Abre el editor VBA con Alt+F11<br>
+        Inserta un módulo nuevo (Insertar → Módulo)<br>
+        El rango de la tabla es variable (puede ser cualquier tamaño)
+      </div>
+      <div>
+        <button class="hint-btn" onclick="toggleHint('h8')">💡 Ver pista</button>
+        <button class="hint-btn" onclick="toggleSolution('s8')">✅ Ver solución</button>
+        <span class="badge b-red">Avanzado — VBA</span>
+        <span class="badge b-gold">+80 coins</span>
+      </div>
+      <div class="hint-box" id="h8">
+        Para acceder al rango usado: <code>ActiveSheet.UsedRange</code><br>
+        Para el color de fondo: <code>Range.Interior.Color = RGB(r,g,b)</code><br>
+        Para iterar filas: <code>For i = 1 To rng.Rows.Count</code><br>
+        Color verde Excel: <code>RGB(33,115,70)</code>
+      </div>
+      <div class="solution-box" id="s8">
+        <div class="fbox">
+Sub FormatearInforme()<br>
+    Dim rng As Range<br>
+    Dim i As Long<br>
+    Set rng = ActiveSheet.UsedRange<br>
+    <br>
+    <span class="c">' Cabecera</span><br>
+    With rng.Rows(1)<br>
+        .Interior.Color = RGB(33, 115, 70)<br>
+        .Font.Color = RGB(255, 255, 255)<br>
+        .Font.Bold = True<br>
+        .Font.Size = 12<br>
+    End With<br>
+    <br>
+    <span class="c">' Filas alternas</span><br>
+    For i = 2 To rng.Rows.Count<br>
+        If i Mod 2 = 0 Then<br>
+            rng.Rows(i).Interior.Color = RGB(232, 245, 238)<br>
+        Else<br>
+            rng.Rows(i).Interior.Color = RGB(255, 255, 255)<br>
+        End If<br>
+    Next i<br>
+    <br>
+    <span class="c">' Bordes</span><br>
+    With rng.Borders<br>
+        .LineStyle = xlContinuous<br>
+        .Color = RGB(200, 212, 200)<br>
+        .Weight = xlThin<br>
+    End With<br>
+    <br>
+    <span class="c">' Autoajustar columnas</span><br>
+    rng.Columns.AutoFit<br>
+    <br>
+    MsgBox "✅ Informe formateado el " & Format(Now, "dd/mm/yyyy"), vbInformation<br>
+End Sub
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ QUIZ FÓRMULAS ═══ -->
+  <div id="tab-formulas" class="tab-panel">
+    <div class="section-h">🔢 Quiz avanzado de fórmulas</div>
+    <p style="font-size:14px;color:var(--gray5);margin-bottom:20px;">20 preguntas de todos los niveles. Cada respuesta correcta suma 5 coins.</p>
+
+    <div id="quiz-container"></div>
+  </div>
+
+  <!-- ═══ RELLENA LOS HUECOS ═══ -->
+  <div id="tab-fillblank" class="tab-panel">
+    <div class="section-h">✏️ Rellena los huecos</div>
+    <p style="font-size:14px;color:var(--gray5);margin-bottom:20px;">Completa las fórmulas y conceptos. Escribe la respuesta y pulsa Comprobar.</p>
+
+    <div id="fill-container"></div>
+  </div>
+
+  <!-- ═══ CASOS REALES ═══ -->
+  <div id="tab-casos" class="tab-panel">
+    <div class="section-h">💼 Casos reales de empresa</div>
+    <p style="font-size:14px;color:var(--gray5);margin-bottom:20px;">Situaciones reales donde Excel marca la diferencia. Aprende aplicando.</p>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">🏪</div><div><div class="card-title">Caso 1: Gestión de inventario para tienda retail</div><div class="card-meta">Nivel: Intermedio · Tiempo estimado: 30 min</div></div></div>
+      <div class="card-body">
+        <p style="font-size:14px;line-height:1.7;margin-bottom:14px;">Una tienda de electrónica necesita controlar su inventario: alertas de stock mínimo, cálculo de valor total del almacén, y un sistema de pedidos automáticos cuando el stock baja del mínimo establecido.</p>
+        <div class="callout c-info"><span>ℹ️</span><span><strong>Objetivo:</strong> Crear una hoja de inventario que marque en rojo los productos con stock por debajo del mínimo, calcule el valor en almacén y genere automáticamente una lista de pedidos pendientes.</span></div>
+        <h3 style="font-size:14px;font-weight:700;margin:14px 0 8px;">Estructura de la hoja:</h3>
+        <table class="dtable">
+          <thead><tr><th>Columna</th><th>Contenido</th><th>Fórmula necesaria</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>Código producto</td><td>—</td></tr>
+            <tr><td>B</td><td>Nombre</td><td>—</td></tr>
+            <tr><td>C</td><td>Stock actual</td><td>Dato manual</td></tr>
+            <tr><td>D</td><td>Stock mínimo</td><td>Dato manual</td></tr>
+            <tr><td>E</td><td>Precio unitario</td><td>Dato manual</td></tr>
+            <tr><td>F</td><td>Valor en almacén</td><td>=C2*E2</td></tr>
+            <tr><td>G</td><td>Estado</td><td>=SI(C2&lt;D2,"⚠️ REPONER","✅ OK")</td></tr>
+            <tr><td>H</td><td>Cantidad a pedir</td><td>=SI(C2&lt;D2, D2*2-C2, 0)</td></tr>
+          </tbody>
+        </table>
+        <div class="fbox">
+<span class="c">Fórmulas clave:</span><br>
+<span class="k">Valor total almacén:</span> =SUMA(F2:F100)<br>
+<span class="k">Productos a reponer:</span> =CONTAR.SI(G2:G100,"*REPONER*")<br>
+<span class="k">Inversión necesaria pedido:</span> =SUMAR.SI(G2:G100,"⚠️ REPONER",F2:F100)<br><br>
+<span class="c">Formato condicional para resaltar filas críticas:</span><br>
+Regla: =$G2="⚠️ REPONER" → Fondo rojo claro en toda la fila
+        </div>
+        <div class="callout c-tip"><span>💡</span><span>Añade una hoja "Pedidos" que use FILTER (Excel 365) para mostrar automáticamente solo los productos a reponer: <code>=FILTER(A2:H100, G2:G100="⚠️ REPONER", "Sin productos")</code></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">📅</div><div><div class="card-title">Caso 2: Planificación de recursos humanos</div><div class="card-meta">Nivel: Avanzado · Tiempo estimado: 45 min</div></div></div>
+      <div class="card-body">
+        <p style="font-size:14px;line-height:1.7;margin-bottom:14px;">Un departamento de RRHH necesita calcular nóminas, días de vacaciones restantes, antigüedad de empleados y el coste total de personal por departamento.</p>
+        <div class="fbox">
+<span class="c">Antigüedad (en años completos):</span><br>
+=SIFECHA(B2, HOY(), "Y")<br><br>
+<span class="c">Días vacaciones según convenio:</span><br>
+=SI(C2&lt;1, 0, SI(C2&lt;3, 22, SI(C2&lt;5, 24, 26)))<br><br>
+<span class="c">Días vacaciones pendientes:</span><br>
+=D2 - CONTAR.SI.CONJUNTO(RangoVacaciones, A2, FechaInicioVac, "&gt;="&DATE(AÑO(HOY()),1,1))<br><br>
+<span class="c">Nómina bruta mensual:</span><br>
+Salario base + (salario * % extra antigüedad)<br>
+=F2 + F2 * SI(C2>=10, 0.10, SI(C2>=5, 0.05, 0))<br><br>
+<span class="c">Coste total por departamento:</span><br>
+=SUMAR.SI($E$2:$E$50, "Ventas", $G$2:$G$50) * 12
+        </div>
+        <div class="callout c-warn"><span>⚠️</span><span>Cuando trabajes con datos personales, recuerda la protección de datos (GDPR). Protege la hoja con contraseña: Revisar → Proteger hoja.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">📊</div><div><div class="card-title">Caso 3: Análisis de rentabilidad con tabla dinámica</div><div class="card-meta">Nivel: Avanzado · Tiempo estimado: 60 min</div></div></div>
+      <div class="card-body">
+        <p style="font-size:14px;line-height:1.7;margin-bottom:14px;">Una empresa quiere analizar sus ventas del año por producto, región y trimestre. Necesita un dashboard interactivo con tabla dinámica, segmentadores y gráfico dinámico.</p>
+        <h3 style="font-size:14px;font-weight:700;margin:12px 0 8px;">Pasos del proyecto:</h3>
+        <ol style="font-size:14px;line-height:2;padding-left:20px;">
+          <li>Crear tabla Excel con columnas: Fecha, Vendedor, Región, Producto, Categoría, Cantidad, Precio, Importe</li>
+          <li>Añadir columna calculada "Trimestre": <code>=ELEGIR(REDONDEAR.MAS(MES(A2)/3,0),"T1","T2","T3","T4")</code></li>
+          <li>Insertar Tabla dinámica (Insertar → Tabla dinámica)</li>
+          <li>Configurar: Filas=Categoría+Producto, Columnas=Trimestre, Valores=SUMA de Importe</li>
+          <li>Añadir Segmentadores para Región y Vendedor</li>
+          <li>Insertar Gráfico dinámico de columnas apiladas</li>
+          <li>Formatear con tema corporativo verde</li>
+        </ol>
+        <div class="callout c-tip"><span>💡</span><span>Los segmentadores se vinculan a la tabla dinámica: clic derecho en el slicer → Conexiones de informe, para conectar múltiples tablas dinámicas al mismo filtro.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ LOGROS ═══ -->
+  <div id="tab-logros" class="tab-panel">
+    <div class="section-h">🏅 Sistema de logros</div>
+    <div class="progress-section">
+      <div class="prog-title">📊 Tu progreso en prácticas</div>
+      <div class="prog-item"><div class="prog-label"><span>Retos completados</span><span id="retos-pct">0/8</span></div><div class="prog-bar"><div class="prog-fill" id="retos-bar" style="width:0%"></div></div></div>
+      <div class="prog-item"><div class="prog-label"><span>Quiz de fórmulas</span><span id="quiz-pct">0/20</span></div><div class="prog-bar"><div class="prog-fill" id="quiz-bar" style="width:0%"></div></div></div>
+      <div class="prog-item"><div class="prog-label"><span>Rellena los huecos</span><span id="fill-pct">0/10</span></div><div class="prog-bar"><div class="prog-fill" id="fill-bar" style="width:0%"></div></div></div>
+      <div class="prog-item"><div class="prog-label"><span>Casos estudiados</span><span id="casos-pct">0/3</span></div><div class="prog-bar"><div class="prog-fill" id="casos-bar" style="width:0%"></div></div></div>
+    </div>
+    <div class="logros-grid" id="logros-grid"></div>
+  </div>
+
+  <!-- ═══ REFERENCIA ═══ -->
+  <div id="tab-referencia" class="tab-panel">
+    <div class="section-h">📖 Referencia rápida de Excel</div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">⌨️</div><div><div class="card-title">Atajos de teclado imprescindibles</div></div></div>
+      <div class="card-body">
+        <table class="dtable">
+          <thead><tr><th>Atajo</th><th>Acción</th><th>Atajo</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Guardar</td><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Deshacer</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>Copiar</td><td><kbd>Ctrl</kbd>+<kbd>X</kbd></td><td>Cortar</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Pegar</td><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd></td><td>Pegado especial</td></tr>
+            <tr><td><kbd>F2</kbd></td><td>Editar celda</td><td><kbd>F4</kbd></td><td>Ciclar referencias ($)</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Inicio</kbd></td><td>Ir a A1</td><td><kbd>Ctrl</kbd>+<kbd>Fin</kbd></td><td>Última celda</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd></td><td>Activar filtros</td><td><kbd>Alt</kbd>+<kbd>=</kbd></td><td>Autosuma</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>Formato celdas</td><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>Crear tabla</td></tr>
+            <tr><td><kbd>F11</kbd></td><td>Gráfico rápido</td><td><kbd>Alt</kbd>+<kbd>F11</kbd></td><td>Editor VBA</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Copiar hacia abajo</td><td><kbd>Ctrl</kbd>+<kbd>R</kbd></td><td>Copiar hacia la derecha</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>;</kbd></td><td>Fecha actual</td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>;</kbd></td><td>Hora actual</td></tr>
+            <tr><td><kbd>Alt</kbd>+<kbd>↓</kbd></td><td>Lista desplegable</td><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td>Relleno rápido</td></tr>
+            <tr><td><kbd>F5</kbd></td><td>Ir a celda específica</td><td><kbd>Ctrl</kbd>+<kbd>H</kbd></td><td>Buscar y reemplazar</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">⚡</div><div><div class="card-title">Top 50 funciones de Excel</div></div></div>
+      <div class="card-body">
+        <table class="dtable">
+          <thead><tr><th>Función</th><th>Uso</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SUMA</strong></td><td>Suma rangos</td><td>=SUMA(A1:A100)</td></tr>
+            <tr><td><strong>PROMEDIO</strong></td><td>Media aritmética</td><td>=PROMEDIO(B1:B50)</td></tr>
+            <tr><td><strong>MAX / MIN</strong></td><td>Valor máximo / mínimo</td><td>=MAX(C1:C200)</td></tr>
+            <tr><td><strong>CONTAR</strong></td><td>Cuenta celdas con números</td><td>=CONTAR(A:A)</td></tr>
+            <tr><td><strong>CONTARA</strong></td><td>Cuenta no vacías</td><td>=CONTARA(B:B)</td></tr>
+            <tr><td><strong>CONTAR.SI</strong></td><td>Cuenta con criterio</td><td>=CONTAR.SI(A:A,"Sí")</td></tr>
+            <tr><td><strong>SUMAR.SI</strong></td><td>Suma con criterio</td><td>=SUMAR.SI(A:A,"Norte",B:B)</td></tr>
+            <tr><td><strong>SUMAR.SI.CONJUNTO</strong></td><td>Suma con múltiples criterios</td><td>=SUMAR.SI.CONJUNTO(C:C,A:A,"Norte",B:B,">100")</td></tr>
+            <tr><td><strong>SI</strong></td><td>Condición lógica</td><td>=SI(A1>5,"Sí","No")</td></tr>
+            <tr><td><strong>SI.ERROR</strong></td><td>Captura errores</td><td>=SI.ERROR(fórmula,"Error")</td></tr>
+            <tr><td><strong>Y / O / NO</strong></td><td>Operadores lógicos</td><td>=SI(Y(A1>0,B1>0),"OK","No")</td></tr>
+            <tr><td><strong>BUSCARV</strong></td><td>Busca en columna</td><td>=BUSCARV(A1,tabla,2,FALSO)</td></tr>
+            <tr><td><strong>XLOOKUP</strong></td><td>Búsqueda moderna</td><td>=XLOOKUP(A1,B:B,C:C,"")</td></tr>
+            <tr><td><strong>ÍNDICE</strong></td><td>Devuelve valor en posición</td><td>=ÍNDICE(A:A,5)</td></tr>
+            <tr><td><strong>COINCIDIR</strong></td><td>Posición de un valor</td><td>=COINCIDIR(A1,B:B,0)</td></tr>
+            <tr><td><strong>HOY / AHORA</strong></td><td>Fecha/hora actual</td><td>=HOY()</td></tr>
+            <tr><td><strong>AÑO/MES/DIA</strong></td><td>Extraer partes de fecha</td><td>=AÑO(A1)</td></tr>
+            <tr><td><strong>SIFECHA</strong></td><td>Diferencia entre fechas</td><td>=SIFECHA(A1,B1,"Y")</td></tr>
+            <tr><td><strong>DIAS.LAB</strong></td><td>Días laborables entre fechas</td><td>=DIAS.LAB(A1,B1)</td></tr>
+            <tr><td><strong>TEXTO</strong></td><td>Formato personalizado como texto</td><td>=TEXTO(A1,"dd/mm/aaaa")</td></tr>
+            <tr><td><strong>CONCATENAR / &amp;</strong></td><td>Unir texto</td><td>=A1&" "&B1</td></tr>
+            <tr><td><strong>LARGO</strong></td><td>Longitud del texto</td><td>=LARGO(A1)</td></tr>
+            <tr><td><strong>IZQUIERDA/DERECHA</strong></td><td>Extraer caracteres</td><td>=IZQUIERDA(A1,3)</td></tr>
+            <tr><td><strong>EXTRAE</strong></td><td>Extraer desde posición</td><td>=EXTRAE(A1,3,4)</td></tr>
+            <tr><td><strong>SUSTITUIR</strong></td><td>Reemplazar texto</td><td>=SUSTITUIR(A1,"viejo","nuevo")</td></tr>
+            <tr><td><strong>MAYUSC/MINUSC</strong></td><td>Cambiar mayúsculas</td><td>=MAYUSC(A1)</td></tr>
+            <tr><td><strong>RECORTAR</strong></td><td>Eliminar espacios extra</td><td>=RECORTAR(A1)</td></tr>
+            <tr><td><strong>REDONDEAR</strong></td><td>Redondear con decimales</td><td>=REDONDEAR(A1,2)</td></tr>
+            <tr><td><strong>ENTERO / TRUNCAR</strong></td><td>Parte entera</td><td>=ENTERO(3.9) → 3</td></tr>
+            <tr><td><strong>ABS</strong></td><td>Valor absoluto</td><td>=ABS(-45) → 45</td></tr>
+            <tr><td><strong>RESIDUO</strong></td><td>Resto de división</td><td>=RESIDUO(10,3) → 1</td></tr>
+            <tr><td><strong>POTENCIA / RAIZ</strong></td><td>Potencia y raíz cuadrada</td><td>=POTENCIA(2,8)</td></tr>
+            <tr><td><strong>K.ESIMO.MAYOR</strong></td><td>Enésimo mayor valor</td><td>=K.ESIMO.MAYOR(A:A,1)</td></tr>
+            <tr><td><strong>MEDIANA / MODA</strong></td><td>Estadísticos</td><td>=MEDIANA(A1:A100)</td></tr>
+            <tr><td><strong>DESVEST</strong></td><td>Desviación estándar</td><td>=DESVEST(A1:A100)</td></tr>
+            <tr><td><strong>PAGO</strong></td><td>Cuota de préstamo</td><td>=PAGO(tasa,nper,-va)</td></tr>
+            <tr><td><strong>VA / VF</strong></td><td>Valor actual/futuro</td><td>=VA(tasa,nper,-pago)</td></tr>
+            <tr><td><strong>TIR</strong></td><td>Tasa interna de retorno</td><td>=TIR(flujos)</td></tr>
+            <tr><td><strong>ALEATORIO</strong></td><td>Número aleatorio 0-1</td><td>=ALEATORIO()</td></tr>
+            <tr><td><strong>ALEATORIO.ENTRE</strong></td><td>Entero aleatorio en rango</td><td>=ALEATORIO.ENTRE(1,100)</td></tr>
+            <tr><td><strong>ELEGIR</strong></td><td>Elegir de una lista</td><td>=ELEGIR(2,"Uno","Dos","Tres")</td></tr>
+            <tr><td><strong>DESREF</strong></td><td>Referencia dinámica desplazada</td><td>=DESREF(A1,2,3)</td></tr>
+            <tr><td><strong>TRANSPONER</strong></td><td>Girar filas/columnas</td><td>=TRANSPONER(A1:D1) (matricial)</td></tr>
+            <tr><td><strong>FRECUENCIA</strong></td><td>Distribución de frecuencias</td><td>Matricial: =FRECUENCIA(datos,bins)</td></tr>
+            <tr><td><strong>FILTER</strong> (365)</td><td>Filtro dinámico</td><td>=FILTER(A:C,B:B>100)</td></tr>
+            <tr><td><strong>SORT</strong> (365)</td><td>Ordenar dinámicamente</td><td>=SORT(A1:C10,2,-1)</td></tr>
+            <tr><td><strong>UNIQUE</strong> (365)</td><td>Valores únicos</td><td>=UNIQUE(A:A)</td></tr>
+            <tr><td><strong>LET</strong> (365)</td><td>Variables en fórmulas</td><td>=LET(x,A1*2,x+1)</td></tr>
+            <tr><td><strong>LAMBDA</strong> (365)</td><td>Funciones personalizadas</td><td>=LAMBDA(x,x^2)(5) → 25</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">🎨</div><div><div class="card-title">Códigos de formato personalizado</div></div></div>
+      <div class="card-body">
+        <table class="dtable">
+          <thead><tr><th>Código</th><th>Resultado</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>#.##0</td><td>Número con separador miles</td><td>1.234</td></tr>
+            <tr><td>#.##0,00</td><td>2 decimales con miles</td><td>1.234,56</td></tr>
+            <tr><td>#.##0,00 "€"</td><td>Con símbolo euro</td><td>1.234,56 €</td></tr>
+            <tr><td>0%</td><td>Porcentaje sin decimales</td><td>75%</td></tr>
+            <tr><td>0,00%</td><td>Porcentaje con 2 decimales</td><td>75,43%</td></tr>
+            <tr><td>dd/mm/aaaa</td><td>Fecha completa</td><td>15/03/2024</td></tr>
+            <tr><td>dddd, d "de" mmmm</td><td>Fecha extendida</td><td>viernes, 15 de marzo</td></tr>
+            <tr><td>hh:mm:ss</td><td>Hora con segundos</td><td>14:30:05</td></tr>
+            <tr><td>[h]:mm</td><td>Horas totales (>24h)</td><td>25:30</td></tr>
+            <tr><td>@</td><td>Formato de texto</td><td>Cualquier texto</td></tr>
+            <tr><td>"▲";; "▼"</td><td>Positivo/negativo con símbolos</td><td>▲ o ▼</td></tr>
+            <tr><td>[Verde]#.##0;[Rojo]-#.##0</td><td>Colores según signo</td><td>Positivos en verde, negativos en rojo</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-tip"><span>💡</span><span>Accede al formato personalizado con <kbd>Ctrl</kbd>+<kbd>1</kbd> → Categoría: Personalizada. El código tiene 4 secciones separadas por ; para: positivos ; negativos ; ceros ; texto</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"><span id="n-icon">✅</span><span id="n-msg">Bien hecho</span></div>
+
+<script>
+// ── TABS ──
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  const tabs = document.querySelectorAll('.tab');
+  const idx = ['retos','formulas','fillblank','casos','logros','referencia'].indexOf(id);
+  if(tabs[idx]) tabs[idx].classList.add('active');
+  if(id === 'logros') buildLogros();
+}
+
+// ── HINTS & SOLUTIONS ──
+function toggleHint(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+function toggleSolution(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+
+// ── NOTIFY ──
+function notify(icon, msg) {
+  document.getElementById('n-icon').textContent = icon;
+  document.getElementById('n-msg').textContent = msg;
+  const n = document.getElementById('notif');
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 3000);
+}
+
+// ── QUIZ DATA ──
+const QUIZ = [
+  { q:'¿Qué devuelve =LARGO("Excel 2024")?', opts:['9','10','11','8'], c:1, e:'LARGO cuenta todos los caracteres incluyendo el espacio: E-x-c-e-l- -2-0-2-4 = 10' },
+  { q:'¿Cuál es el resultado de =RESIDUO(17,5)?', opts:['3','2','4','1'], c:1, e:'17 ÷ 5 = 3 con resto 2. RESIDUO devuelve el resto.' },
+  { q:'=INDICE(A1:A5,3) devuelve...', opts:['El valor de A3','El valor de A1','El tercer rango','Un error'], c:0, e:'ÍNDICE(rango, posición) devuelve el elemento en la posición indicada: la 3ª = A3' },
+  { q:'Para calcular el número de días laborables entre dos fechas (sin festivos) se usa:', opts:['DIAS360','DIAS.LAB','FECHA.MES','DIA.LAB'], c:1, e:'DIAS.LAB(fecha_inicio, fecha_fin) devuelve días laborables excluyendo fines de semana' },
+  { q:'=EXTRAE("Microsoft Excel",11,5) devuelve:', opts:['"Micro"','"Excel"','"icroso"','"soft "'], c:1, e:'Comienza en la posición 11 (E de Excel) y extrae 5 caracteres: E-x-c-e-l' },
+  { q:'¿Qué función devuelve VERDADERO si TODAS las condiciones son ciertas?', opts:['O','NO','Y','SI'], c:2, e:'Y(cond1, cond2...) devuelve VERDADERO solo si TODAS las condiciones son verdaderas' },
+  { q:'El operador ^ en Excel significa:', opts:['División','Raíz cuadrada','Potencia','Porcentaje'], c:2, e:'El símbolo ^ es el operador de potencia: =2^10 = 1024' },
+  { q:'=K.ESIMO.MAYOR(A1:A10, 2) devuelve:', opts:['El mayor valor','El segundo mayor valor','El décimo valor','El valor en posición 2'], c:1, e:'K.ESIMO.MAYOR(rango, k) devuelve el k-ésimo mayor valor. Con k=2, el segundo mayor.' },
+  { q:'¿Qué hace =RECORTAR(" Hola Mundo ")?', opts:['"HolaMundo"','Error','Elimina espacios al inicio y final','Elimina todos los espacios'], c:2, e:'RECORTAR elimina los espacios al inicio y al final, y reduce los espacios múltiples internos a uno.' },
+  { q:'Para hacer que una fórmula muestre "" en vez de error usamos:', opts:['NO.ERROR','SI.ERROR','ISERROR','IFERR'], c:1, e:'SI.ERROR(fórmula, valor_si_error) — si la fórmula da error, muestra el valor alternativo' },
+  { q:'=ELEGIR(3,"Uno","Dos","Tres","Cuatro") devuelve:', opts:['"Uno"','"Dos"','"Tres"','"Cuatro"'], c:2, e:'ELEGIR(índice, val1, val2...) devuelve el valor en la posición del índice: posición 3 = "Tres"' },
+  { q:'¿Cuándo conviene usar ÍNDICE+COINCIDIR sobre BUSCARV?', opts:['Nunca, BUSCARV es mejor siempre','Cuando necesitas buscar hacia la izquierda','Solo con rangos muy grandes','Cuando hay errores en los datos'], c:1, e:'BUSCARV solo busca hacia la derecha. ÍNDICE+COINCIDIR puede buscar en cualquier dirección.' },
+  { q:'=SIFECHA(FECHA(1990,5,15), HOY(), "Y") devuelve:', opts:['Los meses de diferencia','Los años completos de diferencia','Los días de diferencia','Un error'], c:1, e:'"Y" en SIFECHA devuelve los años completos. Perfecto para calcular edades.' },
+  { q:'¿Qué extensión tiene un archivo Excel con macros habilitadas?', opts:['.xlsx','.xlsm','.xltm','.xlsb'], c:1, e:'.xlsm = Excel Macro-Enabled Workbook. Es obligatorio para guardar macros VBA.' },
+  { q:'La función PAGO() sirve para:', opts:['Pagar automáticamente facturas','Calcular la cuota periódica de un préstamo','Calcular el IVA a pagar','Verificar pagos duplicados'], c:1, e:'PAGO(tasa, nper, va) calcula la cuota fija periódica de un préstamo o inversión.' },
+  { q:'=FILTER(A1:C10, B1:B10>100) está disponible en:', opts:['Excel 2010+','Excel 2016+','Solo Excel 365 y 2021','Todas las versiones'], c:2, e:'FILTER es una función de matrices dinámicas introducida en Excel 365 y Excel 2021.' },
+  { q:'¿Qué hace Ctrl+E en Excel?', opts:['Buscar y reemplazar','Relleno rápido (Flash Fill)','Seleccionar toda la hoja','Exportar CSV'], c:1, e:'Ctrl+E activa el Relleno Rápido (Flash Fill) que detecta patrones automáticamente.' },
+  { q:'El formato de celda personalizado [Verde]0;[Rojo]-0 muestra:', opts:['Siempre en verde','Positivos en verde y negativos en rojo','Todo en rojo','No funciona así'], c:1, e:'Los corchetes con nombre de color aplican color condicional: 1ª sección=positivos, 2ª=negativos.' },
+  { q:'¿Para qué sirve la función LAMBDA (Excel 365)?', opts:['Importar datos de Python','Crear funciones personalizadas reutilizables','Calcular funciones matemáticas lambda','Crear gráficos lambdas'], c:1, e:'LAMBDA permite definir funciones personalizadas sin VBA, reutilizables en toda la hoja.' },
+  { q:'=TRANSPONER(A1:D1) convertirá la fila A1:D1 en:', opts:['4 filas en una columna','Una fila más larga','4 columnas en una fila','No hace nada'], c:0, e:'TRANSPONER convierte filas en columnas y viceversa: una fila de 4 celdas → una columna de 4 filas.' },
+];
+
+// ── FILL BLANKS ──
+const FILLS = [
+  { sentence:'La función que calcula la raíz cuadrada de 144 es:', blank:'=RAIZ(144)', accept:['=raiz(144)','raiz(144)','=sqrt(144)'] },
+  { sentence:'Para unir los textos de A1 y B1 con un espacio entre ellos:', blank:'=A1&" "&B1', accept:['=a1&" "&b1','a1&" "&b1','=concatenar(a1," ",b1)','=a1 & " " & b1'] },
+  { sentence:'El atajo para abrir el editor de VBA es:', blank:'Alt + F11', accept:['alt+f11','alt f11','alt+f11'] },
+  { sentence:'Para calcular la edad en años completos desde la fecha en A1 hasta hoy:', blank:'=SIFECHA(A1,HOY(),"Y")', accept:['=sifecha(a1,hoy(),"y")','sifecha(a1,hoy(),"y")','=datedif(a1,today(),"y")'] },
+  { sentence:'La función que devuelve el número de celdas no vacías en A1:A100 es:', blank:'=CONTARA(A1:A100)', accept:['=contara(a1:a100)','contara(a1:a100)','=counta(a1:a100)'] },
+  { sentence:'Para buscar el valor de A1 en la columna E y devolver el valor correspondiente de G (Excel 365):', blank:'=XLOOKUP(A1,E:E,G:G)', accept:['=xlookup(a1,e:e,g:g)','xlookup(a1,e:e,g:g)'] },
+  { sentence:'El formato personalizado para mostrar números con 2 decimales y símbolo de miles es:', blank:'#.##0,00', accept:['#.##0,00','#,##0.00'] },
+  { sentence:'Para que un número negativo se muestre en rojo y positivo en verde, el formato sería:', blank:'[Verde]0;[Rojo]-0', accept:['[verde]0;[rojo]-0','[green]0;[red]-0'] },
+  { sentence:'La tecla que cicla entre referencias relativas y absolutas al editar una fórmula es:', blank:'F4', accept:['f4'] },
+  { sentence:'Para calcular la cuota mensual de un préstamo de 10000€ al 5% anual en 24 meses:', blank:'=PAGO(5%/12,24,-10000)', accept:['=pago(5%/12,24,-10000)','=pago(0.05/12,24,-10000)','pago(5%/12,24,-10000)'] },
+];
+
+// ── BUILD QUIZ ──
+let quizAnswers = {};
+function buildQuiz() {
+  const c = document.getElementById('quiz-container');
+  if(!c || c.innerHTML) return;
+  c.innerHTML = QUIZ.map((q,i) => `
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-body">
+        <div style="font-size:15px;font-weight:700;margin-bottom:12px;"><span style="background:var(--eg);color:white;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px;">${i+1}</span>${q.q}</div>
+        <div class="quiz-wrap">
+          ${q.opts.map((o,j) => `<div class="q-opt" id="qo-${i}-${j}" onclick="answerQuiz(${i},${j},${q.c})"><span class="q-letter">${'ABCD'[j]}</span>${o}</div>`).join('')}
+        </div>
+        <div class="q-fb" id="qf-${i}"></div>
+      </div>
+    </div>
+  `).join('') + `<div style="padding:16px 0;text-align:right;"><span id="quiz-score" style="font-size:16px;font-weight:700;color:var(--eg);">Respondidas: 0/${QUIZ.length}</span></div>`;
+}
+
+function answerQuiz(qi, ai, correct) {
+  if(quizAnswers[qi] !== undefined) return;
+  quizAnswers[qi] = ai;
+  for(let j=0;j<4;j++) {
+    const el = document.getElementById('qo-'+qi+'-'+j);
+    if(!el) continue;
+    el.onclick = null;
+    if(j === correct) el.classList.add('correct');
+    else if(j === ai && ai !== correct) el.classList.add('wrong');
+  }
+  const fb = document.getElementById('qf-'+qi);
+  const ok = ai === correct;
+  fb.textContent = ok ? '✅ ¡Correcto! ' + QUIZ[qi].e : '❌ ' + QUIZ[qi].e;
+  fb.className = 'q-fb show ' + (ok ? 'c' : 'w');
+  document.getElementById('quiz-score').textContent = 'Respondidas: ' + Object.keys(quizAnswers).length + '/' + QUIZ.length;
+  if(ok) notify('💰', '+5 coins al volver a la plataforma principal');
+}
+
+// ── BUILD FILL ──
+let fillAnswers = {};
+function buildFill() {
+  const c = document.getElementById('fill-container');
+  if(!c || c.innerHTML) return;
+  c.innerHTML = FILLS.map((f,i) => `
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-body">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;"><span style="background:var(--eg);color:white;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;margin-right:8px;">${i+1}</span>${f.sentence}</div>
+        <div class="fill-q"><input id="fill-${i}" type="text" placeholder="Escribe tu respuesta..." style="width:100%;max-width:400px;"></div>
+        <div style="margin-top:10px;">
+          <button class="btn btn-g btn-sm" onclick="checkFill(${i})" style="padding:6px 14px;font-size:12px;">Comprobar ✓</button>
+          <button class="hint-btn" onclick="revealFill(${i})" style="font-size:11px;">Ver respuesta</button>
+        </div>
+        <div class="q-fb" id="ff-${i}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function checkFill(i) {
+  const inp = document.getElementById('fill-'+i);
+  const val = inp.value.trim().toLowerCase().replace(/\s+/g,'');
+  const ok = FILLS[i].accept.some(a => val === a.toLowerCase().replace(/\s+/g,'') || val.includes(a.toLowerCase().replace(/\s+/g,'').substring(0,6)));
+  inp.classList.remove('c','w');
+  inp.classList.add(ok ? 'c' : 'w');
+  const fb = document.getElementById('ff-'+i);
+  fb.textContent = ok ? '✅ ¡Correcto! +5 coins' : '❌ Incorrecto. La respuesta esperada: ' + FILLS[i].blank;
+  fb.className = 'q-fb show ' + (ok ? 'c' : 'w');
+  if(ok) { fillAnswers[i] = true; notify('💰', '¡Correcto! +5 coins'); }
+}
+
+function revealFill(i) {
+  const inp = document.getElementById('fill-'+i);
+  inp.value = FILLS[i].blank;
+  const fb = document.getElementById('ff-'+i);
+  fb.textContent = 'Respuesta revelada: ' + FILLS[i].blank;
+  fb.className = 'q-fb show';
+  fb.style.background = '#f5f5f5'; fb.style.color = '#555';
+}
+
+// ── LOGROS ──
+const LOGROS = [
+  { icon:'🌱', name:'Primera fórmula', desc:'Escribe tu primera fórmula =SUMA()', desbloqueado:true },
+  { icon:'🔢', name:'Calculador nato', desc:'Resuelve 5 ejercicios de fórmulas', desbloqueado:false },
+  { icon:'🎯', name:'Puntería total', desc:'10 respuestas correctas en el quiz', desbloqueado:false },
+  { icon:'🔍', name:'Detective de datos', desc:'Usa BUSCARV correctamente', desbloqueado:false },
+  { icon:'📊', name:'Gráfico perfecto', desc:'Crea un gráfico con todos los elementos', desbloqueado:false },
+  { icon:'🧹', name:'Limpiador de datos', desc:'Elimina duplicados de una tabla', desbloqueado:false },
+  { icon:'🔄', name:'Maestro Pivot', desc:'Crea una tabla dinámica completa', desbloqueado:false },
+  { icon:'⚡', name:'Velocidad de luz', desc:'Completa el quiz en menos de 3 minutos', desbloqueado:false },
+  { icon:'🏗', name:'Constructor de macros', desc:'Escribe tu primera macro VBA', desbloqueado:false },
+  { icon:'💎', name:'Fórmula LAMBDA', desc:'Crea una función LAMBDA propia', desbloqueado:false },
+  { icon:'👑', name:'Maestro Excel', desc:'Completa todos los módulos', desbloqueado:false },
+  { icon:'🚀', name:'Power Query Pro', desc:'Importa y transforma datos con PQ', desbloqueado:false },
+];
+
+function buildLogros() {
+  const g = document.getElementById('logros-grid');
+  if(!g) return;
+  g.innerHTML = LOGROS.map(l => `
+    <div class="logro-card ${l.desbloqueado?'desbloqueado':'bloqueado'}">
+      ${l.desbloqueado ? '<span class="logro-stamp">✅</span>' : '<span class="logro-stamp">🔒</span>'}
+      <span class="logro-icon">${l.icon}</span>
+      <div class="logro-name">${l.name}</div>
+      <div class="logro-desc">${l.desc}</div>
+    </div>
+  `).join('');
+}
+
+// ── INIT ──
+buildQuiz();
+buildFill();
+buildLogros();
+</script>
+</body>
+</html>
