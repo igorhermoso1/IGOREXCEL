@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IGOREXCEL — Aprende Excel de cero a experto con Igor.">
+<title>📊 IGOREXCEL · Aprende Excel con Igor</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --eg:#217346;--egm:#2e8b57;--egl:#3daa6e;--egp:#e8f5ee;
+  --ed:#1a2e1a;--eacc:#107c41;--gold:#f4c430;--red:#e53935;
+  --g1:#f4f6f4;--g2:#e8ece8;--g3:#c8d4c8;--g5:#6b8f6b;
+  --sw:280px;--hh:60px;--r:12px;--rs:8px;
+  --sh:0 4px 20px rgba(33,115,70,.12);--sh2:0 8px 40px rgba(33,115,70,.18);
+  --font:'Plus Jakarta Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--g1);color:var(--ed);overflow-x:hidden;}
+#sidebar{position:fixed;top:0;left:0;width:var(--sw);height:100vh;background:var(--ed);
+  display:flex;flex-direction:column;z-index:200;transition:transform .3s ease;overflow-y:auto;}
+#sidebar::-webkit-scrollbar{width:4px;}
+#sidebar::-webkit-scrollbar-thumb{background:var(--eg);border-radius:4px;}
+.sb-hdr{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(135deg,var(--eg),var(--eacc));}
+.sb-logo{display:flex;align-items:center;gap:10px;}
+.sb-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:20px;}
+.sb-brand{font-size:16px;font-weight:800;color:#fff;display:block;}
+.sb-tag{font-size:11px;color:rgba(255,255,255,.8);}
+.sb-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px;
+  border-bottom:1px solid rgba(255,255,255,.07);}
+.sp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--rs);padding:8px 10px;text-align:center;}
+.sp .v{font-size:18px;font-weight:800;color:var(--egl);display:block;}
+.sp .l{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;}
+.pb-w{padding:0 16px 12px;}
+.pb-l{font-size:10px;color:rgba(255,255,255,.5);margin-bottom:6px;display:flex;justify-content:space-between;}
+.pb{height:4px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden;}
+.pb-f{height:100%;background:linear-gradient(90deg,var(--egl),var(--gold));border-radius:4px;transition:width .5s;width:0%;}
+.nv-s{padding:8px 0;}
+.nv-l{font-size:9px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;
+  letter-spacing:1px;padding:8px 20px 4px;}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 20px;color:rgba(255,255,255,.65);
+  cursor:pointer;transition:all .15s;font-size:13.5px;border-left:3px solid transparent;
+  text-decoration:none;user-select:none;}
+.ni:hover{background:rgba(255,255,255,.06);color:#fff;}
+.ni.active{background:rgba(61,170,110,.15);color:var(--egl);border-left-color:var(--egl);font-weight:600;}
+.ni .ic{font-size:16px;flex-shrink:0;}
+.sb-ft{margin-top:auto;padding:12px 16px;border-top:1px solid rgba(255,255,255,.07);
+  font-size:10px;color:rgba(255,255,255,.3);text-align:center;}
+#topbar{position:fixed;top:0;left:var(--sw);right:0;height:var(--hh);background:#fff;
+  border-bottom:2px solid var(--egp);display:flex;align-items:center;gap:12px;
+  padding:0 24px;z-index:100;box-shadow:0 2px 8px rgba(33,115,70,.06);}
+#menu-toggle{display:none;background:none;border:none;font-size:20px;cursor:pointer;color:var(--eg);}
+.tb-title{font-size:16px;font-weight:700;color:var(--ed);}
+.tb-streak{margin-left:auto;display:flex;align-items:center;gap:6px;background:var(--egp);
+  border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;color:var(--eg);}
+.coins-b{display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,#f4c430,#f0a500);
+  color:#5a3e00;font-weight:700;font-size:13px;border-radius:20px;padding:4px 12px;}
+#main{margin-left:var(--sw);padding-top:var(--hh);min-height:100vh;}
+.sec{display:none;padding:32px;}
+.sec.active{display:block;}
+.hero{background:linear-gradient(135deg,var(--eg),var(--egm) 50%,var(--eacc));
+  border-radius:var(--r);padding:48px 40px;color:#fff;margin-bottom:28px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:240px;height:240px;
+  background:rgba(255,255,255,.05);border-radius:50%;}
+.hero::after{content:'📊';position:absolute;right:40px;top:50%;transform:translateY(-50%);
+  font-size:80px;opacity:.15;}
+.hero h1{font-size:32px;font-weight:800;margin-bottom:10px;}
+.hero p{font-size:15px;opacity:.85;max-width:500px;margin-bottom:24px;}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{padding:10px 20px;border-radius:var(--rs);font-family:var(--font);font-size:14px;
+  font-weight:600;cursor:pointer;border:none;transition:all .2s;
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+.btn-w{background:#fff;color:var(--eg);}
+.btn-w:hover{background:var(--egp);transform:translateY(-1px);}
+.btn-o{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);}
+.btn-o:hover{background:rgba(255,255,255,.1);}
+.btn-g{background:var(--eg);color:#fff;}
+.btn-g:hover{background:var(--eacc);transform:translateY(-1px);}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.sc{background:#fff;border-radius:var(--r);padding:20px;display:flex;
+  align-items:center;gap:14px;box-shadow:var(--sh);border:1px solid var(--egp);transition:transform .2s;}
+.sc:hover{transform:translateY(-2px);}
+.sc-i{font-size:28px;}
+.sc-v{font-size:24px;font-weight:800;color:var(--eg);}
+.sc-l{font-size:12px;color:var(--g5);}
+.sh2{font-size:20px;font-weight:800;margin-bottom:16px;color:var(--ed);display:flex;align-items:center;gap:8px;}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.mc{background:#fff;border-radius:var(--r);border:1px solid var(--g2);
+  overflow:hidden;transition:all .25s;cursor:pointer;box-shadow:var(--sh);}
+.mc:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--egl);}
+.mc-h{padding:16px 18px;background:linear-gradient(135deg,var(--egp),var(--g1));
+  display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--g2);}
+.mc-ic{font-size:28px;}
+.mc-tt{font-size:15px;font-weight:700;color:var(--ed);}
+.mc-sb{font-size:11px;color:var(--g5);margin-top:2px;}
+.mc-b{padding:14px 18px;}
+.mc-d{font-size:13px;color:#555;line-height:1.6;margin-bottom:12px;}
+.mc-m{display:flex;align-items:center;justify-content:space-between;}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+.b-be{background:#e8f5ee;color:var(--eg);}
+.b-in{background:#fff3e0;color:#e65100;}
+.b-av{background:#fce4ec;color:#c62828;}
+.mc-xp{font-size:12px;font-weight:700;color:var(--gold);}
+.mc-pb{height:3px;background:var(--g2);border-radius:3px;margin-top:10px;overflow:hidden;}
+.mc-pf{height:100%;background:var(--eg);border-radius:3px;transition:width .4s;}
+.lw{max-width:800px;}
+.bc{font-size:12px;color:var(--g5);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+.bc .lk{color:var(--eg);cursor:pointer;}
+.bc .lk:hover{text-decoration:underline;}
+.lh{background:#fff;border-radius:var(--r);padding:28px 32px;border:1px solid var(--g2);margin-bottom:20px;box-shadow:var(--sh);}
+.lt{font-size:26px;font-weight:800;color:var(--ed);margin-bottom:8px;}
+.lm{font-size:13px;color:var(--g5);display:flex;gap:16px;flex-wrap:wrap;}
+.lb{background:#fff;border-radius:var(--r);padding:32px;border:1px solid var(--g2);margin-bottom:20px;box-shadow:var(--sh);line-height:1.75;}
+.lb h2{font-size:18px;font-weight:700;color:var(--eg);margin:24px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--egp);}
+.lb h2:first-child{margin-top:0;}
+.lb h3{font-size:15px;font-weight:700;color:var(--ed);margin:18px 0 8px;}
+.lb p{font-size:14px;color:#444;margin-bottom:12px;}
+.lb ul,.lb ol{margin:10px 0 14px 20px;}
+.lb li{font-size:14px;color:#444;margin-bottom:6px;}
+.lb code{background:var(--egp);color:var(--eg);padding:1px 6px;border-radius:4px;font-family:var(--mono);font-size:13px;}
+.callout{border-radius:var(--rs);padding:14px 16px;margin:14px 0;font-size:13.5px;border-left:4px solid;display:flex;gap:10px;}
+.c-tip{background:var(--egp);border-color:var(--eg);color:var(--egm);}
+.c-warn{background:#fff8e1;border-color:#f9a825;color:#6d4c00;}
+.c-info{background:#e3f2fd;border-color:#1976d2;color:#0d47a1;}
+.fb{background:var(--ed);color:#88f7b0;font-family:var(--mono);font-size:13px;
+  padding:16px 20px;border-radius:var(--rs);margin:14px 0;overflow-x:auto;line-height:1.8;
+  border:1px solid rgba(61,170,110,.2);}
+.fb .cm{color:rgba(255,255,255,.4);}
+kbd{background:var(--g1);border:1px solid var(--g3);border-radius:4px;padding:2px 6px;font-family:var(--mono);font-size:12px;color:var(--ed);}
+.dt{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+.dt th{background:var(--eg);color:#fff;padding:10px 14px;text-align:left;font-weight:700;}
+.dt td{padding:9px 14px;border-bottom:1px solid var(--g2);}
+.dt tr:nth-child(even) td{background:var(--g1);}
+.dt tr:hover td{background:var(--egp);}
+.tts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.tt{padding:7px 14px;border-radius:20px;border:2px solid var(--g2);font-size:13px;
+  font-weight:600;cursor:pointer;background:#fff;color:var(--g5);transition:all .15s;}
+.tt:hover{border-color:var(--egl);color:var(--eg);}
+.tt.active{background:var(--eg);border-color:var(--eg);color:#fff;}
+.sw{background:#fff;border-radius:var(--r);border:2px solid var(--eg);overflow:hidden;box-shadow:var(--sh2);}
+.s-tb{background:var(--eg);color:#fff;padding:8px 14px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;}
+.s-rb{background:var(--egp);border-bottom:1px solid var(--g2);padding:6px 12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.sbtn{background:#fff;border:1px solid var(--g3);border-radius:4px;padding:4px 10px;
+  font-size:11px;cursor:pointer;font-family:var(--font);transition:all .15s;}
+.sbtn:hover{background:var(--egp);border-color:var(--eg);color:var(--eg);}
+.s-fb{border-bottom:1px solid var(--g2);padding:5px 10px;display:flex;align-items:center;gap:8px;background:var(--g1);}
+.s-cr{width:60px;text-align:center;font-family:var(--mono);font-size:12px;
+  background:#fff;border:1px solid var(--g3);border-radius:4px;padding:3px 6px;color:var(--ed);}
+.s-fi{flex:1;font-family:var(--mono);font-size:13px;border:1px solid var(--g3);
+  border-radius:4px;padding:4px 10px;background:#fff;outline:none;color:var(--ed);}
+.s-fi:focus{border-color:var(--eg);box-shadow:0 0 0 2px rgba(33,115,70,.15);}
+.s-fx{font-family:var(--mono);color:var(--eg);font-weight:700;font-size:13px;}
+.s-sc{overflow:auto;max-height:360px;}
+table.ss{border-collapse:collapse;width:max-content;min-width:100%;font-size:12px;font-family:var(--font);}
+table.ss th{background:var(--g1);border:1px solid var(--g2);padding:4px 0;text-align:center;
+  font-weight:600;color:var(--g5);min-width:90px;position:sticky;top:0;z-index:2;user-select:none;font-size:11px;}
+table.ss th.rh{width:36px;min-width:36px;left:0;z-index:3;background:var(--g1);}
+table.ss td{border:1px solid var(--g2);padding:0;height:22px;white-space:nowrap;position:relative;}
+table.ss td.rn{background:var(--g1);text-align:center;color:var(--g5);font-size:11px;
+  position:sticky;left:0;z-index:1;min-width:36px;user-select:none;}
+table.ss td.sel{background:rgba(33,115,70,.1)!important;outline:2px solid var(--eg);outline-offset:-2px;}
+.ci{width:100%;height:100%;border:none;outline:none;padding:0 4px;
+  font-family:var(--mono);font-size:12px;background:transparent;color:var(--ed);cursor:default;}
+.ci:focus{cursor:text;background:rgba(255,255,255,.95);}
+.ci.num{text-align:right;}
+.ci.bold{font-weight:700;}
+.ci.ital{font-style:italic;}
+.ci.ctr{text-align:center;}
+.ci.bgg{background:#e8f5ee;}
+.ci.bgh{background:#217346;color:#fff;font-weight:700;text-align:center;}
+.ci.bgt{background:#fff8e1;font-weight:700;}
+.s-st{background:var(--eg);color:#fff;padding:3px 12px;font-size:11px;
+  display:flex;justify-content:space-between;align-items:center;}
+.qc{background:#fff;border-radius:var(--r);border:1px solid var(--g2);padding:28px 32px;margin-bottom:16px;box-shadow:var(--sh);}
+.qq{font-size:16px;font-weight:700;margin-bottom:18px;color:var(--ed);}
+.qn{display:inline-block;background:var(--eg);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;margin-right:8px;}
+.qo-w{display:flex;flex-direction:column;gap:10px;}
+.qo{padding:12px 16px;border-radius:var(--rs);border:2px solid var(--g2);cursor:pointer;
+  font-size:14px;transition:all .15s;display:flex;align-items:center;gap:10px;background:#fff;}
+.qo:hover{border-color:var(--egl);background:var(--egp);}
+.qo.ok{border-color:var(--eg);background:var(--egp);color:var(--eg);font-weight:600;}
+.qo.ko{border-color:var(--red);background:#fce4ec;color:var(--red);}
+.ql{width:26px;height:26px;background:var(--g1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;}
+.qfb{margin-top:12px;padding:10px 14px;border-radius:var(--rs);font-size:13px;font-weight:600;display:none;}
+.qfb.show{display:block;}
+.qfb.ok{background:var(--egp);color:var(--eg);}
+.qfb.ko{background:#fce4ec;color:var(--red);}
+.fi input{background:#fff;border:2px solid var(--egl);border-radius:var(--rs);
+  padding:8px 12px;font-family:var(--mono);font-size:14px;color:var(--ed);outline:none;margin:0 4px;min-width:120px;}
+.fi input:focus{border-color:var(--eg);box-shadow:0 0 0 3px rgba(33,115,70,.15);}
+.fi input.ok{border-color:var(--eg);background:var(--egp);}
+.fi input.ko{border-color:var(--red);background:#fce4ec;}
+.cb{margin-top:14px;background:var(--eg);color:#fff;border:none;border-radius:var(--rs);
+  padding:10px 22px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.cb:hover{background:var(--eacc);transform:translateY(-1px);}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.rcard{background:#fff;border-radius:var(--r);padding:20px;text-align:center;
+  border:2px solid var(--g2);transition:all .25s;position:relative;overflow:hidden;}
+.rcard.locked{opacity:.5;filter:grayscale(.5);}
+.rcard.unlocked{border-color:var(--gold);box-shadow:0 0 20px rgba(244,196,48,.25);}
+.rcard .ri{font-size:40px;margin-bottom:8px;display:block;}
+.rcard .rn{font-size:14px;font-weight:700;color:var(--ed);margin-bottom:4px;}
+.rcard .rr{font-size:11px;color:var(--g5);}
+.rcard .rb{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--gold);color:#5a3e00;}
+.ll{display:flex;flex-direction:column;gap:12px;}
+.li{background:#fff;border-radius:var(--r);border:1px solid var(--g2);padding:16px 20px;
+  display:flex;align-items:center;gap:16px;box-shadow:var(--sh);transition:all .2s;}
+.li.cur{border-color:var(--eg);background:var(--egp);}
+.li:hover{transform:translateX(4px);}
+.ln{font-size:24px;font-weight:800;color:var(--eg);min-width:36px;}
+.lname{font-size:15px;font-weight:700;}
+.lrange{font-size:12px;color:var(--g5);margin-top:2px;}
+.lbar{flex:1;height:8px;background:var(--g2);border-radius:8px;overflow:hidden;}
+.lbf{height:100%;background:linear-gradient(90deg,var(--eg),var(--egl));border-radius:8px;}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.fc{height:160px;perspective:1000px;cursor:pointer;}
+.fc-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s ease;}
+.fc.flipped .fc-in{transform:rotateY(180deg);}
+.fc-f,.fc-b{position:absolute;width:100%;height:100%;backface-visibility:hidden;
+  border-radius:var(--r);display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:20px;box-shadow:var(--sh);}
+.fc-f{background:linear-gradient(135deg,var(--eg),var(--eacc));color:#fff;font-size:14px;font-weight:700;line-height:1.5;}
+.fc-b{background:#fff;border:2px solid var(--eg);color:var(--ed);font-size:13px;line-height:1.6;transform:rotateY(180deg);}
+.notif{position:fixed;bottom:24px;right:24px;background:var(--ed);color:#fff;
+  border-radius:var(--r);padding:14px 18px;font-size:14px;font-weight:600;
+  box-shadow:var(--sh2);transform:translateY(80px);opacity:0;
+  transition:all .3s ease;z-index:999;border-left:4px solid var(--eg);
+  min-width:260px;display:flex;align-items:center;gap:10px;}
+.notif.show{transform:translateY(0);opacity:1;}
+.xpp{position:fixed;bottom:80px;right:24px;background:var(--gold);color:#5a3e00;
+  border-radius:var(--r);padding:10px 18px;font-size:16px;font-weight:800;
+  box-shadow:var(--sh2);transform:translateY(40px) scale(.8);opacity:0;
+  transition:all .4s ease;z-index:998;}
+.xpp.show{transform:translateY(0) scale(1);opacity:1;}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:150;}
+#overlay.show{display:block;}
+@media(max-width:900px){
+  #sidebar{transform:translateX(-100%);}
+  #sidebar.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  #topbar{left:0;}
+  #menu-toggle{display:block;}
+  .sr{grid-template-columns:1fr 1fr;}
+  .hero{padding:32px 24px;}
+  .hero::after{display:none;}
+  .sec{padding:20px 16px;}
+  .lb{padding:20px;}
+}
+@media(max-width:600px){.hero h1{font-size:22px;}.mg{grid-template-columns:1fr;}.sr{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div id="overlay" onclick="closeSB()"></div>
+<aside id="sidebar">
+  <div class="sb-hdr">
+    <div class="sb-logo">
+      <div class="sb-icon">📊</div>
+      <div><span class="sb-brand">IGOREXCEL</span><span class="sb-tag">Aprende con Igor</span></div>
+    </div>
+  </div>
+  <div class="sb-stats">
+    <div class="sp"><span class="v" id="sb-coins">0</span><span class="l">💰 Coins</span></div>
+    <div class="sp"><span class="v" id="sb-level">1</span><span class="l">🎖 Nivel</span></div>
+    <div class="sp"><span class="v" id="sb-done">0</span><span class="l">✅ Hechos</span></div>
+    <div class="sp"><span class="v" id="sb-streak">0🔥</span><span class="l">Racha</span></div>
+  </div>
+  <div class="pb-w">
+    <div class="pb-l"><span>Progreso total</span><span id="prog-pct">0%</span></div>
+    <div class="pb"><div class="pb-f" id="prog-fill"></div></div>
+  </div>
+  <nav>
+    <div class="nv-s">
+      <div class="nv-l">General</div>
+      <div class="ni active" onclick="go('inicio')"><span class="ic">📍</span>Inicio</div>
+      <div class="ni" onclick="go('dashboard')"><span class="ic">🏠</span>Dashboard</div>
+      <div class="ni" onclick="go('niveles')"><span class="ic">🎖</span>Niveles y XP</div>
+      <div class="ni" onclick="go('recompensas')"><span class="ic">🎁</span>Recompensas</div>
+    </div>
+    <div class="nv-s">
+      <div class="nv-l">📚 Módulos</div>
+      <div class="ni" onclick="go('intro')"><span class="ic">🌱</span>Introducción</div>
+      <div class="ni" onclick="go('datos')"><span class="ic">📝</span>Datos y celdas</div>
+      <div class="ni" onclick="go('formato')"><span class="ic">🎨</span>Formato y diseño</div>
+      <div class="ni" onclick="go('formulas')"><span class="ic">🔢</span>Fórmulas básicas</div>
+      <div class="ni" onclick="go('funciones')"><span class="ic">⚡</span>Funciones avanzadas</div>
+      <div class="ni" onclick="go('graficos')"><span class="ic">📊</span>Gráficos</div>
+      <div class="ni" onclick="go('tablas')"><span class="ic">🗂</span>Tablas y BD</div>
+      <div class="ni" onclick="go('dinamicas')"><span class="ic">🔄</span>Tablas dinámicas</div>
+      <div class="ni" onclick="go('avanzado')"><span class="ic">🚀</span>Excel avanzado</div>
+      <div class="ni" onclick="go('ia')"><span class="ic">🤖</span>IA y Excel</div>
+    </div>
+    <div class="nv-s">
+      <div class="nv-l">🛠 Práctica</div>
+      <div class="ni" onclick="go('simulador')"><span class="ic">🖥</span>Simulador Excel</div>
+      <div class="ni" onclick="go('flashcards')"><span class="ic">🃏</span>Flashcards</div>
+      <div class="ni" onclick="go('reto')"><span class="ic">⚔️</span>Reto final</div>
+      <a class="ni" href="practicas.html" target="_blank"><span class="ic">🧪</span>Prácticas avanzadas ↗</a>
+    </div>
+    <div class="nv-s">
+      <div class="nv-l">📦 Recursos</div>
+      <div class="ni" onclick="go('plantillas')"><span class="ic">📋</span>Plantillas descargables</div>
+      <a class="ni" href="formulas.html" target="_blank"><span class="ic">📖</span>Biblioteca de fórmulas ↗</a>
+      <a class="ni" href="atajos.html" target="_blank"><span class="ic">⌨️</span>Atajos de teclado ↗</a>
+    </div>
+    <div class="nv-s">
+      <div class="nv-l">Sistema</div>
+      <div class="ni" onclick="resetProg()"><span class="ic">🗑</span>Reiniciar progreso</div>
+    </div>
+  </nav>
+  <div class="sb-ft">IGOREXCEL v1.2 · Hecho con 💚 para Igor</div>
+</aside>
+
+<header id="topbar">
+  <button id="menu-toggle" onclick="toggleSB()">☰</button>
+  <div class="tb-title">📊 IGOREXCEL</div>
+  <div class="tb-streak" id="tb-streak">🔥 0 días</div>
+  <div class="coins-b" id="tb-coins">💰 0</div>
+</header>
+
+<main id="main">
+<!-- INICIO -->
+<section id="s-inicio" class="sec active">
+  <div class="hero">
+    <h1>📊 De cero a experto en Excel</h1>
+    <p>Aprende Microsoft Excel con simulador interactivo, ejercicios prácticos y gamificación real. ¡De principiante a maestro!</p>
+    <div class="hbtns">
+      <button class="btn btn-w" onclick="go('intro')">🚀 Empezar ahora</button>
+      <button class="btn btn-o" onclick="go('simulador')">🖥 Abrir simulador</button>
+      <a class="btn btn-o" href="practicas.html" target="_blank">🧪 Prácticas avanzadas</a>
+      <a class="btn btn-o" href="formulas.html" target="_blank">📖 Fórmulas</a>
+      <a class="btn btn-o" href="atajos.html" target="_blank">⌨️ Atajos</a>
+    </div>
+  </div>
+  <div class="sr">
+    <div class="sc"><div class="sc-i">📚</div><div><div class="sc-v">10</div><div class="sc-l">Módulos de aprendizaje</div></div></div>
+    <div class="sc"><div class="sc-i">🎮</div><div><div class="sc-v">50+</div><div class="sc-l">Ejercicios interactivos</div></div></div>
+    <div class="sc"><div class="sc-i">🖥</div><div><div class="sc-v">1</div><div class="sc-l">Simulador Excel real</div></div></div>
+    <div class="sc"><div class="sc-i">🏆</div><div><div class="sc-v">20</div><div class="sc-l">Recompensas</div></div></div>
+  </div>
+  <h2 class="sh2">🗺 Ruta de aprendizaje</h2>
+  <div class="mg" id="mods-grid"></div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="s-dashboard" class="sec">
+  <h2 class="sh2">🏠 Dashboard</h2>
+  <div class="sr">
+    <div class="sc"><div class="sc-i">💰</div><div><div class="sc-v" id="d-coins">0</div><div class="sc-l">IgorCoins</div></div></div>
+    <div class="sc"><div class="sc-i">🎖</div><div><div class="sc-v" id="d-level">1</div><div class="sc-l">Nivel actual</div></div></div>
+    <div class="sc"><div class="sc-i">✅</div><div><div class="sc-v" id="d-done">0</div><div class="sc-l">Lecciones hechas</div></div></div>
+    <div class="sc"><div class="sc-i">🔥</div><div><div class="sc-v" id="d-streak">0</div><div class="sc-l">Días de racha</div></div></div>
+  </div>
+  <div style="background:#fff;border-radius:var(--r);padding:24px;border:1px solid var(--g2);box-shadow:var(--sh);">
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">📈 Progreso por módulos</h3>
+    <div id="dash-prog"></div>
+  </div>
+</section>
+
+<!-- NIVELES -->
+<section id="s-niveles" class="sec">
+  <h2 class="sh2">🎖 Niveles y XP</h2>
+  <p style="font-size:14px;color:var(--g5);margin-bottom:20px;">Completa lecciones para ganar IgorCoins y subir de nivel.</p>
+  <div class="ll" id="levels-list"></div>
+</section>
+
+<!-- RECOMPENSAS -->
+<section id="s-recompensas" class="sec">
+  <h2 class="sh2">🎁 Recompensas</h2>
+  <p style="font-size:14px;color:var(--g5);margin-bottom:20px;">Acumula IgorCoins para desbloquear recompensas exclusivas.</p>
+  <div class="rg" id="rewards-grid"></div>
+</section>
+<!-- MOD INTRO -->
+<section id="s-intro" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>🌱 Introducción</span></div>
+  <div class="tts" id="tts-intro">
+    <button class="tt active" onclick="showTab('intro','t1',this)">¿Qué es Excel?</button>
+    <button class="tt" onclick="showTab('intro','t2',this)">La interfaz</button>
+    <button class="tt" onclick="showTab('intro','t3',this)">Primeros pasos</button>
+    <button class="tt" onclick="showTab('intro','t4',this)">🧪 Ejercicios</button>
+  </div>
+  <div id="intro-t1" class="lw">
+    <div class="lh"><div class="lt">¿Qué es Microsoft Excel?</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 8 min</span><span>💰 +10 coins</span></div></div>
+    <div class="lb">
+      <h2>📌 Definición</h2>
+      <p>Microsoft Excel es una <strong>hoja de cálculo electrónica</strong> que permite organizar datos en una cuadrícula de filas y columnas, realizar cálculos automáticos y crear gráficos para analizar información de forma eficiente.</p>
+      <div class="callout c-tip"><span>💡</span><span>Excel puede manejar desde listas sencillas hasta modelos financieros complejos con millones de datos.</span></div>
+      <h2>🏗 Estructura básica</h2>
+      <p>Un archivo Excel se llama <strong>Libro de trabajo</strong> (.xlsx). Dentro hay <strong>Hojas de cálculo</strong> con una cuadrícula de:</p>
+      <ul>
+        <li><strong>Filas:</strong> numeradas del 1 al 1.048.576</li>
+        <li><strong>Columnas:</strong> letras de A a XFD (16.384 columnas)</li>
+        <li><strong>Celdas:</strong> intersección fila+columna → A1, B5, C12…</li>
+      </ul>
+      <h2>💼 Principales usos</h2>
+      <table class="dt">
+        <thead><tr><th>Área</th><th>Uso típico</th></tr></thead>
+        <tbody>
+          <tr><td>💰 Finanzas</td><td>Presupuestos, préstamos, control de gastos</td></tr>
+          <tr><td>📊 Análisis</td><td>Estadísticas, dashboards, tendencias</td></tr>
+          <tr><td>🗃 Gestión</td><td>Inventarios, proyectos, CRM básico</td></tr>
+          <tr><td>🎓 Educación</td><td>Registro de notas, planificaciones</td></tr>
+        </tbody>
+      </table>
+      <h2>🆕 Novedades Excel 2016 y versiones recientes</h2>
+      <ul>
+        <li>6 nuevos tipos de gráficos: treemap, cascada, histograma, pareto, cajas y bigotes, proyección solar</li>
+        <li>Mapas 3D para visualización geoespacial</li>
+        <li>Colaboración en tiempo real con múltiples usuarios</li>
+        <li>En Excel 365/2021: XLOOKUP, FILTER, LET, LAMBDA, matrices dinámicas</li>
+      </ul>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('intro-1',10)">✅ Lección completada (+10 coins)</button>
+  </div>
+  <div id="intro-t2" class="lw" style="display:none">
+    <div class="lh"><div class="lt">La interfaz de Excel</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 10 min</span><span>💰 +10 coins</span></div></div>
+    <div class="lb">
+      <h2>🖥 Elementos principales</h2>
+      <table class="dt">
+        <thead><tr><th>Elemento</th><th>Función</th></tr></thead>
+        <tbody>
+          <tr><td>📂 Barra de título</td><td>Nombre del archivo + botones Minimizar/Maximizar/Cerrar</td></tr>
+          <tr><td>⚡ Barra acceso rápido</td><td>Guardar, Deshacer, Rehacer. Personalizable.</td></tr>
+          <tr><td>🎀 Cinta de opciones</td><td>Todas las funciones organizadas en pestañas: Inicio, Insertar, Fórmulas…</td></tr>
+          <tr><td>🔲 Cuadro de nombres</td><td>Referencia de la celda activa (ej: A1). Permite navegar directamente.</td></tr>
+          <tr><td>fx Barra de fórmulas</td><td>Muestra y permite editar el contenido de la celda activa</td></tr>
+          <tr><td>📋 Área de trabajo</td><td>La cuadrícula de filas y columnas donde se trabaja</td></tr>
+          <tr><td>📑 Barra de etiquetas</td><td>Hojas del libro. Clic para navegar entre ellas.</td></tr>
+          <tr><td>📊 Barra de estado</td><td>Suma, promedio, zoom y vistas rápidas</td></tr>
+        </tbody>
+      </table>
+      <h2>⌨️ Atajos esenciales</h2>
+      <table class="dt">
+        <thead><tr><th>Atajo</th><th>Acción</th></tr></thead>
+        <tbody>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Guardar</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Deshacer</td></tr>
+          <tr><td><kbd>F2</kbd></td><td>Editar celda activa</td></tr>
+          <tr><td><kbd>F4</kbd></td><td>Ciclar tipos de referencia ($)</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>Inicio</kbd></td><td>Ir a A1</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>Formato de celdas</td></tr>
+          <tr><td><kbd>Alt</kbd>+<kbd>F11</kbd></td><td>Editor VBA/Macros</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>Crear tabla</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('intro-2',10)">✅ Lección completada (+10 coins)</button>
+  </div>
+  <div id="intro-t3" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Primeros pasos</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 8 min</span><span>💰 +10 coins</span></div></div>
+    <div class="lb">
+      <h2>📄 Crear nuevo libro</h2>
+      <ul>
+        <li>Pantalla de inicio → <strong>Libro en blanco</strong></li>
+        <li>Atajo: <kbd>Ctrl</kbd>+<kbd>U</kbd></li>
+        <li>Menú Archivo → Nuevo</li>
+      </ul>
+      <h2>💾 Guardar</h2>
+      <ul>
+        <li><strong>Guardar</strong> (<kbd>Ctrl</kbd>+<kbd>S</kbd>): sobreescribe el archivo existente</li>
+        <li><strong>Guardar como</strong>: nuevo nombre, carpeta o formato diferente</li>
+      </ul>
+      <div class="callout c-warn"><span>⚠️</span><span>¡Guarda frecuentemente! Activa el autoguardado si usas Microsoft 365.</span></div>
+      <h2>📁 Formatos de archivo</h2>
+      <table class="dt">
+        <thead><tr><th>Extensión</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>.xlsx</td><td>Libro estándar moderno (Excel 2007+)</td></tr>
+          <tr><td>.xlsm</td><td>Libro con macros habilitadas</td></tr>
+          <tr><td>.xls</td><td>Formato antiguo (Excel 97-2003)</td></tr>
+          <tr><td>.csv</td><td>Texto separado por comas, universal</td></tr>
+          <tr><td>.pdf</td><td>Para compartir sin posibilidad de edición</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('intro-3',10)">✅ Lección completada (+10 coins)</button>
+  </div>
+  <div id="intro-t4" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🧪 Ejercicios — Introducción</div><div class="lm"><span>🎮 Interactivo</span><span>💰 +5 coins por acierto</span></div></div>
+    <div class="qc">
+      <div class="qq"><span class="qn">1</span>¿Cuántas filas tiene una hoja de Excel?</div>
+      <div class="qo-w" id="q-i1">
+        <div class="qo" onclick="checkQ(this,'q-i1',false)"><span class="ql">A</span>65.536 filas</div>
+        <div class="qo" onclick="checkQ(this,'q-i1',false)"><span class="ql">B</span>256 filas</div>
+        <div class="qo" onclick="checkQ(this,'q-i1',true)"><span class="ql">C</span>1.048.576 filas</div>
+        <div class="qo" onclick="checkQ(this,'q-i1',false)"><span class="ql">D</span>16.384 filas</div>
+      </div>
+      <div class="qfb" id="q-i1-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">2</span>¿Qué extensión tiene un libro de Excel con macros habilitadas?</div>
+      <div class="qo-w" id="q-i2">
+        <div class="qo" onclick="checkQ(this,'q-i2',false)"><span class="ql">A</span>.xlsx</div>
+        <div class="qo" onclick="checkQ(this,'q-i2',true)"><span class="ql">B</span>.xlsm</div>
+        <div class="qo" onclick="checkQ(this,'q-i2',false)"><span class="ql">C</span>.xls</div>
+        <div class="qo" onclick="checkQ(this,'q-i2',false)"><span class="ql">D</span>.xlx</div>
+      </div>
+      <div class="qfb" id="q-i2-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">3</span>¿Qué elemento de Excel muestra y permite editar el contenido de la celda activa?</div>
+      <div class="qo-w" id="q-i3">
+        <div class="qo" onclick="checkQ(this,'q-i3',false)"><span class="ql">A</span>La cinta de opciones</div>
+        <div class="qo" onclick="checkQ(this,'q-i3',false)"><span class="ql">B</span>El cuadro de nombres</div>
+        <div class="qo" onclick="checkQ(this,'q-i3',true)"><span class="ql">C</span>La barra de fórmulas</div>
+        <div class="qo" onclick="checkQ(this,'q-i3',false)"><span class="ql">D</span>La barra de estado</div>
+      </div>
+      <div class="qfb" id="q-i3-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">4</span>El atajo de teclado para guardar en Excel es: <span class="fi"><input id="fi-i4" type="text" placeholder="Ctrl + ?"></span></div>
+      <button class="cb" onclick="checkFI('fi-i4',['ctrl+s','ctrls','ctrl+g'],'fi-i4-fb')">Comprobar ✓</button>
+      <div class="qfb" id="fi-i4-fb"></div>
+    </div>
+  </div>
+</section>
+<!-- MOD DATOS -->
+<section id="s-datos" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>📝 Datos y celdas</span></div>
+  <div class="tts" id="tts-datos">
+    <button class="tt active" onclick="showTab('datos','t1',this)">Tipos de datos</button>
+    <button class="tt" onclick="showTab('datos','t2',this)">Selección y edición</button>
+    <button class="tt" onclick="showTab('datos','t3',this)">Copiar y mover</button>
+    <button class="tt" onclick="showTab('datos','t4',this)">Validación</button>
+    <button class="tt" onclick="showTab('datos','t5',this)">🧪 Ejercicios</button>
+  </div>
+  <div id="datos-t1" class="lw">
+    <div class="lh"><div class="lt">Tipos de datos en Excel</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 10 min</span><span>💰 +12 coins</span></div></div>
+    <div class="lb">
+      <h2>📦 Tipos disponibles</h2>
+      <table class="dt">
+        <thead><tr><th>Tipo</th><th>Ejemplo</th><th>Alineación</th><th>Notas</th></tr></thead>
+        <tbody>
+          <tr><td>📝 Texto</td><td>Hola Mundo</td><td>Izquierda</td><td>No calculable</td></tr>
+          <tr><td>🔢 Número</td><td>1234.56</td><td>Derecha</td><td>Enteros, decimales, negativos</td></tr>
+          <tr><td>📅 Fecha</td><td>15/03/2024</td><td>Derecha</td><td>Internamente es un número de días</td></tr>
+          <tr><td>🕐 Hora</td><td>14:30:00</td><td>Derecha</td><td>Fracción decimal de un día</td></tr>
+          <tr><td>✅ Lógico</td><td>VERDADERO</td><td>Centro</td><td>Resultado de comparaciones</td></tr>
+          <tr><td>⚡ Fórmula</td><td>=A1+B1</td><td>Según resultado</td><td>Siempre empieza con =</td></tr>
+        </tbody>
+      </table>
+      <h2>⚠️ Errores más frecuentes</h2>
+      <table class="dt">
+        <thead><tr><th>Error</th><th>Causa</th><th>Solución</th></tr></thead>
+        <tbody>
+          <tr><td><code>#####</code></td><td>Columna demasiado estrecha</td><td>Amplía la columna</td></tr>
+          <tr><td><code>#¡VALOR!</code></td><td>Tipo de dato incorrecto (sumar texto)</td><td>Revisa los tipos de datos</td></tr>
+          <tr><td><code>#¡DIV/0!</code></td><td>División entre cero</td><td>Usa SI.ERROR o comprueba el divisor</td></tr>
+          <tr><td><code>#¿NOMBRE?</code></td><td>Función o rango no reconocido</td><td>Revisa el nombre de la función</td></tr>
+          <tr><td><code>#N/A</code></td><td>Valor no encontrado (BUSCARV…)</td><td>Usa SI.ERROR para capturarlo</td></tr>
+          <tr><td><code>#¡REF!</code></td><td>Referencia inválida (celda eliminada)</td><td>Revisa las referencias de la fórmula</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('datos-1',12)">✅ Lección completada (+12 coins)</button>
+  </div>
+  <div id="datos-t2" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Selección y edición de celdas</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 10 min</span><span>💰 +12 coins</span></div></div>
+    <div class="lb">
+      <h2>🖱 Formas de seleccionar</h2>
+      <ul>
+        <li><strong>Una celda:</strong> Clic directo</li>
+        <li><strong>Rango continuo:</strong> Clic y arrastrar, o <kbd>Shift</kbd>+clic en la última</li>
+        <li><strong>No contiguas:</strong> Mantén <kbd>Ctrl</kbd> y haz clic en cada celda</li>
+        <li><strong>Columna entera:</strong> Clic en la letra de cabecera</li>
+        <li><strong>Fila entera:</strong> Clic en el número de la fila</li>
+        <li><strong>Toda la hoja:</strong> <kbd>Ctrl</kbd>+<kbd>E</kbd> o clic en la esquina superior izquierda</li>
+      </ul>
+      <h2>✏️ Modos de edición</h2>
+      <ul>
+        <li><strong>Escritura directa:</strong> Escribe sobre la celda, reemplaza el contenido</li>
+        <li><strong>Editar existente:</strong> <kbd>F2</kbd> o doble clic — sitúa el cursor dentro</li>
+        <li><strong>Cancelar:</strong> <kbd>Esc</kbd> — descarta los cambios</li>
+        <li><strong>Confirmar:</strong> <kbd>Enter</kbd> (baja), <kbd>Tab</kbd> (derecha), clic en ✓</li>
+      </ul>
+      <h2>🧹 Borrar datos</h2>
+      <ul>
+        <li><kbd>Supr</kbd>: Borra el contenido, conserva el formato</li>
+        <li>Inicio → Borrar → <strong>Borrar todo</strong>: elimina contenido y formato</li>
+        <li>Inicio → Borrar → <strong>Borrar formatos</strong>: solo limpia el estilo visual</li>
+      </ul>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('datos-2',12)">✅ Lección completada (+12 coins)</button>
+  </div>
+  <div id="datos-t3" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Copiar, cortar y mover</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 8 min</span><span>💰 +10 coins</span></div></div>
+    <div class="lb">
+      <h2>📋 Copiar y pegar</h2>
+      <ol><li>Selecciona → <kbd>Ctrl</kbd>+<kbd>C</kbd> (aparece línea punteada)</li><li>Ve al destino → <kbd>Ctrl</kbd>+<kbd>V</kbd></li></ol>
+      <h2>✂️ Cortar y pegar (mover)</h2>
+      <ol><li>Selecciona → <kbd>Ctrl</kbd>+<kbd>X</kbd></li><li>Ve al destino → <kbd>Ctrl</kbd>+<kbd>V</kbd></li></ol>
+      <div class="callout c-warn"><span>⚠️</span><span>Al <strong>mover</strong> (Cortar+Pegar), las referencias relativas en fórmulas NO se ajustan. Al <strong>copiar</strong>, sí se ajustan automáticamente.</span></div>
+      <h2>🎛 Pegado especial — <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd></h2>
+      <ul>
+        <li><strong>Solo valores:</strong> Pega el resultado numérico, no la fórmula</li>
+        <li><strong>Solo formatos:</strong> Aplica el estilo sin copiar datos</li>
+        <li><strong>Transponer:</strong> Convierte filas en columnas y viceversa</li>
+        <li><strong>Operación:</strong> Suma/resta/multiplica con los valores existentes</li>
+      </ul>
+      <h2>🤏 Autorrelleno</h2>
+      <p>El <strong>controlador de relleno</strong> es el cuadradito en la esquina inferior derecha de la selección. Arrástralo para copiar o continuar series automáticamente (1,2,3… o Lunes,Martes…).</p>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('datos-3',10)">✅ Lección completada (+10 coins)</button>
+  </div>
+  <div id="datos-t4" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Validación de datos</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 12 min</span><span>💰 +15 coins</span></div></div>
+    <div class="lb">
+      <h2>🛡 ¿Qué es?</h2>
+      <p>La validación de datos restringe qué valores se pueden introducir en una celda. Es esencial para formularios y para evitar errores de entrada.</p>
+      <h2>⚙️ Cómo configurarla</h2>
+      <ol>
+        <li>Selecciona la celda o rango</li>
+        <li>Pestaña <strong>Datos → Validación de datos</strong></li>
+        <li>En "Permitir" elige: Número entero, Decimal, Lista, Fecha, Hora, Longitud o Personalizada</li>
+        <li>Configura la condición (entre, mayor que, igual a…)</li>
+        <li>Opcionalmente: configura Mensaje de entrada y Mensaje de error</li>
+      </ol>
+      <h2>📋 Lista desplegable (muy utilizado)</h2>
+      <p>Validación → Permitir: <strong>Lista</strong> → Escribe las opciones separadas por ";" en Origen:</p>
+      <div class="fb">Sí;No;En proceso;Cancelado;Pendiente</div>
+      <div class="callout c-tip"><span>💡</span><span>Las listas desplegables son perfectas para hojas compartidas. Evitan inconsistencias y errores tipográficos.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('datos-4',15)">✅ Lección completada (+15 coins)</button>
+  </div>
+  <div id="datos-t5" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🧪 Ejercicios — Datos y celdas</div><div class="lm"><span>🎮 Interactivo</span><span>💰 +5 coins por acierto</span></div></div>
+    <div class="qc">
+      <div class="qq"><span class="qn">1</span>¿Qué atajo activa el Pegado especial?</div>
+      <div class="qo-w" id="q-d1">
+        <div class="qo" onclick="checkQ(this,'q-d1',false)"><span class="ql">A</span>Ctrl + P</div>
+        <div class="qo" onclick="checkQ(this,'q-d1',true)"><span class="ql">B</span>Ctrl + Alt + V</div>
+        <div class="qo" onclick="checkQ(this,'q-d1',false)"><span class="ql">C</span>Ctrl + Shift + V</div>
+        <div class="qo" onclick="checkQ(this,'q-d1',false)"><span class="ql">D</span>Alt + P</div>
+      </div>
+      <div class="qfb" id="q-d1-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">2</span>¿Qué error muestra Excel al dividir entre cero?</div>
+      <div class="qo-w" id="q-d2">
+        <div class="qo" onclick="checkQ(this,'q-d2',false)"><span class="ql">A</span>#¡REF!</div>
+        <div class="qo" onclick="checkQ(this,'q-d2',false)"><span class="ql">B</span>#¡VALOR!</div>
+        <div class="qo" onclick="checkQ(this,'q-d2',true)"><span class="ql">C</span>#¡DIV/0!</div>
+        <div class="qo" onclick="checkQ(this,'q-d2',false)"><span class="ql">D</span>#N/A</div>
+      </div>
+      <div class="qfb" id="q-d2-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">3</span>El autorrelleno se activa arrastrando el ___ de la celda seleccionada.</div>
+      <div class="qo-w" id="q-d3">
+        <div class="qo" onclick="checkQ(this,'q-d3',false)"><span class="ql">A</span>Borde superior izquierdo</div>
+        <div class="qo" onclick="checkQ(this,'q-d3',true)"><span class="ql">B</span>Controlador de relleno (esquina inferior derecha)</div>
+        <div class="qo" onclick="checkQ(this,'q-d3',false)"><span class="ql">C</span>Barra de fórmulas</div>
+        <div class="qo" onclick="checkQ(this,'q-d3',false)"><span class="ql">D</span>Cuadro de nombres</div>
+      </div>
+      <div class="qfb" id="q-d3-fb"></div>
+    </div>
+  </div>
+</section>
+<!-- MOD FORMULAS -->
+<section id="s-formulas" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>🔢 Fórmulas básicas</span></div>
+  <div class="tts" id="tts-formulas">
+    <button class="tt active" onclick="showTab('formulas','t1',this)">Qué son</button>
+    <button class="tt" onclick="showTab('formulas','t2',this)">Operadores</button>
+    <button class="tt" onclick="showTab('formulas','t3',this)">Referencias</button>
+    <button class="tt" onclick="showTab('formulas','t4',this)">🧪 Ejercicios</button>
+  </div>
+  <div id="formulas-t1" class="lw">
+    <div class="lh"><div class="lt">Fórmulas en Excel</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 12 min</span><span>💰 +15 coins</span></div></div>
+    <div class="lb">
+      <h2>⚡ ¿Qué es una fórmula?</h2>
+      <p>Una fórmula es una instrucción de cálculo que <strong>empieza siempre con =</strong>. Excel la evalúa y muestra el resultado en la celda.</p>
+      <div class="fb">=A1+B1<br>=C3*0.21<br>=D5-D4<br>=SUMA(A1:A10)</div>
+      <h2>📐 Reglas de sintaxis</h2>
+      <ul>
+        <li>Siempre empieza con <strong>=</strong></li>
+        <li>Puede contener: referencias de celdas, números, texto entre comillas, operadores, funciones</li>
+        <li>Se recalcula automáticamente cuando cambia cualquier celda referenciada</li>
+      </ul>
+      <div class="callout c-tip"><span>💡</span><span>Puedes ver y editar la fórmula de una celda en la <strong>barra de fórmulas</strong>, aunque la celda muestre el resultado calculado.</span></div>
+      <h2>🛠 Ejemplo: Factura simple</h2>
+      <div id="fe-wrap" style="border:2px solid var(--eg);border-radius:var(--rs);overflow:hidden;">
+        <div style="background:var(--eg);color:#fff;padding:6px 12px;font-size:12px;font-weight:600;">📊 Ejemplo — fórmulas básicas</div>
+        <div style="overflow-x:auto;"><table class="ss" id="fe-table"><thead><tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody id="fe-body"></tbody></table></div>
+      </div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('form-1',15)">✅ Lección completada (+15 coins)</button>
+  </div>
+  <div id="formulas-t2" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Operadores en Excel</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 8 min</span><span>💰 +12 coins</span></div></div>
+    <div class="lb">
+      <h2>🔧 Operadores aritméticos</h2>
+      <table class="dt"><thead><tr><th>Op.</th><th>Operación</th><th>Ejemplo</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>+</td><td>Suma</td><td>=5+3</td><td>8</td></tr>
+          <tr><td>-</td><td>Resta</td><td>=10-4</td><td>6</td></tr>
+          <tr><td>*</td><td>Multiplicación</td><td>=4*5</td><td>20</td></tr>
+          <tr><td>/</td><td>División</td><td>=15/3</td><td>5</td></tr>
+          <tr><td>^</td><td>Potencia</td><td>=2^8</td><td>256</td></tr>
+          <tr><td>%</td><td>Porcentaje</td><td>=50%</td><td>0.5</td></tr>
+        </tbody>
+      </table>
+      <h2>🔀 Operadores de comparación</h2>
+      <table class="dt"><thead><tr><th>Op.</th><th>Significado</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td>=</td><td>Igual a</td><td>=A1=B1</td></tr>
+          <tr><td>&lt;&gt;</td><td>Distinto de</td><td>=A1&lt;&gt;0</td></tr>
+          <tr><td>&gt; / &lt;</td><td>Mayor / Menor</td><td>=A1&gt;100</td></tr>
+          <tr><td>&gt;= / &lt;=</td><td>Mayor o igual / Menor o igual</td><td>=B1&gt;=18</td></tr>
+        </tbody>
+      </table>
+      <h2>📝 Concatenar texto con &amp;</h2>
+      <div class="fb">="Hola "&amp;A1&amp;" bienvenido"<br><span class="cm">Si A1="Igor" → resultado: "Hola Igor bienvenido"</span></div>
+      <h2>⚖️ Precedencia de operadores</h2>
+      <p>^ → * / → + - → &amp; → comparaciones. Usa paréntesis para forzar el orden:</p>
+      <div class="fb">=(A1+B1)*C1  <span class="cm">← primero suma, luego multiplica</span><br>=A1+B1*C1   <span class="cm">← primero multiplica, luego suma</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('form-2',12)">✅ Lección completada (+12 coins)</button>
+  </div>
+  <div id="formulas-t3" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Referencias de celdas</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 15 min</span><span>💰 +18 coins</span></div></div>
+    <div class="lb">
+      <h2>🔗 Tipos de referencias</h2>
+      <table class="dt"><thead><tr><th>Tipo</th><th>Sintaxis</th><th>Al copiar</th><th>Cuándo usarla</th></tr></thead>
+        <tbody>
+          <tr><td>🔄 Relativa</td><td>A1</td><td>Se ajusta automáticamente</td><td>Fórmulas repetidas por filas/columnas</td></tr>
+          <tr><td>🔒 Absoluta</td><td>$A$1</td><td>Nunca cambia</td><td>Celda fija: IVA, tipo de cambio…</td></tr>
+          <tr><td>🔀 Mixta fila</td><td>A$1</td><td>Columna cambia, fila fija</td><td>Tablas de multiplicar, matrices</td></tr>
+          <tr><td>🔀 Mixta col.</td><td>$A1</td><td>Fila cambia, columna fija</td><td>Misma categoría en varias filas</td></tr>
+        </tbody>
+      </table>
+      <div class="callout c-tip"><span>💡</span><span>Pulsa <kbd>F4</kbd> mientras editas una referencia para ciclar: A1 → $A$1 → A$1 → $A1 → A1</span></div>
+      <h2>🌐 Referencias a otras hojas</h2>
+      <div class="fb">=Hoja2!A1             <span class="cm">← Celda A1 de Hoja2</span><br>=Ventas!B2+Gastos!B2  <span class="cm">← Suma de dos hojas distintas</span><br>='Datos 2024'!C5      <span class="cm">← Nombre con espacios entre comillas simples</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('form-3',18)">✅ Lección completada (+18 coins)</button>
+  </div>
+  <div id="formulas-t4" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🧪 Ejercicios — Fórmulas</div><div class="lm"><span>🎮 Interactivo</span><span>💰 +5 coins</span></div></div>
+    <div class="qc">
+      <div class="qq"><span class="qn">1</span>¿Cuál es el resultado de =2+3*4?</div>
+      <div class="qo-w" id="q-f1">
+        <div class="qo" onclick="checkQ(this,'q-f1',false)"><span class="ql">A</span>20</div>
+        <div class="qo" onclick="checkQ(this,'q-f1',true)"><span class="ql">B</span>14</div>
+        <div class="qo" onclick="checkQ(this,'q-f1',false)"><span class="ql">C</span>24</div>
+        <div class="qo" onclick="checkQ(this,'q-f1',false)"><span class="ql">D</span>10</div>
+      </div><div class="qfb" id="q-f1-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">2</span>Para que una referencia no cambie al copiar la fórmula usamos:</div>
+      <div class="qo-w" id="q-f2">
+        <div class="qo" onclick="checkQ(this,'q-f2',false)"><span class="ql">A</span>Referencia relativa (A1)</div>
+        <div class="qo" onclick="checkQ(this,'q-f2',true)"><span class="ql">B</span>Referencia absoluta ($A$1)</div>
+        <div class="qo" onclick="checkQ(this,'q-f2',false)"><span class="ql">C</span>Referencia mixta (A$1)</div>
+        <div class="qo" onclick="checkQ(this,'q-f2',false)"><span class="ql">D</span>No existe esa opción</div>
+      </div><div class="qfb" id="q-f2-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">3</span>¿Qué operador une (concatena) texto en Excel?</div>
+      <div class="qo-w" id="q-f3">
+        <div class="qo" onclick="checkQ(this,'q-f3',false)"><span class="ql">A</span>+ (suma)</div>
+        <div class="qo" onclick="checkQ(this,'q-f3',false)"><span class="ql">B</span>* (asterisco)</div>
+        <div class="qo" onclick="checkQ(this,'q-f3',true)"><span class="ql">C</span>&amp; (ampersand)</div>
+        <div class="qo" onclick="checkQ(this,'q-f3',false)"><span class="ql">D</span>| (pipe)</div>
+      </div><div class="qfb" id="q-f3-fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOD FUNCIONES -->
+<section id="s-funciones" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>⚡ Funciones avanzadas</span></div>
+  <div class="tts" id="tts-funciones">
+    <button class="tt active" onclick="showTab('funciones','t1',this)">Básicas</button>
+    <button class="tt" onclick="showTab('funciones','t2',this)">Texto</button>
+    <button class="tt" onclick="showTab('funciones','t3',this)">Lógicas SI/Y/O</button>
+    <button class="tt" onclick="showTab('funciones','t4',this)">BUSCARV/XLOOKUP</button>
+    <button class="tt" onclick="showTab('funciones','t5',this)">Fecha y hora</button>
+    <button class="tt" onclick="showTab('funciones','t6',this)">🧪 Ejercicios</button>
+  </div>
+  <div id="funciones-t1" class="lw">
+    <div class="lh"><div class="lt">Funciones matemáticas y estadísticas</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 15 min</span><span>💰 +20 coins</span></div></div>
+    <div class="lb">
+      <table class="dt"><thead><tr><th>Función</th><th>Sintaxis</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>SUMA</td><td>=SUMA(A1:A10)</td><td>Suma todos los valores del rango</td></tr>
+          <tr><td>PROMEDIO</td><td>=PROMEDIO(B1:B20)</td><td>Media aritmética</td></tr>
+          <tr><td>MAX / MIN</td><td>=MAX(C1:C50)</td><td>Valor máximo / mínimo</td></tr>
+          <tr><td>CONTAR</td><td>=CONTAR(A1:A100)</td><td>Cuenta celdas con números</td></tr>
+          <tr><td>CONTARA</td><td>=CONTARA(A1:A100)</td><td>Cuenta celdas no vacías</td></tr>
+          <tr><td>CONTAR.SI</td><td>=CONTAR.SI(A:A,"Sí")</td><td>Cuenta si cumple una condición</td></tr>
+          <tr><td>SUMAR.SI</td><td>=SUMAR.SI(A:A,"Norte",B:B)</td><td>Suma si cumple una condición</td></tr>
+          <tr><td>SUMAR.SI.CONJUNTO</td><td>=SUMAR.SI.CONJUNTO(C:C,A:A,"N",B:B,"&gt;0")</td><td>Suma con múltiples criterios</td></tr>
+          <tr><td>REDONDEAR</td><td>=REDONDEAR(3.14159,2)</td><td>Redondea a N decimales → 3.14</td></tr>
+          <tr><td>ENTERO</td><td>=ENTERO(3.7)</td><td>Entero inferior → 3</td></tr>
+          <tr><td>ABS</td><td>=ABS(-45)</td><td>Valor absoluto → 45</td></tr>
+          <tr><td>POTENCIA</td><td>=POTENCIA(2,10)</td><td>2 elevado a 10 → 1024</td></tr>
+          <tr><td>K.ESIMO.MAYOR</td><td>=K.ESIMO.MAYOR(A:A,2)</td><td>2º mayor valor del rango</td></tr>
+          <tr><td>MEDIANA</td><td>=MEDIANA(A1:A100)</td><td>Valor central del rango</td></tr>
+        </tbody>
+      </table>
+      <div class="callout c-tip"><span>💡</span><span>SUMAR.SI.CONJUNTO acepta múltiples criterios: =SUMAR.SI.CONJUNTO(C:C, A:A, "Norte", B:B, "&gt;100")</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('func-1',20)">✅ Lección completada (+20 coins)</button>
+  </div>
+  <div id="funciones-t2" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Funciones de texto</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 12 min</span><span>💰 +18 coins</span></div></div>
+    <div class="lb">
+      <table class="dt"><thead><tr><th>Función</th><th>Ejemplo</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>MAYUSC / MINUSC</td><td>=MAYUSC("hola")</td><td>"HOLA" / "hola"</td></tr>
+          <tr><td>NOMPROPIO</td><td>=NOMPROPIO("igor hermoso")</td><td>"Igor Hermoso"</td></tr>
+          <tr><td>LARGO</td><td>=LARGO("Excel")</td><td>5</td></tr>
+          <tr><td>IZQUIERDA</td><td>=IZQUIERDA("Excel",3)</td><td>"Exc"</td></tr>
+          <tr><td>DERECHA</td><td>=DERECHA("Excel",3)</td><td>"cel"</td></tr>
+          <tr><td>EXTRAE</td><td>=EXTRAE("Microsoft",6,4)</td><td>"soft"</td></tr>
+          <tr><td>ENCONTRAR</td><td>=ENCONTRAR("x","Excel")</td><td>2 (posición)</td></tr>
+          <tr><td>SUSTITUIR</td><td>=SUSTITUIR("Hola Mundo","Mundo","Igor")</td><td>"Hola Igor"</td></tr>
+          <tr><td>CONCATENAR / &amp;</td><td>=A1&amp;" "&amp;B1</td><td>Une textos con espacio</td></tr>
+          <tr><td>TEXTO</td><td>=TEXTO(1234.5,"#.##0,00 €")</td><td>"1.234,50 €"</td></tr>
+          <tr><td>RECORTAR</td><td>=RECORTAR("  hola  ")</td><td>"hola"</td></tr>
+          <tr><td>LIMPIAR</td><td>=LIMPIAR(A1)</td><td>Elimina caracteres no imprimibles</td></tr>
+        </tbody>
+      </table>
+      <div class="fb"><span class="cm">Truco: separar nombre y apellidos</span><br>=IZQUIERDA(A2, ENCONTRAR(" ",A2)-1)     <span class="cm">← Nombre</span><br>=DERECHA(A2, LARGO(A2)-ENCONTRAR(" ",A2))  <span class="cm">← Apellidos</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('func-2',18)">✅ Lección completada (+18 coins)</button>
+  </div>
+  <div id="funciones-t3" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Funciones lógicas: SI, Y, O</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 15 min</span><span>💰 +22 coins</span></div></div>
+    <div class="lb">
+      <h2>🔀 Función SI</h2>
+      <div class="fb">=SI(condición, valor_si_verdadero, valor_si_falso)<br><br>=SI(A1&gt;=5, "Aprobado", "Suspenso")<br>=SI(B2&gt;=18, "Mayor de edad", "Menor")<br>=SI(C3="", "Sin datos", C3)</div>
+      <h2>🪆 SI anidado</h2>
+      <div class="fb">=SI(A1&gt;=9,"Sobresaliente",<br>   SI(A1&gt;=7,"Notable",<br>   SI(A1&gt;=5,"Aprobado","Suspenso")))</div>
+      <div class="callout c-info"><span>ℹ️</span><span>En Excel 365 usa <strong>IFS</strong> en lugar de SI anidado: =IFS(A1&gt;=9,"Sobresaliente", A1&gt;=7,"Notable", A1&gt;=5,"Aprobado", VERDADERO,"Suspenso")</span></div>
+      <h2>🔗 Y y O combinados con SI</h2>
+      <div class="fb">=SI(Y(A1&gt;=18, B1="Sí"), "Puede votar", "No puede")<br><span class="cm">Y: TODAS las condiciones deben ser verdaderas</span><br><br>=SI(O(A1="VIP", B1&gt;1000), "Descuento 20%", "Normal")<br><span class="cm">O: basta con que UNA condición sea verdadera</span><br><br>=SI.ERROR(BUSCARV(A1,B:C,2,0), "No encontrado")<br><span class="cm">SI.ERROR: captura cualquier error de la fórmula</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('func-3',22)">✅ Lección completada (+22 coins)</button>
+  </div>
+  <div id="funciones-t4" class="lw" style="display:none">
+    <div class="lh"><div class="lt">BUSCARV, BUSCARH y XLOOKUP</div><div class="lm"><span>🔴 Avanzado</span><span>⏱ 20 min</span><span>💰 +30 coins</span></div></div>
+    <div class="lb">
+      <h2>🔍 BUSCARV</h2>
+      <div class="fb">=BUSCARV(valor_buscado, tabla, número_columna, FALSO)<br><br>=BUSCARV(A2, $E$2:$G$100, 2, FALSO)<br><span class="cm">← Busca A2 en la 1ª columna de E2:G100</span><br><span class="cm">← Devuelve el valor de la columna 2</span><br><span class="cm">← FALSO = coincidencia exacta (casi siempre)</span></div>
+      <div class="callout c-warn"><span>⚠️</span><span>BUSCARV solo busca hacia la derecha. Para buscar en cualquier dirección usa ÍNDICE+COINCIDIR o XLOOKUP.</span></div>
+      <h2>🆕 XLOOKUP (Excel 365/2021)</h2>
+      <div class="fb">=XLOOKUP(valor, rango_búsqueda, rango_resultado, [si_no_encontrado])<br><br>=XLOOKUP(A2, E:E, G:G, "No encontrado")<br><span class="cm">← Más flexible: busca en cualquier dirección</span><br><span class="cm">← Acepta valor por defecto si no encuentra</span></div>
+      <h2>🔧 ÍNDICE + COINCIDIR (clásico)</h2>
+      <div class="fb">=ÍNDICE(G:G, COINCIDIR(A2, E:E, 0))<br><span class="cm">← COINCIDIR: posición de A2 en columna E</span><br><span class="cm">← ÍNDICE: valor en esa posición de G</span><br><span class="cm">← Funciona en CUALQUIER dirección</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('func-4',30)">✅ Lección completada (+30 coins)</button>
+  </div>
+  <div id="funciones-t5" class="lw" style="display:none">
+    <div class="lh"><div class="lt">Funciones de fecha y hora</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 12 min</span><span>💰 +18 coins</span></div></div>
+    <div class="lb">
+      <div class="callout c-info"><span>ℹ️</span><span>Las fechas en Excel son números: el 01/01/1900 = 1. Cada día suma 1. Esto permite hacer aritmética con fechas directamente.</span></div>
+      <table class="dt"><thead><tr><th>Función</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td>HOY()</td><td>Fecha actual sin hora</td><td>=HOY()</td></tr>
+          <tr><td>AHORA()</td><td>Fecha y hora actual</td><td>=AHORA()</td></tr>
+          <tr><td>DIA / MES / AÑO</td><td>Extrae partes de una fecha</td><td>=AÑO(A1) → 2024</td></tr>
+          <tr><td>FECHA()</td><td>Crea fecha desde año, mes, día</td><td>=FECHA(2024,12,31)</td></tr>
+          <tr><td>DIASEM()</td><td>Día de la semana (2=lunes inicio)</td><td>=DIASEM(A1,2)</td></tr>
+          <tr><td>DIAS.LAB()</td><td>Días laborables entre dos fechas</td><td>=DIAS.LAB(A1,B1)</td></tr>
+          <tr><td>SIFECHA()</td><td>Diferencia en años/meses/días</td><td>=SIFECHA(A1,B1,"Y")</td></tr>
+          <tr><td>FIN.MES()</td><td>Último día del mes</td><td>=FIN.MES(HOY(),0)</td></tr>
+        </tbody>
+      </table>
+      <div class="fb"><span class="cm">Calcular edad en años completos:</span><br>=SIFECHA(A1, HOY(), "Y")<br><br><span class="cm">Diferencia de tiempo (formatea como [h]:mm):</span><br>=B1-A1</div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('func-5',18)">✅ Lección completada (+18 coins)</button>
+  </div>
+  <div id="funciones-t6" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🧪 Ejercicios — Funciones</div><div class="lm"><span>🎮 Interactivo</span><span>💰 +5 coins por acierto</span></div></div>
+    <div class="qc">
+      <div class="qq"><span class="qn">1</span>¿Qué función cuenta celdas NO vacías (incluyendo texto)?</div>
+      <div class="qo-w" id="q-fu1">
+        <div class="qo" onclick="checkQ(this,'q-fu1',false)"><span class="ql">A</span>CONTAR</div>
+        <div class="qo" onclick="checkQ(this,'q-fu1',true)"><span class="ql">B</span>CONTARA</div>
+        <div class="qo" onclick="checkQ(this,'q-fu1',false)"><span class="ql">C</span>SUMA</div>
+        <div class="qo" onclick="checkQ(this,'q-fu1',false)"><span class="ql">D</span>MAX</div>
+      </div><div class="qfb" id="q-fu1-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">2</span>=SI(A1>=5,"Aprobado","Suspenso") devuelve "Aprobado" cuando:</div>
+      <div class="qo-w" id="q-fu2">
+        <div class="qo" onclick="checkQ(this,'q-fu2',false)"><span class="ql">A</span>A1 es exactamente 5</div>
+        <div class="qo" onclick="checkQ(this,'q-fu2',true)"><span class="ql">B</span>A1 es 5 o más</div>
+        <div class="qo" onclick="checkQ(this,'q-fu2',false)"><span class="ql">C</span>A1 es mayor que 5 (sin incluir 5)</div>
+        <div class="qo" onclick="checkQ(this,'q-fu2',false)"><span class="ql">D</span>A1 contiene el texto "Aprobado"</div>
+      </div><div class="qfb" id="q-fu2-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">3</span>En BUSCARV, el argumento FALSO al final significa:</div>
+      <div class="qo-w" id="q-fu3">
+        <div class="qo" onclick="checkQ(this,'q-fu3',false)"><span class="ql">A</span>Búsqueda aproximada</div>
+        <div class="qo" onclick="checkQ(this,'q-fu3',true)"><span class="ql">B</span>Coincidencia exacta</div>
+        <div class="qo" onclick="checkQ(this,'q-fu3',false)"><span class="ql">C</span>Devuelve FALSO si no encuentra</div>
+        <div class="qo" onclick="checkQ(this,'q-fu3',false)"><span class="ql">D</span>Omite los errores</div>
+      </div><div class="qfb" id="q-fu3-fb"></div>
+    </div>
+  </div>
+</section>
+<!-- MÓDULOS COMPACTOS -->
+<section id="s-formato" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>🎨 Formato y diseño</span></div>
+  <div class="lw">
+    <div class="lh"><div class="lt">🎨 Formato y diseño de celdas</div><div class="lm"><span>🟢 Principiante</span><span>⏱ 20 min</span><span>💰 +25 coins</span></div></div>
+    <div class="lb">
+      <h2>🖌 Fuente y estilo</h2>
+      <p>Desde la pestaña <strong>Inicio</strong> cambia tipo, tamaño, color y estilo. Atajos rápidos: <kbd>Ctrl</kbd>+<kbd>N</kbd> Negrita, <kbd>Ctrl</kbd>+<kbd>K</kbd> Cursiva, <kbd>Ctrl</kbd>+<kbd>S</kbd> Subrayado.</p>
+      <h2>📐 Alineación</h2>
+      <p>Horizontal (izquierda, centro, derecha), vertical (superior, medio, inferior), combinar celdas para títulos, rotar texto hasta 90°. Activar "Ajustar texto" para que el contenido no desborde la celda.</p>
+      <h2>🔢 Formato de números — <kbd>Ctrl</kbd>+<kbd>1</kbd></h2>
+      <table class="dt"><thead><tr><th>Categoría</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Número</td><td>Decimales, separador miles, negativos en rojo</td><td>1.234,56</td></tr>
+          <tr><td>Moneda</td><td>Símbolo €/$, formato monetario</td><td>1.234,56 €</td></tr>
+          <tr><td>Contabilidad</td><td>Como moneda pero alinea el símbolo</td><td>  1.234,56 €</td></tr>
+          <tr><td>Fecha</td><td>Múltiples formatos de fecha</td><td>15/03/2024</td></tr>
+          <tr><td>Porcentaje</td><td>Multiplica ×100 y añade %</td><td>75,43%</td></tr>
+          <tr><td>Personalizado</td><td>Códigos propios de formato</td><td>#.##0,00 "kg"</td></tr>
+        </tbody>
+      </table>
+      <h2>🌈 Formato condicional</h2>
+      <p>Inicio → Formato condicional. Resalta celdas automáticamente según su valor:</p>
+      <ul>
+        <li><strong>Escala de colores:</strong> degradado rojo-amarillo-verde</li>
+        <li><strong>Barras de datos:</strong> mini-barra proporcional dentro de la celda</li>
+        <li><strong>Conjuntos de iconos:</strong> semáforos, flechas, estrellas</li>
+        <li><strong>Regla personalizada con fórmula:</strong> =$A1&lt;0 → fondo rojo para negativos</li>
+      </ul>
+      <div class="callout c-tip"><span>💡</span><span>Usa <strong>Copiar formato</strong> (pincelito en Inicio) para aplicar el mismo estilo de una celda a otras sin reconfigurar todo manualmente.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('formato',25)">✅ Lección completada (+25 coins)</button>
+  </div>
+</section>
+
+<section id="s-graficos" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>📊 Gráficos</span></div>
+  <div class="lw">
+    <div class="lh"><div class="lt">📊 Crear y personalizar gráficos</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 18 min</span><span>💰 +22 coins</span></div></div>
+    <div class="lb">
+      <h2>📈 Tipos de gráficos y cuándo usarlos</h2>
+      <table class="dt"><thead><tr><th>Gráfico</th><th>Cuándo usarlo</th></tr></thead>
+        <tbody>
+          <tr><td>📊 Columnas / Barras</td><td>Comparar categorías entre sí</td></tr>
+          <tr><td>📈 Líneas</td><td>Evolución y tendencias en el tiempo</td></tr>
+          <tr><td>🥧 Circular (tarta)</td><td>Proporciones de un total (máx. 6-7 sectores)</td></tr>
+          <tr><td>📉 Área</td><td>Volumen acumulado a lo largo del tiempo</td></tr>
+          <tr><td>⚫ Dispersión XY</td><td>Correlación entre dos variables numéricas</td></tr>
+          <tr><td>🌲 Treemap</td><td>Jerarquías y proporciones anidadas</td></tr>
+          <tr><td>🌊 Cascada</td><td>Variaciones positivas/negativas acumuladas</td></tr>
+          <tr><td>📦 Cajas y bigotes</td><td>Distribución estadística de datos</td></tr>
+        </tbody>
+      </table>
+      <h2>🔧 Crear un gráfico — paso a paso</h2>
+      <ol>
+        <li>Selecciona el rango de datos (incluye los encabezados)</li>
+        <li>Pestaña <strong>Insertar</strong> → sección Gráficos → elige el tipo</li>
+        <li>Usa <kbd>Alt</kbd>+<kbd>F1</kbd> para insertar el gráfico por defecto al instante</li>
+        <li>Personaliza con las pestañas <strong>Diseño</strong> y <strong>Formato</strong> que aparecen</li>
+      </ol>
+      <h2>⚡ Minigráficos (Sparklines)</h2>
+      <p>Pequeños gráficos que caben dentro de una sola celda. Insertar → Minigráficos. Perfectos para mostrar tendencias en tablas de datos sin ocupar espacio adicional.</p>
+      <div class="callout c-tip"><span>💡</span><span>Haz clic derecho sobre una serie del gráfico → "Agregar etiquetas de datos" para mostrar los valores directamente en el gráfico.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('graficos',22)">✅ Lección completada (+22 coins)</button>
+  </div>
+</section>
+
+<section id="s-tablas" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>🗂 Tablas y BD</span></div>
+  <div class="lw">
+    <div class="lh"><div class="lt">🗂 Tablas de Excel y gestión de datos</div><div class="lm"><span>🟡 Intermedio</span><span>⏱ 20 min</span><span>💰 +25 coins</span></div></div>
+    <div class="lb">
+      <h2>📋 ¿Qué es una Tabla de Excel?</h2>
+      <p>Insertar → Tabla (o <kbd>Ctrl</kbd>+<kbd>T</kbd>) convierte un rango en un objeto estructurado con ventajas únicas:</p>
+      <ul>
+        <li>Filtros automáticos en los encabezados</li>
+        <li>Estilos visuales con bandas de color alternadas</li>
+        <li>Fila de totales con funciones predefinidas</li>
+        <li>Referencias por nombre: <code>=Tabla1[Ventas]</code> en vez de <code>=$B$2:$B$100</code></li>
+        <li>Se expanden automáticamente al añadir datos</li>
+        <li>Las fórmulas se copian solas a toda la columna</li>
+      </ul>
+      <h2>🔍 Filtrar y ordenar datos</h2>
+      <p>Usa las flechas de los encabezados para filtrar por valor, color, texto o número. Para criterios más complejos: Datos → <strong>Filtro avanzado</strong>.</p>
+      <h2>🧹 Eliminar duplicados</h2>
+      <p>Datos → <strong>Quitar duplicados</strong>. Elige las columnas a comprobar. Imprescindible para limpiar bases de datos importadas.</p>
+      <h2>🔣 Funciones de base de datos</h2>
+      <table class="dt"><thead><tr><th>Función</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>BDSUMA</td><td>Suma valores que cumplen un criterio</td></tr>
+          <tr><td>BDPROMEDIO</td><td>Promedio con criterio de filtrado</td></tr>
+          <tr><td>BDMAX / BDMIN</td><td>Máximo/mínimo con criterio</td></tr>
+          <tr><td>BDCONTAR</td><td>Cuenta registros que cumplen criterio</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('tablas',25)">✅ Lección completada (+25 coins)</button>
+  </div>
+</section>
+
+<section id="s-dinamicas" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>🔄 Tablas dinámicas</span></div>
+  <div class="lw">
+    <div class="lh"><div class="lt">🔄 Tablas dinámicas (Pivot Tables)</div><div class="lm"><span>🔴 Avanzado</span><span>⏱ 25 min</span><span>💰 +35 coins</span></div></div>
+    <div class="lb">
+      <h2>🌀 ¿Qué son?</h2>
+      <p>Las tablas dinámicas <strong>resumen, agrupan y analizan</strong> grandes volúmenes de datos de forma interactiva, sin escribir una sola fórmula. Son la herramienta más potente de Excel para análisis de datos.</p>
+      <h2>⚡ Crear una tabla dinámica</h2>
+      <ol>
+        <li>Clic en cualquier celda de los datos</li>
+        <li>Insertar → <strong>Tabla dinámica</strong></li>
+        <li>Elige si insertarla en hoja nueva o en la actual</li>
+        <li>En el panel de campos, arrastra a: Filas, Columnas, Valores, Filtros</li>
+      </ol>
+      <h2>🎛 El panel de campos</h2>
+      <ul>
+        <li><strong>Filas:</strong> Agrupa verticalmente (por mes, región, categoría…)</li>
+        <li><strong>Columnas:</strong> Agrupa horizontalmente</li>
+        <li><strong>Valores:</strong> Qué calcular (suma, promedio, máximo, conteo…)</li>
+        <li><strong>Filtros:</strong> Filtro global para toda la tabla dinámica</li>
+      </ul>
+      <h2>🔪 Segmentadores (Slicers)</h2>
+      <p>Filtros visuales con botones. Insertar → Segmentación de datos. Se pueden conectar a múltiples tablas dinámicas simultáneamente para crear dashboards interactivos.</p>
+      <div class="callout c-tip"><span>💡</span><span>Las tablas dinámicas NO modifican los datos originales. Son una vista dinámica. Puedes tener varias sobre el mismo origen de datos.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('dinamicas',35)">✅ Lección completada (+35 coins)</button>
+  </div>
+</section>
+
+<section id="s-avanzado" class="sec">
+  <div class="bc"><span class="lk" onclick="go('inicio')">🏠 Inicio</span> › <span>🚀 Excel avanzado</span></div>
+  <div class="lw">
+    <div class="lh"><div class="lt">🚀 Macros, Power Query y matrices dinámicas</div><div class="lm"><span>🔴 Avanzado</span><span>⏱ 30 min</span><span>💰 +40 coins</span></div></div>
+    <div class="lb">
+      <h2>⚙️ Macros y VBA</h2>
+      <ul>
+        <li><strong>Grabar macro:</strong> Vista → Macros → Grabar macro. Excel registra tus acciones como código VBA.</li>
+        <li><strong>Editor VBA:</strong> <kbd>Alt</kbd>+<kbd>F11</kbd>. Edita, mejora o crea macros desde cero.</li>
+        <li>Guarda el archivo como <strong>.xlsm</strong> para conservar las macros.</li>
+      </ul>
+      <div class="fb">Sub FormatearTabla()<br>    Range("A1:E1").Interior.Color = RGB(33,115,70)<br>    Range("A1:E1").Font.Color = RGB(255,255,255)<br>    Range("A1:E1").Font.Bold = True<br>    MsgBox "¡Tabla formateada!"<br>End Sub</div>
+      <h2>🔌 Power Query</h2>
+      <p>Datos → Obtener y transformar datos. ETL (Extracción, Transformación y Carga) sin programar:</p>
+      <ul>
+        <li>Importa desde Excel, CSV, web, SQL Server, APIs REST…</li>
+        <li>Transforma: divide columnas, filtra filas, pivota/anula el pivote, une tablas</li>
+        <li>El proceso se puede refrescar automáticamente con nuevos datos</li>
+      </ul>
+      <h2>🆕 Matrices dinámicas (Excel 365)</h2>
+      <table class="dt"><thead><tr><th>Función</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td>FILTER</td><td>Filtra y devuelve un array dinámico</td><td>=FILTER(A:C,B:B&gt;100)</td></tr>
+          <tr><td>SORT / SORTBY</td><td>Ordena dinámicamente</td><td>=SORT(A1:C10,2,-1)</td></tr>
+          <tr><td>UNIQUE</td><td>Devuelve valores únicos</td><td>=UNIQUE(A:A)</td></tr>
+          <tr><td>LET</td><td>Define variables dentro de una fórmula</td><td>=LET(x,A1*2,x+B1)</td></tr>
+          <tr><td>LAMBDA</td><td>Crea funciones personalizadas sin VBA</td><td>=LAMBDA(x,x^2)</td></tr>
+        </tbody>
+      </table>
+      <h2>📊 Power Pivot</h2>
+      <p>Para modelos de datos con millones de filas. Permite crear relaciones entre tablas como en una base de datos relacional. Usa el lenguaje DAX para medidas calculadas avanzadas.</p>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('avanzado',40)">✅ Lección completada (+40 coins)</button>
+  </div>
+</section>
+<!-- SIMULADOR -->
+<section id="s-simulador" class="sec">
+  <h2 class="sh2">🖥 Simulador de Excel</h2>
+  <p style="font-size:14px;color:var(--g5);margin-bottom:16px;">Escribe valores y fórmulas reales (=SUMA, =SI, =PROMEDIO, =SUMAR.SI, =CONTAR.SI, =CONCAT, =IZQUIERDA, =MAYUSC…), aplica formato y descarga CSV. Criterios numéricos entre comillas: =CONTAR.SI(B2:B6,'&gt;100').</p>
+  <div class="tts" id="tts-sim">
+    <button class="tt active" onclick="loadSC('blank',this)">📄 Hoja en blanco</button>
+    <button class="tt" onclick="loadSC('presupuesto',this)">💰 Presupuesto</button>
+    <button class="tt" onclick="loadSC('notas',this)">🎓 Notas</button>
+    <button class="tt" onclick="loadSC('inventario',this)">📦 Inventario</button>
+    <button class="tt" onclick="loadSC('ventas',this)">📈 Ventas</button>
+  </div>
+  <div class="sw">
+    <div class="s-tb"><span>📊 IGOREXCEL — Simulador interactivo</span><span id="sim-fn" style="margin-left:auto;opacity:.7;font-size:11px;">Libro1.xlsx</span></div>
+    <div class="s-rb">
+      <button class="sbtn" onclick="simFmt('bold')"><b>N</b> Negrita</button>
+      <button class="sbtn" onclick="simFmt('italic')"><i>K</i> Cursiva</button>
+      <button class="sbtn" onclick="simFmt('center')">≡ Centro</button>
+      <button class="sbtn" onclick="simFmt('bgg')">🟢 Verde</button>
+      <button class="sbtn" onclick="simFmt('bgh')">📋 Cabecera</button>
+      <button class="sbtn" onclick="simFmt('bgt')">📊 Total</button>
+      <button class="sbtn" onclick="simClearCell()">🗑 Limpiar</button>
+      <button class="sbtn" onclick="simClearAll()">🧹 Limpiar todo</button>
+      <button class="sbtn" onclick="simCSV()">⬇ CSV</button>
+    </div>
+    <div class="s-fb">
+      <div class="s-cr" id="sim-ref">A1</div>
+      <div class="s-fx">fx</div>
+      <input class="s-fi" id="sim-fi" placeholder="Escribe valor o fórmula y pulsa Enter…"
+        onkeydown="simFBKey(event)" oninput="simFBInput()">
+    </div>
+    <div class="s-sc" id="sim-scroll"></div>
+    <div class="s-st">
+      <span id="sim-st">Listo</span>
+      <span id="sim-agg"></span>
+      <span>IGOREXCEL Sim v1.1</span>
+    </div>
+  </div>
+  <div style="margin-top:14px;background:#fff;border-radius:var(--r);padding:14px;border:1px solid var(--g2);box-shadow:var(--sh);">
+    <b style="font-size:13px;">💡 Fórmulas de ejemplo — clic para insertar:</b><br><br>
+    <span style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=SUMA(B2:B6)')">= SUMA(B2:B6)</code>
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=PROMEDIO(B2:B6)')">= PROMEDIO(B2:B6)</code>
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=MAX(B2:B6)')">= MAX(B2:B6)</code>
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=MIN(B2:B6)')">= MIN(B2:B6)</code>
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=SI(B2&gt;100,&quot;Alto&quot;,&quot;Bajo&quot;)')">= SI(B2&gt;100,…)</code>
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=HOY()')">= HOY()</code>
+      <code style="background:var(--egp);color:var(--eg);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer" onclick="simInsert('=B2*1.21')">= B2 * 1.21 (IVA)</code>
+    </span>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section id="s-flashcards" class="sec">
+  <h2 class="sh2">🃏 Flashcards</h2>
+  <p style="font-size:14px;color:var(--g5);margin-bottom:20px;">Clic en cada tarjeta para ver la respuesta.</p>
+  <div class="fg" id="fc-grid"></div>
+</section>
+
+<!-- RETO FINAL -->
+<section id="s-reto" class="sec">
+  <h2 class="sh2">⚔️ Reto Final</h2>
+  <p style="font-size:14px;color:var(--g5);margin-bottom:20px;">10 preguntas. Necesitas 8/10 para el título de <strong>Maestro Excel</strong>.</p>
+  <div id="reto-wrap"></div>
+</section>
+
+
+<!-- IA Y EXCEL -->
+<section id="s-ia" class="sec">
+  <div class="sh"><h1>🤖 IA y Excel — La hoja de cálculo en 2026</h1><p>La inteligencia artificial ya forma parte del trabajo diario con hojas de cálculo. Aprende a usarla bien: te ahorra horas, pero exige criterio.</p></div>
+  <div class="tts" id="tts-ia">
+    <button class="tt active" onclick="showTab('ia','t1',this)">Panorama 2026</button>
+    <button class="tt" onclick="showTab('ia','t2',this)">Copilot y Analyze Data</button>
+    <button class="tt" onclick="showTab('ia','t3',this)">Prompts efectivos</button>
+    <button class="tt" onclick="showTab('ia','t4',this)">Buenas prácticas y límites</button>
+    <button class="tt" onclick="showTab('ia','t5',this)">🧪 Ejercicios</button>
+  </div>
+  <div id="ia-t1" class="lw">
+    <div class="lh"><div class="lt">🌍 La IA en las hojas de cálculo</div><div class="lm"><span>📖 Teoría</span><span>⏱ 10 min</span></div></div>
+    <div class="lb">
+      <p>En 2026 la IA no sustituye a quien domina Excel: <strong>multiplica a quien lo domina</strong>. Quien no entiende referencias, funciones o tablas dinámicas no puede validar lo que la IA propone — y validar es el trabajo.</p>
+      <h2>🧩 Dónde aparece la IA en tu día a día con Excel</h2>
+      <table class="dt">
+        <thead><tr><th>Herramienta</th><th>Qué hace</th><th>Dónde está</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Copilot en Excel</strong></td><td>Genera fórmulas, columnas calculadas, resúmenes, gráficos y explica resultados en lenguaje natural</td><td>Microsoft 365 (con licencia Copilot)</td></tr>
+          <tr><td><strong>Analyze Data</strong></td><td>Respondes preguntas sobre tus datos y propone tablas dinámicas y gráficos automáticos</td><td>Inicio → Análisis de datos</td></tr>
+          <tr><td><strong>Relleno rápido (Flash Fill)</strong></td><td>Detecta patrones de tus ejemplos y completa la columna (la "IA clásica" de Excel)</td><td>Ctrl + E</td></tr>
+          <tr><td><strong>Tipos de datos vinculados</strong></td><td>Cotizaciones, divisas y geografía actualizados desde la nube</td><td>Pestaña Datos</td></tr>
+          <tr><td><strong>Asistentes externos (Claude, ChatGPT, Gemini)</strong></td><td>Diseñan fórmulas complejas, macros VBA, pasos de Power Query y explican errores</td><td>Fuera de Excel: copiar y validar</td></tr>
+          <tr><td><strong>Python en Excel</strong></td><td>Análisis avanzado y gráficos con pandas dentro de la hoja</td><td>=PY( en Microsoft 365</td></tr>
+        </tbody>
+      </table>
+      <div class="callout c-tip"><span>💡</span><span>Regla de oro: la IA propone, <strong>tú verificas</strong>. Una fórmula generada que no entiendes es una fórmula que no puedes mantener.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('ia-1',15)">✅ Lección completada (+15 coins)</button>
+  </div>
+  <div id="ia-t2" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🚁 Copilot y Analyze Data en la práctica</div><div class="lm"><span>📖 Teoría</span><span>⏱ 12 min</span></div></div>
+    <div class="lb">
+      <h2>🚁 Qué puedes pedirle a Copilot en Excel</h2>
+      <ul class="cl">
+        <li><strong>Crear columnas calculadas:</strong> "Añade una columna con el margen % entre coste y precio"</li>
+        <li><strong>Generar fórmulas:</strong> "Dame una fórmula que busque el email de A2 en la hoja Clientes"</li>
+        <li><strong>Resumir:</strong> "Resume las ventas por región y trimestre en una tabla dinámica"</li>
+        <li><strong>Detectar:</strong> "Resalta los pedidos con importe atípico"</li>
+        <li><strong>Explicar:</strong> "Explica qué hace la fórmula de la celda D2 paso a paso"</li>
+      </ul>
+      <div class="callout c-warn"><span>⚠️</span><span>Copilot trabaja mejor sobre <strong>tablas de Excel</strong> (Ctrl+T) con cabeceras claras. Datos sueltos sin estructura = respuestas pobres.</span></div>
+      <h2>📊 Analyze Data (Análisis de datos)</h2>
+      <p>Selecciona tus datos, pulsa <strong>Inicio → Análisis de datos</strong> y escribe preguntas como "¿total de ventas por vendedor?" o "¿tendencia mensual de gastos?". Excel propone tablas dinámicas, gráficos y patrones detectados que puedes insertar con un clic. Funciona sin licencia Copilot en Microsoft 365.</p>
+      <h2>⚡ Relleno rápido: la IA que ya tenías</h2>
+      <p>Escribe en B2 el resultado que quieres a partir de A2 (por ejemplo, extraer el nombre de un email). Baja a B3, pulsa <strong>Ctrl + E</strong> y Excel completa toda la columna detectando el patrón. Sin fórmulas.</p>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('ia-2',15)">✅ Lección completada (+15 coins)</button>
+  </div>
+  <div id="ia-t3" class="lw" style="display:none">
+    <div class="lh"><div class="lt">✍️ Prompts efectivos para hojas de cálculo</div><div class="lm"><span>📖 Teoría</span><span>⏱ 12 min</span></div></div>
+    <div class="lb">
+      <p>Pedir bien es el 80% del resultado. La estructura que funciona: <strong>contexto + datos + objetivo + formato de salida</strong>.</p>
+      <table class="dt">
+        <thead><tr><th>❌ Prompt pobre</th><th>✅ Prompt efectivo</th></tr></thead>
+        <tbody>
+          <tr><td>"hazme una fórmula de buscar"</td><td>"En la hoja 'Ventas' tengo IDs en A y nombres en B. En la hoja 'Resumen', celda C2, quiero buscar el ID de A2 y traer el nombre. Si no existe, que ponga 'No encontrado'. Dame la fórmula en Excel en español."</td></tr>
+          <tr><td>"arregla mi excel"</td><td>"Esta fórmula devuelve #N/D: =BUSCARV(A2;Datos!A:C;3;0). La hoja Datos tiene los IDs con espacios al final. ¿Cómo lo soluciono sin tocar los datos originales?"</td></tr>
+          <tr><td>"hazme una macro"</td><td>"Macro VBA que recorra las filas 2 a 500 de la hoja activa, y si la celda de la columna F está vacía, oculte la fila. Con comentarios en español."</td></tr>
+        </tbody>
+      </table>
+      <h2>📐 Reglas de oro del prompt para Excel</h2>
+      <ul class="cl">
+        <li>Indica <strong>versión e idioma</strong>: las funciones cambian de nombre (BUSCARV/VLOOKUP) y de separador (; o ,)</li>
+        <li>Describe la <strong>estructura</strong>: qué hay en cada columna y en qué hoja</li>
+        <li>Da un <strong>ejemplo de entrada y salida</strong> esperada</li>
+        <li>Pide <strong>explicación paso a paso</strong> para aprender, no solo el resultado</li>
+        <li>Si falla, pega el <strong>mensaje de error exacto</strong> y la fórmula completa</li>
+      </ul>
+      <div class="callout c-tip"><span>💡</span><span>Truco: pide siempre "¿qué casos límite podría romper esta fórmula?". La IA suele detectar problemas con celdas vacías, duplicados o textos que parecen números.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('ia-3',15)">✅ Lección completada (+15 coins)</button>
+  </div>
+  <div id="ia-t4" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🛡️ Buenas prácticas, privacidad y límites</div><div class="lm"><span>📖 Teoría</span><span>⏱ 8 min</span></div></div>
+    <div class="lb">
+      <h2>🛡️ Lo que NUNCA debes hacer</h2>
+      <ul class="cl">
+        <li><strong>Pegar datos personales o confidenciales</strong> (DNIs, nóminas, datos de clientes) en asistentes externos sin autorización: puede violar el RGPD y las políticas de tu empresa</li>
+        <li><strong>Ejecutar macros VBA generadas sin leerlas</strong>: una macro puede borrar datos o tocar archivos. Léela, entiéndela y prueba en una copia</li>
+        <li><strong>Entregar resultados sin validar</strong>: la IA se equivoca con seguridad aparente. Comprueba con casos conocidos</li>
+      </ul>
+      <h2>✅ Flujo de trabajo profesional con IA</h2>
+      <ul class="cl">
+        <li>1️⃣ Trabaja sobre una <strong>copia</strong> del archivo</li>
+        <li>2️⃣ Anonimiza o usa <strong>datos de ejemplo</strong> si consultas fuera de tu organización</li>
+        <li>3️⃣ Pide la solución <strong>con explicación</strong> y entiéndela antes de aplicarla</li>
+        <li>4️⃣ <strong>Valida</strong> con 3-4 casos cuyo resultado conoces (incluye casos límite)</li>
+        <li>5️⃣ Documenta: comenta en la hoja qué hace la fórmula o macro</li>
+      </ul>
+      <div class="callout c-warn"><span>⚠️</span><span>Las IA "alucinan": pueden inventar funciones que no existen o mezclar sintaxis de Google Sheets con Excel. Si una función te suena rara, búscala en la <a href="formulas.html" target="_blank" style="color:var(--eacc);font-weight:700">biblioteca de fórmulas</a>.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('ia-4',10)">✅ Lección completada (+10 coins)</button>
+  </div>
+  <div id="ia-t5" class="lw" style="display:none">
+    <div class="lh"><div class="lt">🧪 Ejercicios — IA y Excel</div><div class="lm"><span>🎮 Interactivo</span><span>💰 +5 coins por acierto</span></div></div>
+    <div class="qc">
+      <div class="qq"><span class="qn">1</span>¿Qué atajo activa el Relleno rápido (Flash Fill)?</div>
+      <div class="qo-w" id="q-ia1">
+        <div class="qo" onclick="checkQ(this,'q-ia1',false)"><span class="ql">A</span>Ctrl + R</div>
+        <div class="qo" onclick="checkQ(this,'q-ia1',true)"><span class="ql">B</span>Ctrl + E</div>
+        <div class="qo" onclick="checkQ(this,'q-ia1',false)"><span class="ql">C</span>Alt + F</div>
+        <div class="qo" onclick="checkQ(this,'q-ia1',false)"><span class="ql">D</span>F9</div>
+      </div>
+      <div class="qfb" id="q-ia1-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">2</span>Antes de ejecutar una macro VBA generada por IA debes…</div>
+      <div class="qo-w" id="q-ia2">
+        <div class="qo" onclick="checkQ(this,'q-ia2',false)"><span class="ql">A</span>Ejecutarla directamente: la IA no se equivoca</div>
+        <div class="qo" onclick="checkQ(this,'q-ia2',true)"><span class="ql">B</span>Leerla, entenderla y probarla en una copia del archivo</div>
+        <div class="qo" onclick="checkQ(this,'q-ia2',false)"><span class="ql">C</span>Desactivar el antivirus</div>
+        <div class="qo" onclick="checkQ(this,'q-ia2',false)"><span class="ql">D</span>Guardar el libro como .xlsx</div>
+      </div>
+      <div class="qfb" id="q-ia2-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">3</span>¿Qué información NO debería faltar en un buen prompt para pedir una fórmula?</div>
+      <div class="qo-w" id="q-ia3">
+        <div class="qo" onclick="checkQ(this,'q-ia3',false)"><span class="ql">A</span>El color de la celda</div>
+        <div class="qo" onclick="checkQ(this,'q-ia3',true)"><span class="ql">B</span>Qué hay en cada columna y el resultado esperado</div>
+        <div class="qo" onclick="checkQ(this,'q-ia3',false)"><span class="ql">C</span>La marca de tu ordenador</div>
+        <div class="qo" onclick="checkQ(this,'q-ia3',false)"><span class="ql">D</span>El nombre de tu empresa y los DNI de los clientes</div>
+      </div>
+      <div class="qfb" id="q-ia3-fb"></div>
+    </div>
+    <div class="qc">
+      <div class="qq"><span class="qn">4</span>Copilot en Excel funciona mejor cuando los datos están…</div>
+      <div class="qo-w" id="q-ia4">
+        <div class="qo" onclick="checkQ(this,'q-ia4',true)"><span class="ql">A</span>En una tabla de Excel (Ctrl+T) con cabeceras claras</div>
+        <div class="qo" onclick="checkQ(this,'q-ia4',false)"><span class="ql">B</span>Repartidos por varias hojas sin formato</div>
+        <div class="qo" onclick="checkQ(this,'q-ia4',false)"><span class="ql">C</span>En celdas combinadas con colores</div>
+        <div class="qo" onclick="checkQ(this,'q-ia4',false)"><span class="ql">D</span>Como imagen pegada</div>
+      </div>
+      <div class="qfb" id="q-ia4-fb"></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('ia-5',10)">✅ Módulo IA completado (+10 coins)</button>
+  </div>
+</section>
+
+<!-- PLANTILLAS -->
+<section id="s-plantillas" class="sec">
+  <div class="sh"><h1>📋 Plantillas descargables</h1><p>Plantillas reales en formato .xlsx creadas para IGOREXCEL: descárgalas, ábrelas y estudia sus fórmulas. Aprender desmontando es aprender dos veces.</p></div>
+  <div class="lw">
+    <div class="lb">
+      <h2>📦 Plantillas IGOREXCEL (con fórmulas comentadas)</h2>
+      <div class="sr" style="margin-top:12px">
+        <div class="sc"><div class="sc-i">💰</div><div><div class="sc-v" style="font-size:15px">Presupuesto mensual</div><div class="sc-l">Ingresos vs gastos con desviación y % — usa SUMA y referencias absolutas</div><a href="plantilla_presupuesto_mensual.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">🧾</div><div><div class="sc-v" style="font-size:15px">Factura profesional</div><div class="sc-l">Base imponible, IVA 21% y total automáticos — REDONDEAR y formato moneda</div><a href="plantilla_factura.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">📦</div><div><div class="sc-v" style="font-size:15px">Control de inventario</div><div class="sc-l">Stock, mínimos y alerta de reposición — SI y SUMAR.SI en acción</div><a href="plantilla_inventario.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">📒</div><div><div class="sc-v" style="font-size:15px">Control de gastos</div><div class="sc-l">Registro diario con resumen por categoría — SUMAR.SI y CONTAR.SI</div><a href="plantilla_control_gastos.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">🗓️</div><div><div class="sc-v" style="font-size:15px">Planificador semanal</div><div class="sc-l">Horario de lunes a domingo con franjas — formato y estructura</div><a href="plantilla_planificador_semanal.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">✅</div><div><div class="sc-v" style="font-size:15px">Lista de tareas</div><div class="sc-l">Tareas con prioridad, estado y % completado — CONTAR.SI y validación</div><a href="plantilla_lista_tareas.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">🔁</div><div><div class="sc-v" style="font-size:15px">Seguimiento de hábitos</div><div class="sc-l">30 días × hábitos con racha y % — CONTAR.SI por filas</div><a href="plantilla_habitos.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+        <div class="sc"><div class="sc-i">📈</div><div><div class="sc-v" style="font-size:15px">Registro de notas</div><div class="sc-l">Notas por evaluación con media ponderada — PROMEDIO y SI anidado</div><a href="plantilla_notas.xlsx" download style="color:var(--eacc);font-weight:700;font-size:13px">⬇ Descargar .xlsx</a></div></div>
+      </div>
+      <div class="callout c-tip" style="margin-top:14px"><span>💡</span><span>Sube estos archivos .xlsx a la raíz del repositorio junto al index para que los enlaces de descarga funcionen en GitHub Pages.</span></div>
+      <h2 style="margin-top:22px">🌐 Galerías oficiales de plantillas</h2>
+      <ul class="cl">
+        <li><a href="https://excel.cloud.microsoft/es-es/search/templates/" target="_blank" rel="noopener" style="color:var(--eacc);font-weight:700">Plantillas oficiales de Microsoft Excel</a> — cientos de plantillas gratuitas: calendarios, presupuestos, facturas, planificadores…</li>
+        <li><a href="https://create.microsoft.com/es-es/templates/excel" target="_blank" rel="noopener" style="color:var(--eacc);font-weight:700">Microsoft Create</a> — plantillas modernas listas para personalizar</li>
+        <li>Truco dentro de Excel: <strong>Archivo → Nuevo</strong> y busca por palabra clave ("presupuesto", "factura", "Gantt")</li>
+      </ul>
+      <div class="callout c-warn"><span>⚠️</span><span>Las plantillas de internet pueden traer macros. Si Excel muestra la barra amarilla de advertencia, no habilites contenido salvo que confíes en la fuente.</span></div>
+    </div>
+    <button class="btn btn-g" onclick="completeLesson('plantillas-1',10)">✅ Sección explorada (+10 coins)</button>
+  </div>
+</section>
+
+</main>
+
+<div class="notif" id="notif"><span id="n-ic">✅</span><span id="n-msg">¡Bien hecho!</span></div>
+<div class="xpp" id="xpp">💰 +0</div>
+<script>
+// ── STATE ─────────────────────────────────────────────────────────
+var ST = JSON.parse(localStorage.getItem('igxl')||'{}');
+ST.coins = ST.coins||0; ST.done = ST.done||0;
+ST.streak = ST.streak||0; ST.level = ST.level||1;
+ST.completed = ST.completed||{}; ST.modProg = ST.modProg||{};
+function save(){ localStorage.setItem('igxl',JSON.stringify(ST)); }
+
+// ── DATA ──────────────────────────────────────────────────────────
+var MODS=[
+  {id:'intro',icon:'🌱',title:'Introducción a Excel',sub:'Unidad 1',desc:'Interfaz, elementos básicos y primeros pasos.',lvl:'Principiante',xp:30},
+  {id:'datos',icon:'📝',title:'Datos y celdas',sub:'Unidad 2',desc:'Tipos de datos, selección, edición y validación.',lvl:'Principiante',xp:40},
+  {id:'formato',icon:'🎨',title:'Formato y diseño',sub:'Unidad 7-8',desc:'Fuente, bordes, rellenos y formato condicional.',lvl:'Principiante',xp:25},
+  {id:'formulas',icon:'🔢',title:'Fórmulas básicas',sub:'Unidad 2',desc:'Operadores, referencias absolutas y relativas.',lvl:'Principiante',xp:45},
+  {id:'funciones',icon:'⚡',title:'Funciones avanzadas',sub:'Unidad 6',desc:'SUMA, SI, BUSCARV, XLOOKUP, texto, fecha y más.',lvl:'Intermedio',xp:90},
+  {id:'graficos',icon:'📊',title:'Gráficos',sub:'Unidad 12',desc:'Tipos de gráficos, creación y personalización.',lvl:'Intermedio',xp:22},
+  {id:'tablas',icon:'🗂',title:'Tablas y BD',sub:'Unidad 16',desc:'Tablas Excel, filtros avanzados y funciones BD.',lvl:'Intermedio',xp:60},
+  {id:'dinamicas',icon:'🔄',title:'Tablas dinámicas',sub:'Unidad 17',desc:'Pivot tables, slicers y gráficos dinámicos.',lvl:'Avanzado',xp:35},
+  {id:'avanzado',icon:'🚀',title:'Excel avanzado',sub:'Extras',desc:'Macros, VBA, Power Query y matrices dinámicas.',lvl:'Avanzado',xp:40},
+  {id:'ia',icon:'🤖',title:'IA y Excel',sub:'Unidad 2026',desc:'Copilot, Analyze Data, prompts efectivos y flujo de trabajo con IA.',lvl:'Avanzado',xp:55}
+];
+var LVS=[
+  {n:1,name:'Celda en blanco',range:'0-99'},
+  {n:2,name:'Aprendiz de Fórmulas',range:'100-249'},
+  {n:3,name:'Manipulador de Datos',range:'250-499'},
+  {n:4,name:'Maestro del Formato',range:'500-849'},
+  {n:5,name:'Gurú de Funciones',range:'850-1299'},
+  {n:6,name:'Arquitecto de Tablas',range:'1300-1849'},
+  {n:7,name:'Sensei del Pivot',range:'1850-2499'},
+  {n:8,name:'Hacker de Excel',range:'2500-3249'},
+  {n:9,name:'Leyenda de la Hoja',range:'3250-4099'},
+  {n:10,name:'⚡ Maestro Excel',range:'4100+'}
+];
+var LTH=[0,100,250,500,850,1300,1850,2500,3250,4100];
+var RWDS=[
+  {icon:'🌱',name:'Primera Hoja',coins:10},{icon:'🔢',name:'Formulero',coins:50},
+  {icon:'📊',name:'Grafista',coins:100},{icon:'🎯',name:'Precisión Total',coins:200},
+  {icon:'⚡',name:'Ninja Funciones',coins:350},{icon:'🔄',name:'Pivot Master',coins:500},
+  {icon:'🚀',name:'Excel Avanzado',coins:700},{icon:'🏆',name:'Maestro Excel',coins:1000},
+  {icon:'💎',name:'Leyenda',coins:1500},{icon:'👑',name:'Rey del Excel',coins:2000}
+];
+var FCS=[
+  {q:'¿Con qué símbolo empieza siempre una fórmula?',a:'Con el signo igual = (ej: =A1+B1)'},
+  {q:'¿Cómo se llama la intersección de fila y columna?',a:'Celda. Se identifica con letra+número: B5'},
+  {q:'Atajo de teclado para guardar',a:'Ctrl + S (o Ctrl + G en español)'},
+  {q:'¿Qué es una referencia absoluta?',a:'Referencia fija con $: $A$1 — no cambia al copiar'},
+  {q:'¿Qué función suma con una condición?',a:'SUMAR.SI(rango, criterio, rango_suma)'},
+  {q:'¿Qué error aparece al dividir entre cero?',a:'#¡DIV/0!'},
+  {q:'¿Para qué sirve la tecla F2?',a:'Activa el modo edición de la celda activa'},
+  {q:'¿Qué tecla cicla entre tipos de referencias?',a:'F4: A1 → $A$1 → A$1 → $A1 → A1'},
+  {q:'Diferencia entre CONTAR y CONTARA',a:'CONTAR cuenta números; CONTARA cuenta cualquier celda no vacía'},
+  {q:'Atajo para ir directamente a la celda A1',a:'Ctrl + Inicio'},
+  {q:'¿Qué es una tabla dinámica?',a:'Resumen interactivo de datos para agrupar, filtrar y analizar sin fórmulas'},
+  {q:'¿Cómo buscar un valor en una tabla y devolver otro?',a:'BUSCARV(valor, tabla, columna, FALSO) o XLOOKUP en Excel 365'},
+  {q:'Sintaxis de la función SI',a:'=SI(condición, valor_si_verdadero, valor_si_falso)'},
+  {q:'¿Qué es Power Query?',a:'Herramienta de transformación de datos ETL integrada en Excel'},
+  {q:'Atajo para abrir el editor de macros VBA',a:'Alt + F11'},
+  {q:'Extensión de archivo para guardar macros',a:'.xlsm (Libro habilitado para macros)'},
+  {q:'¿Qué función moderna sustituye a BUSCARV?',a:'BUSCARX (XLOOKUP): busca en cualquier dirección y admite valor por defecto'},
+  {q:'¿Qué hace =UNICOS(A:A)?',a:'Devuelve la lista de valores sin duplicados (matriz dinámica, Excel 365)'},
+  {q:'Atajo del Relleno rápido (Flash Fill)',a:'Ctrl + E — detecta el patrón de tus ejemplos y completa la columna'},
+  {q:'¿Qué combina INDICE + COINCIDIR?',a:'Una búsqueda flexible: COINCIDIR encuentra la posición e INDICE devuelve el valor'},
+  {q:'¿Para qué sirve Ctrl + T?',a:'Convierte un rango en Tabla de Excel: filtros, formato y rangos que crecen solos'},
+  {q:'¿Qué es Copilot en Excel?',a:'El asistente de IA de Microsoft 365: genera fórmulas, resúmenes y gráficos a partir de lenguaje natural'},
+  {q:'¿Qué hace =FILTRAR(A:C; B:B>100)?',a:'Devuelve solo las filas cuyo valor en B supera 100. Se actualiza sola (365)'},
+  {q:'Diferencia entre ENCONTRAR y HALLAR',a:'ENCONTRAR distingue mayúsculas; HALLAR no, y además admite comodines * y ?'},
+  {q:'¿Qué calcula =DIAS.LAB(A1;B1)?',a:'Los días laborables entre dos fechas, descontando fines de semana (y festivos opcionales)'},
+  {q:'¿Qué es una referencia mixta?',a:'Fija solo fila o solo columna: A$1 (fila fija) o $A1 (columna fija)'},
+  {q:'¿Qué hace SI.ERROR?',a:'Sustituye cualquier error de la fórmula por un valor controlado: =SI.ERROR(A1/B1;0)'},
+  {q:'¿Qué insertan Ctrl+; y Ctrl+Mayús+;?',a:'La fecha de hoy y la hora actual, como valores estáticos'},
+  {q:'¿Qué función define variables dentro de una fórmula?',a:'LET (365): =LET(x;A1*2;x+x^2) — más legible y más rápida'},
+  {q:'¿Qué riesgo tiene ejecutar una macro generada por IA sin leerla?',a:'Puede borrar o alterar datos. Siempre: leerla, entenderla y probarla en una copia'}
+];
+var RETO=[
+  {q:'¿Cuántas columnas tiene una hoja de Excel?',opts:['1.048.576','256','16.384','65.536'],c:2,e:'Excel tiene 16.384 columnas (hasta XFD)'},
+  {q:'Al CORTAR+PEGAR celdas con fórmulas, las referencias relativas…',opts:['Se ajustan igual que al copiar','NO se ajustan','Se vuelven absolutas','Dan error'],c:1,e:'Al mover (cortar+pegar), las referencias relativas NO se ajustan. Al copiar sí.'},
+  {q:'XLOOKUP está disponible en:',opts:['Excel 2010','Excel 2016','Excel 2019','Excel 365 / 2021'],c:3,e:'XLOOKUP fue introducida en Excel 365 y Excel 2021'},
+  {q:'=SUMAR.SI(A:A,"Norte",B:B) suma…',opts:['Toda la columna B','B donde A contiene "Norte"','Cuántas veces aparece "Norte"','Nada'],c:1,e:'SUMAR.SI(rango_criterio, criterio, rango_suma) suma donde se cumple la condición'},
+  {q:'Las tablas dinámicas permiten…',opts:['Solo contar datos','Crear macros automáticas','Resumir datos sin fórmulas','Importar de BD externas'],c:2,e:'Son la herramienta principal de análisis interactivo de datos en Excel'},
+  {q:'¿Cuál es el resultado de =ENTERO(7.9)?',opts:['8','7','7.9','0'],c:1,e:'ENTERO redondea hacia abajo al entero inferior: 7.9 → 7'},
+  {q:'$A1 significa que al copiar la fórmula…',opts:['Nada cambia','La columna A es fija, la fila cambia','La fila 1 es fija, la columna cambia','Todo cambia'],c:1,e:'$A1: columna fija ($), fila relativa (cambia al copiar verticalmente)'},
+  {q:'¿Qué función devuelve la fecha de hoy sin hora?',opts:['AHORA()','FECHA()','HOY()','TIEMPO()'],c:2,e:'HOY() devuelve la fecha actual sin hora. AHORA() incluye la hora.'},
+  {q:'Alt + F11 en Excel abre…',opts:['El guardado automático','El editor de macros VBA','Una hoja nueva','El buscador'],c:1,e:'Alt+F11 abre el editor de Visual Basic para Aplicaciones (VBA)'},
+  {q:'Una celda muestra ##### porque…',opts:['Hay un error de fórmula','La columna es demasiado estrecha','El valor es negativo','Tiene formato texto'],c:1,e:'##### aparece cuando la columna es muy estrecha. Amplíala haciendo doble clic en el borde de la cabecera.'},
+  {q:'¿Qué devuelve =BUSCARX("Pepe";A:A;C:C;"No está")?',opts:['Error #N/D si no existe','El valor de C en la fila de Pepe, o "No está"','Siempre "No está"','La posición de Pepe'],c:1,e:'BUSCARX admite un valor por defecto cuando no hay coincidencia, sin necesidad de SI.ERROR'},
+  {q:'=CONTAR.SI(B:B;">100") devuelve…',opts:['La suma de los mayores de 100','Cuántas celdas superan 100','El mayor valor','Un error: falta rango de suma'],c:1,e:'CONTAR.SI cuenta las celdas del rango que cumplen el criterio'},
+  {q:'El error #N/D en un BUSCARV significa que…',opts:['La tabla está mal ordenada','El valor buscado no se ha encontrado','Hay división entre cero','La fórmula tiene paréntesis de más'],c:1,e:'#N/D = No Disponible: el valor buscado no existe en la primera columna de la tabla'},
+  {q:'¿Qué hace Ctrl + E en una columna con ejemplos?',opts:['Centrar el texto','Relleno rápido: completa según el patrón','Eliminar la columna','Exportar a CSV'],c:1,e:'Flash Fill detecta el patrón de tus ejemplos y rellena el resto de la columna'},
+  {q:'En Power Query, los pasos aplicados…',opts:['Modifican el archivo original','Se guardan y se repiten al actualizar','Hay que rehacerlos cada vez','Solo funcionan con CSV'],c:1,e:'Power Query graba cada transformación: al actualizar, repite todos los pasos sobre los datos nuevos'},
+  {q:'¿Cuál es una buena práctica al usar IA con datos de empresa?',opts:['Pegar la base de datos completa en cualquier chat','Anonimizar o usar datos de ejemplo','Compartir las contraseñas para más contexto','Ejecutar las macros sin leerlas'],c:1,e:'Nunca pegues datos personales o confidenciales en asistentes externos sin autorización'},
+  {q:'=SUMAPRODUCTO(B2:B5;C2:C5) calcula…',opts:['La suma de B más la suma de C','B2*C2 + B3*C3 + B4*C4 + B5*C5','El producto de todas las celdas','Un error: necesita 3 rangos'],c:1,e:'SUMAPRODUCTO multiplica los rangos elemento a elemento y suma los resultados'},
+  {q:'Una tabla de Excel (Ctrl+T) frente a un rango normal…',opts:['Es solo un cambio estético','Crece sola y las fórmulas se autocompletan','Ocupa menos memoria','No permite filtros'],c:1,e:'Las tablas expanden automáticamente rangos, fórmulas y formatos al añadir filas'},
+  {q:'¿Qué hace =LET(x;A1*2;x+1)?',opts:['Da error: LET no existe','Define x=A1*2 y devuelve x+1','Crea una macro','Bloquea la celda A1'],c:1,e:'LET define variables dentro de la fórmula: más legible y se calcula una sola vez'},
+  {q:'El formato condicional sirve para…',opts:['Proteger celdas con contraseña','Cambiar el aspecto según el valor de la celda','Convertir texto en número','Crear tablas dinámicas'],c:1,e:'Aplica colores, barras o iconos automáticamente según reglas sobre los valores'}
+];
+
+// ── UI ────────────────────────────────────────────────────────────
+function calcLevel(){
+  for(var i=LTH.length-1;i>=0;i--){ if(ST.coins>=LTH[i]){ST.level=i+1;break;} }
+}
+function updateUI(){
+  calcLevel();
+  var ids=['sb-coins','sb-level','sb-done'];
+  var vals=[ST.coins,ST.level,ST.done];
+  ids.forEach(function(id,i){ var el=document.getElementById(id); if(el)el.textContent=vals[i]; });
+  document.getElementById('sb-streak').textContent=ST.streak+'🔥';
+  document.getElementById('tb-streak').textContent='🔥 '+ST.streak+' días';
+  document.getElementById('tb-coins').textContent='💰 '+ST.coins;
+  ['d-coins','d-level','d-done','d-streak'].forEach(function(id,i){
+    var el=document.getElementById(id); if(el)el.textContent=[ST.coins,ST.level,ST.done,ST.streak][i];
+  });
+  var pct=Math.min(100,Math.round(ST.done/20*100));
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  save();
+}
+function go(id){
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('active');});
+  var sec=document.getElementById('s-'+id);
+  if(sec) sec.classList.add('active');
+  document.querySelectorAll('.ni').forEach(function(n){
+    var oc=n.getAttribute('onclick')||'';
+    if(oc.indexOf("'"+id+"'")>-1) n.classList.add('active');
+  });
+  if(window.innerWidth<900) closeSB();
+  if(id==='inicio') buildMods();
+  if(id==='recompensas') buildRwds();
+  if(id==='niveles') buildLvs();
+  if(id==='flashcards') buildFCs();
+  if(id==='reto') buildReto();
+  if(id==='dashboard') buildDash();
+  if(id==='simulador'){ setTimeout(function(){initSim();},80); }
+  if(id==='formulas') buildFE();
+  window.scrollTo(0,0);
+}
+function toggleSB(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); }
+function closeSB(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
+
+// ── TOPIC TABS ── bug-free version ────────────────────────────────
+function showTab(prefix, suffix, btn){
+  btn.closest('.tts').querySelectorAll('.tt').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  var section = btn.closest('.sec');
+  // Only target direct topic divs (not nested ones)
+  var targetId = prefix + '-' + suffix;
+  section.querySelectorAll('div[id^="'+prefix+'-"]').forEach(function(d){
+    // Only affect direct topic divs (single level: prefix-tN)
+    if(/^[a-z]+-t\d+$/.test(d.id)){
+      d.style.display = (d.id === targetId) ? '' : 'none';
+    }
+  });
+}
+
+// ── MODULES GRID ──────────────────────────────────────────────────
+function buildMods(){
+  var g=document.getElementById('mods-grid'); if(!g)return;
+  g.innerHTML=MODS.map(function(m){
+    var bc=m.lvl==='Principiante'?'b-be':m.lvl==='Intermedio'?'b-in':'b-av';
+    var p=ST.modProg[m.id]||0;
+    return '<div class="mc" onclick="go(\''+m.id+'\')">'
+      +'<div class="mc-h"><div class="mc-ic">'+m.icon+'</div>'
+      +'<div><div class="mc-tt">'+m.title+'</div><div class="mc-sb">'+m.sub+'</div></div></div>'
+      +'<div class="mc-b"><div class="mc-d">'+m.desc+'</div>'
+      +'<div class="mc-m"><span class="badge '+bc+'">'+m.lvl+'</span>'
+      +'<span class="mc-xp">💰 '+m.xp+' coins</span></div>'
+      +'<div class="mc-pb"><div class="mc-pf" style="width:'+p+'%"></div></div>'
+      +'</div></div>';
+  }).join('');
+}
+function buildRwds(){
+  var g=document.getElementById('rewards-grid'); if(!g)return;
+  g.innerHTML=RWDS.map(function(r){
+    var ok=ST.coins>=r.coins;
+    return '<div class="rcard '+(ok?'unlocked':'locked')+'">'
+      +(ok?'<div class="rb">✅ Lograda</div>':'')
+      +'<span class="ri">'+r.icon+'</span>'
+      +'<div class="rn">'+r.name+'</div>'
+      +'<div class="rr">'+(ok?'🎉 ¡Conseguida!':'🔒 '+r.coins+' coins')+'</div></div>';
+  }).join('');
+}
+function buildLvs(){
+  var list=document.getElementById('levels-list'); if(!list)return;
+  list.innerHTML=LVS.map(function(l,i){
+    var cur=ST.level===l.n;
+    var done=ST.coins>=LTH[i];
+    var pct=done?(i<LVS.length-1?Math.min(100,Math.round((ST.coins-LTH[i])/(LTH[i+1]-LTH[i])*100)):100):0;
+    return '<div class="li '+(cur?'cur':'')+'">'
+      +'<div class="ln">'+l.n+'</div>'
+      +'<div><div class="lname">'+l.name+(cur?' ← Tú':'')+(done&&!cur?' ✅':'')+'</div>'
+      +'<div class="lrange">'+l.range+' coins</div></div>'
+      +'<div class="lbar"><div class="lbf" style="width:'+pct+'%"></div></div></div>';
+  }).join('');
+}
+function buildDash(){
+  var c=document.getElementById('dash-prog'); if(!c)return;
+  c.innerHTML=MODS.map(function(m){
+    var p=ST.modProg[m.id]||0;
+    return '<div style="margin-bottom:12px">'
+      +'<div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:4px">'
+      +'<span>'+m.icon+' '+m.title+'</span><span style="color:var(--g5)">'+p+'%</span></div>'
+      +'<div style="height:8px;background:var(--g2);border-radius:8px;overflow:hidden">'
+      +'<div style="height:100%;background:var(--eg);border-radius:8px;width:'+p+'%;transition:width .5s"></div>'
+      +'</div></div>';
+  }).join('');
+}
+function buildFCs(){
+  var g=document.getElementById('fc-grid'); if(!g)return;
+  g.innerHTML=FCS.map(function(f){
+    return '<div class="fc" onclick="this.classList.toggle(\'flipped\')">'
+      +'<div class="fc-in"><div class="fc-f">'+f.q+'</div>'
+      +'<div class="fc-b">'+f.a+'</div></div></div>';
+  }).join('');
+}
+
+// ── RETO ──────────────────────────────────────────────────────────
+var retoAns={};
+function buildReto(){
+  retoAns={};
+  var c=document.getElementById('reto-wrap'); if(!c)return;
+  var html=RETO.map(function(q,i){
+    return '<div class="qc"><div class="qq"><span class="qn">'+(i+1)+'</span>'+q.q+'</div>'
+      +'<div class="qo-w" id="rq'+i+'">'
+      +q.opts.map(function(o,j){
+        return '<div class="qo" onclick="retoClick('+i+','+j+','+q.c+')"><span class="ql">'+'ABCD'[j]+'</span>'+o+'</div>';
+      }).join('')
+      +'</div><div class="qfb" id="rqfb'+i+'"></div></div>';
+  }).join('');
+  html+='<button class="btn btn-g" style="margin-top:12px" onclick="submitReto()">🏁 Ver resultado final</button>'
+       +'<div id="reto-result" style="margin-top:16px"></div>';
+  c.innerHTML=html;
+}
+function retoClick(qi,ai,correct){
+  if(retoAns[qi]!==undefined)return;
+  retoAns[qi]=ai;
+  document.querySelectorAll('#rq'+qi+' .qo').forEach(function(o,j){
+    o.onclick=null;
+    if(j===correct) o.classList.add('ok');
+    else if(j===ai) o.classList.add('ko');
+  });
+  var fb=document.getElementById('rqfb'+qi);
+  fb.textContent=(ai===correct?'✅ ¡Correcto! ':'❌ ')+RETO[qi].e;
+  fb.className='qfb show '+(ai===correct?'ok':'ko');
+}
+function submitReto(){
+  if(Object.keys(retoAns).length<RETO.length){notify('⚠️','Responde todas las preguntas primero');return;}
+  var ok=RETO.filter(function(_,i){return retoAns[i]===RETO[i].c;}).length;
+  var msg=ok>=9?'🏆 ¡MAESTRO EXCEL!':ok>=7?'🎯 ¡Muy bien!':ok>=5?'📚 Repasa algunos módulos':'💪 ¡Sigue practicando!';
+  document.getElementById('reto-result').innerHTML=
+    '<div style="background:#fff;border-radius:var(--r);padding:28px;text-align:center;border:2px solid var(--eg);box-shadow:var(--sh2)">'
+    +'<div style="font-size:48px;margin-bottom:12px">'+(ok>=9?'🏆':ok>=7?'🥈':ok>=5?'🥉':'📚')+'</div>'
+    +'<div style="font-size:28px;font-weight:800;color:var(--eg);margin-bottom:8px">'+ok+'/10</div>'
+    +'<div style="font-size:16px">'+msg+'</div></div>';
+  addCoins(ok*20);
+  notify('🏁','Reto: '+ok+'/10 (+'+ok*20+' coins)');
+}
+
+// ── QUIZ HELPERS ──────────────────────────────────────────────────
+function checkQ(el,cid,isOk){
+  var cont=document.getElementById(cid);
+  if(!cont||cont.dataset.done)return;
+  cont.dataset.done='1';
+  // Find which option is the correct one (has true in onclick)
+  var opts=cont.querySelectorAll('.qo');
+  opts.forEach(function(o){
+    o.onclick=null;
+    var oc=o.getAttribute('onclick')||'';
+    if(o===el) o.classList.add(isOk?'ok':'ko');
+    if(!isOk && oc.indexOf(',true)')>-1) o.classList.add('ok');
+  });
+  var fb=document.getElementById(cid+'-fb');
+  if(fb){
+    fb.textContent=isOk?'✅ ¡Correcto! +5 coins':'❌ Incorrecto. La respuesta correcta está marcada en verde.';
+    fb.className='qfb show '+(isOk?'ok':'ko');
+  }
+  if(isOk) addCoins(5);
+}
+function checkFI(inputId,accepted,fbId){
+  var inp=document.getElementById(inputId); if(!inp)return;
+  var val=inp.value.trim().toLowerCase().replace(/\s+/g,'');
+  var ok=accepted.some(function(a){return val===a.toLowerCase().replace(/\s+/g,'');});
+  inp.classList.remove('ok','ko'); inp.classList.add(ok?'ok':'ko');
+  var fb=document.getElementById(fbId);
+  if(fb){
+    fb.textContent=ok?'✅ ¡Correcto! +5 coins':'❌ Incorrecto. Respuesta esperada: '+accepted[0];
+    fb.className='qfb show '+(ok?'ok':'ko');
+  }
+  if(ok) addCoins(5);
+}
+function completeLesson(id,coins){
+  if(ST.completed[id]){notify('ℹ️','Ya completaste esta lección');return;}
+  ST.completed[id]=true; ST.done++;
+  addCoins(coins);
+  notify('🎉','¡Lección completada! +'+coins+' coins');
+}
+function addCoins(n){ ST.coins+=n; updateUI(); showXP(n); }
+function showXP(n){
+  var p=document.getElementById('xpp'); p.textContent='💰 +'+n;
+  p.classList.add('show'); setTimeout(function(){p.classList.remove('show');},2000);
+}
+function notify(icon,msg){
+  document.getElementById('n-ic').textContent=icon;
+  document.getElementById('n-msg').textContent=msg;
+  var el=document.getElementById('notif');
+  el.classList.add('show'); setTimeout(function(){el.classList.remove('show');},3000);
+}
+function resetProg(){
+  if(!confirm('¿Reiniciar todo el progreso?'))return;
+  ST={coins:0,done:0,streak:0,level:1,completed:{},modProg:{}};
+  save(); updateUI(); notify('🗑','Progreso reiniciado');
+}
+
+// ── FORMULA EXAMPLE ───────────────────────────────────────────────
+function buildFE(){
+  var tbody=document.getElementById('fe-body');
+  if(!tbody) return;
+  if(tbody.children.length>0) return;
+  var rows=[
+    ['Producto','Precio','Cantidad','Total'],
+    ['Monitor','299','2','598'],
+    ['Teclado','49','5','245'],
+    ['Ratón','25','3','75'],
+    ['','','TOTAL','918']
+  ];
+  tbody.innerHTML=rows.map(function(row,ri){
+    return '<tr><td class="rn">'+(ri+1)+'</td>'
+      +row.map(function(cell,ci){
+        var cls=(ri===0)?'bgh':(ri===4&&ci>=2)?'bgt':'';
+        var numcls=(!isNaN(parseFloat(cell))&&cell!==''&&ri>0&&ri<4)?' num':'';
+        return '<td><input class="ci'+numcls+(cls?' '+cls:'')+'" value="'+cell+'" readonly tabindex="-1"></td>';
+      }).join('')+'</tr>';
+  }).join('');
+}
+
+// ── SIMULATOR ─────────────────────────────────────────────────────
+var SCOLS=10,SROWS=25,SD={},SEL={r:1,c:1},EDITING=false;
+// Reset EDITING if user clicks outside simulator
+document.addEventListener('mousedown',function(e){
+  if(!e.target.closest||!e.target.closest('#sim-scroll')){
+    EDITING=false;
+    // Make all cell inputs readonly again
+    var inputs=document.querySelectorAll('#sim-scroll .ci');
+    inputs.forEach(function(inp){ if(!inp.readOnly){ inp.setAttribute('readonly',''); } });
+  }
+});
+
+function ck(r,c){return r+','+c;}
+function colL(n){
+  var s='';
+  while(n>0){n--;s=String.fromCharCode(65+(n%26))+s;n=Math.floor(n/26);}
+  return s;
+}
+function addr(r,c){return colL(c)+r;}
+
+function initSim(){
+  var scroll=document.getElementById('sim-scroll');
+  if(!scroll)return;
+  var h='<table class="ss"><thead><tr><th class="rh"></th>';
+  for(var c=1;c<=SCOLS;c++) h+='<th>'+colL(c)+'</th>';
+  h+='</tr></thead><tbody>';
+  for(var r=1;r<=SROWS;r++){
+    h+='<tr><td class="rn">'+r+'</td>';
+    for(var c2=1;c2<=SCOLS;c2++){
+      h+='<td id="td'+r+'_'+c2+'" onclick="simClick('+r+','+c2+')" ondblclick="simDbl('+r+','+c2+')">'
+        +'<input id="inp'+r+'_'+c2+'" class="ci" value="" readonly'
+        +' onblur="simBlur('+r+','+c2+',event)"'
+        +' onkeydown="simKey(event,'+r+','+c2+')">'
+        +'</td>';
+    }
+    h+='</tr>';
+  }
+  h+='</tbody></table>';
+  scroll.innerHTML=h;
+  // Apply existing data
+  Object.keys(SD).forEach(function(key){
+    var parts=key.split(','),r=+parts[0],c=+parts[1];
+    var inp=document.getElementById('inp'+r+'_'+c);
+    var d=SD[key];
+    if(inp&&d){
+      inp.value=d.display||'';
+      if(d.bold)inp.classList.add('bold');
+      if(d.ital)inp.classList.add('ital');
+      if(d.ctr)inp.classList.add('ctr');
+      if(d.bg)inp.classList.add(d.bg);
+      if(!isNaN(parseFloat(d.display))&&d.display.trim()!=='')inp.classList.add('num');
+    }
+  });
+  simClick(1,1);
+}
+
+function simClick(r,c){
+  // Allow clicking same cell or if not editing
+  if(EDITING && !(SEL.r===r && SEL.c===c)) return;
+  if(EDITING) return;
+  document.querySelectorAll('.ss td.sel').forEach(function(t){t.classList.remove('sel');});
+  SEL={r:r,c:c};
+  var td=document.getElementById('td'+r+'_'+c);
+  if(td)td.classList.add('sel');
+  var d=SD[ck(r,c)];
+  document.getElementById('sim-fi').value=d?(d.raw||''):'';
+  document.getElementById('sim-ref').textContent=addr(r,c);
+  updateST();
+}
+
+function simDbl(r,c){
+  SEL={r:r,c:c};
+  var inp=document.getElementById('inp'+r+'_'+c);
+  if(!inp)return;
+  var d=SD[ck(r,c)];
+  inp.value=d?(d.raw||''):'';
+  inp.removeAttribute('readonly');
+  inp.focus();
+  EDITING=true;
+}
+
+function simBlur(r,c,e){
+  var inp=document.getElementById('inp'+r+'_'+c);
+  if(!inp||inp.readOnly){EDITING=false;return;}
+  simCommit(r,c,inp.value);
+  EDITING=false;
+}
+
+function simKey(e,r,c){
+  var inp=document.getElementById('inp'+r+'_'+c);
+  if(!inp)return;
+  if(!inp.readOnly){
+    if(e.key==='Enter'){e.preventDefault();simCommit(r,c,inp.value);setTimeout(function(){simClick(Math.min(SROWS,r+1),c);},0);}
+    else if(e.key==='Tab'){e.preventDefault();simCommit(r,c,inp.value);setTimeout(function(){simClick(r,Math.min(SCOLS,c+1));},0);}
+    else if(e.key==='Escape'){var d=SD[ck(r,c)];inp.value=d?(d.display||''):'';inp.setAttribute('readonly','');EDITING=false;}
+    return;
+  }
+  var nav={ArrowDown:[1,0],ArrowUp:[-1,0],ArrowRight:[0,1],ArrowLeft:[0,-1]};
+  if(nav[e.key]){e.preventDefault();var dr=nav[e.key][0],dc=nav[e.key][1];simClick(Math.max(1,Math.min(SROWS,r+dr)),Math.max(1,Math.min(SCOLS,c+dc)));return;}
+  if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();simCommit(r,c,'');return;}
+  if(e.key==='F2'){e.preventDefault();simDbl(r,c);return;}
+  if(e.key.length===1&&!e.ctrlKey&&!e.metaKey){inp.removeAttribute('readonly');inp.value=e.key;inp.focus();EDITING=true;e.preventDefault();}
+}
+
+function simCommit(r,c,raw){
+  var inp=document.getElementById('inp'+r+'_'+c);
+  if(!inp)return;
+  inp.setAttribute('readonly','');
+  EDITING=false;
+  if(!SD[ck(r,c)])SD[ck(r,c)]={};
+  raw = raw || '';
+  SD[ck(r,c)].raw=raw;
+  var display=(raw.length>0&&raw.charAt(0)==='=')?String(evalF(raw.substring(1))):raw;
+  SD[ck(r,c)].display=display;
+  inp.value=display;
+  inp.classList.toggle('num',!isNaN(parseFloat(display))&&display.trim()!=='');
+  document.getElementById('sim-fi').value=raw;
+  recalc();
+  document.getElementById('sim-fi').value = SD[ck(r,c)] ? SD[ck(r,c)].raw||'' : '';
+  updateST();
+}
+
+function getCVal(a){
+  var m=a.trim().replace(/\$/g,'').match(/^([A-Z]+)(\d+)$/i);
+  if(!m)return 0;
+  var col=0; m[1].toUpperCase().split('').forEach(function(ch){col=col*26+(ch.charCodeAt(0)-64);});
+  var d=SD[ck(parseInt(m[2]),col)];
+  if(!d)return 0;
+  var n=parseFloat(d.display);
+  if(!isNaN(n)) return n;
+  return (d.display===undefined||d.display==='')?0:String(d.display);
+}
+function getRVals(range){
+  var parts=range.split(':');
+  if(parts.length!==2)return [getCVal(parts[0])];
+  function parse(a){var m=a.trim().replace(/\$/g,'').match(/^([A-Z]+)(\d+)$/i);if(!m)return null;var col=0;m[1].toUpperCase().split('').forEach(function(ch){col=col*26+(ch.charCodeAt(0)-64);});return{r:parseInt(m[2]),c:col};}
+  var p1=parse(parts[0]),p2=parse(parts[1]);
+  if(!p1||!p2)return [0];
+  var vals=[];
+  for(var r=Math.min(p1.r,p2.r);r<=Math.max(p1.r,p2.r);r++)
+    for(var c=Math.min(p1.c,p2.c);c<=Math.max(p1.c,p2.c);c++){
+      var d=SD[ck(r,c)];var n=d?parseFloat(d.display):NaN;vals.push(isNaN(n)?0:n);
+    }
+  return vals;
+}
+
+function evalF(f){
+  // Normalizar comillas tipográficas y asegurar que f es string
+  if(typeof f !== 'string') return 0;
+  f = f.trim();
+  // HOY / AHORA
+  f=f.replace(/HOY\(\)/gi,function(){var d=new Date();return'"'+d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear()+'"';});
+  f=f.replace(/AHORA\(\)/gi,function(){return'"'+new Date().toLocaleString('es-ES')+'"';});
+  // SI / IF
+  f=f.replace(/\bSI\.ERROR\s*\(/gi,'_SIFERR(');
+  f=f.replace(/\bIFERROR\s*\(/gi,'_SIFERR(');
+  f=f.replace(/\bSUMAR\.SI\s*\(/gi,'_SSI(');
+  f=f.replace(/\bSUMIF\s*\(/gi,'_SSI(');
+  f=f.replace(/\bCONTAR\.SI\s*\(/gi,'_CSI(');
+  f=f.replace(/\bCOUNTIF\s*\(/gi,'_CSI(');
+  f=f.replace(/\bPROMEDIO\.SI\s*\(/gi,'_PSI(');
+  f=f.replace(/\bAVERAGEIF\s*\(/gi,'_PSI(');
+  f=f.replace(/\bSI\s*\(/gi,'_SI(');
+  f=f.replace(/\bIF\s*\(/gi,'_SI(');
+  // Funciones
+  var fns={SUMA:'_S',SUM:'_S',PROMEDIO:'_AV',AVERAGE:'_AV',MAX:'_MX',MIN:'_MN',
+           CONTAR:'_CT',COUNT:'_CT',CONTARA:'_CTA',COUNTA:'_CTA',
+           RAIZ:'_SQ',SQRT:'_SQ',ABS:'_AB',ENTERO:'_IN',INT:'_IN',
+           REDONDEAR:'_RD',ROUND:'_RD',POTENCIA:'_PW',POWER:'_PW',
+           CONCATENAR:'_CC',CONCAT:'_CC',IZQUIERDA:'_IZQ',LEFT:'_IZQ',
+           DERECHA:'_DER',RIGHT:'_DER',EXTRAE:'_EXT',MID:'_EXT',
+           LARGO:'_LG',LEN:'_LG',MAYUSC:'_MAY',UPPER:'_MAY',
+           MINUSC:'_MNU',LOWER:'_MNU',NOMPROPIO:'_NPR',PROPER:'_NPR',
+           ESPACIOS:'_TRM',TRIM:'_TRM',REPETIR:'_RPT',REPT:'_RPT'};
+  Object.keys(fns).forEach(function(fn){
+    var re=new RegExp('\\b'+fn+'\\s*\\(','gi');
+    f=f.replace(re,fns[fn]+'(');
+  });
+  // Ranges before cells
+  f=f.replace(/\$?[A-Z]+\$?\d+:\$?[A-Z]+\$?\d+/gi,function(m){return '['+getRVals(m).join(',')+']';});
+  // Cell refs
+  f=f.replace(/\$?([A-Z]+)\$?(\d+)/gi,function(_,col,row){var v=getCVal(col+row);return (typeof v==='number')?String(v):JSON.stringify(String(v));});
+  // Logical
+  f=f.replace(/\bVERDADERO\b/gi,'true').replace(/\bFALSO\b/gi,'false');
+  var _S=function(a){return (Array.isArray(a)?a:[a]).flat().reduce(function(s,v){return s+(+v||0);},0);};
+  var _AV=function(a){var fl=(Array.isArray(a)?a:[a]).flat();return fl.length?fl.reduce(function(s,v){return s+(+v||0);},0)/fl.length:0;};
+  var _MX=function(a){return Math.max.apply(null,(Array.isArray(a)?a:[a]).flat().map(function(v){return +v||0;}));};
+  var _MN=function(a){return Math.min.apply(null,(Array.isArray(a)?a:[a]).flat().map(function(v){return +v||0;}));};
+  var _CT=function(a){return (Array.isArray(a)?a:[a]).flat().filter(function(v){return !isNaN(+v)&&v!=='';}).length;};
+  var _CTA=function(a){return (Array.isArray(a)?a:[a]).flat().filter(function(v){return v!==''&&v!==null&&v!==undefined;}).length;};
+  var _SQ=function(a){return Math.sqrt(+a);};
+  var _AB=function(a){return Math.abs(+a);};
+  var _IN=function(a){return Math.floor(+a);};
+  var _RD=function(a,d){return +((+a).toFixed(+d||0));};
+  var _PW=function(a,b){return Math.pow(+a,+b);};
+  var _SI=function(cond,t,f2){return cond?t:f2;};
+  var _SIFERR=function(v,e){try{return(v===undefined||v===null||String(v).indexOf('#')===0)?e:v;}catch(err){return e;}};
+  var _CRIT=function(crit){
+    if(typeof crit==='number')return function(v){return +v===crit;};
+    var s=String(crit).trim();
+    var m2=s.match(/^(>=|<=|<>|>|<|=)?\s*(-?\d+(?:[.,]\d+)?)$/);
+    if(m2){var op=m2[1]||'=';var n2=parseFloat(m2[2].replace(',','.'));
+      return function(v){v=+v;
+        if(op==='>')return v>n2; if(op==='<')return v<n2;
+        if(op==='>=')return v>=n2; if(op==='<=')return v<=n2;
+        if(op==='<>')return v!==n2; return v===n2;};}
+    return function(v){return String(v).toLowerCase()===s.toLowerCase();};
+  };
+  var _flat=function(a){return (Array.isArray(a)?a:[a]).flat();};
+  var _SSI=function(r,c,rs){var a=_flat(r),b=rs!==undefined?_flat(rs):a,t=_CRIT(c),s=0;for(var i=0;i<a.length;i++){if(t(a[i]))s+=(+b[i]||0);}return s;};
+  var _CSI=function(r,c){var t=_CRIT(c);return _flat(r).filter(function(v){return t(v);}).length;};
+  var _PSI=function(r,c,rs){var a=_flat(r),b=rs!==undefined?_flat(rs):a,t=_CRIT(c),s=0,n3=0;for(var i=0;i<a.length;i++){if(t(a[i])){s+=(+b[i]||0);n3++;}}return n3?Math.round(s/n3*1e10)/1e10:0;};
+  var _CC=function(){return Array.prototype.slice.call(arguments).map(function(v){return Array.isArray(v)?v.flat().join(''):String(v);}).join('');};
+  var _IZQ=function(t,n4){return String(t).substring(0,n4===undefined?1:+n4);};
+  var _DER=function(t,n4){t=String(t);n4=(n4===undefined?1:+n4);return t.substring(Math.max(0,t.length-n4));};
+  var _EXT=function(t,i,n4){return String(t).substr(Math.max(0,(+i)-1),+n4);};
+  var _LG=function(t){return String(t).length;};
+  var _MAY=function(t){return String(t).toUpperCase();};
+  var _MNU=function(t){return String(t).toLowerCase();};
+  var _NPR=function(t){return String(t).toLowerCase().replace(/(^|\s)([a-záéíóúüñ])/g,function(m3,a2,b2){return a2+b2.toUpperCase();});};
+  var _TRM=function(t){return String(t).trim().replace(/\s+/g,' ');};
+  var _RPT=function(t,n4){n4=Math.max(0,Math.floor(+n4||0));return n4>200?'#¡NUM!':new Array(n4+1).join(String(t));};
+  try{
+    var result=(new Function('_S','_AV','_MX','_MN','_CT','_CTA','_SQ','_AB','_IN','_RD','_PW','_SI','_SIFERR','_SSI','_CSI','_PSI','_CC','_IZQ','_DER','_EXT','_LG','_MAY','_MNU','_NPR','_TRM','_RPT',
+      '"use strict";return ('+f+');'))(_S,_AV,_MX,_MN,_CT,_CTA,_SQ,_AB,_IN,_RD,_PW,_SI,_SIFERR,_SSI,_CSI,_PSI,_CC,_IZQ,_DER,_EXT,_LG,_MAY,_MNU,_NPR,_TRM,_RPT);
+    if(typeof result==='number')return isFinite(result)?Math.round(result*1e10)/1e10:'#¡NUM!';
+    return result;
+  }catch(e){return '#¡ERROR!';}
+}
+
+function recalc(){
+  Object.keys(SD).forEach(function(key){
+    var d=SD[key];
+    if(!d||!d.raw||d.raw.charAt(0)!=='=')return;
+    var parts=key.split(','),r=+parts[0],c=+parts[1];
+    d.display=String(evalF(d.raw.substring(1)));
+    var inp=document.getElementById('inp'+r+'_'+c);
+    if(inp&&inp.readOnly){
+      inp.value=d.display;
+      inp.classList.toggle('num',!isNaN(parseFloat(d.display))&&d.display.trim()!=='');
+    }
+  });
+}
+
+function simFBKey(e){
+  if(e.key==='Enter'){
+    e.preventDefault();
+    var fi=document.getElementById('sim-fi');
+    if(!fi) return;
+    var val=fi.value;
+    simCommit(SEL.r,SEL.c,val);
+    setTimeout(function(){ simClick(Math.min(SROWS,SEL.r+1),SEL.c); }, 30);
+  }
+  if(e.key==='Escape'){
+    var d=SD[ck(SEL.r,SEL.c)];
+    var fi=document.getElementById('sim-fi');
+    if(fi) fi.value=d?(d.raw||''):'';
+  }
+}
+function simFBInput(){
+  var fi = document.getElementById('sim-fi');
+  if(!fi) return;
+  var val = fi.value;
+  var inp = document.getElementById('inp'+SEL.r+'_'+SEL.c);
+  if(inp && inp.readOnly) inp.value = val;
+}
+function updateST(){
+  var st=document.getElementById('sim-st');
+  var ag=document.getElementById('sim-agg');
+  if(!st||!ag) return;
+  var d=SD[ck(SEL.r,SEL.c)];
+  var disp=d?d.display||'':'';
+  st.textContent=addr(SEL.r,SEL.c)+': '+(disp||'vacía');
+  ag.textContent=(!isNaN(parseFloat(disp))&&disp!=='')?'Valor: '+disp:'';
+}
+function simFmt(type){
+  var d=SD[ck(SEL.r,SEL.c)]||{};
+  SD[ck(SEL.r,SEL.c)]=d;
+  var inp=document.getElementById('inp'+SEL.r+'_'+SEL.c);
+  if(!inp)return;
+  if(type==='bold'){d.bold=!d.bold;inp.classList.toggle('bold',!!d.bold);}
+  if(type==='italic'){d.ital=!d.ital;inp.classList.toggle('ital',!!d.ital);}
+  if(type==='center'){d.ctr=!d.ctr;inp.classList.toggle('ctr',!!d.ctr);}
+  if(type==='bgg'||type==='bgh'||type==='bgt'){
+    var on=!inp.classList.contains(type);
+    inp.classList.remove('bgg','bgh','bgt');
+    if(on){inp.classList.add(type);d.bg=type;}else{d.bg='';}
+  }
+}
+function simClearCell(){
+  var r=SEL.r,c=SEL.c;
+  SD[ck(r,c)]={raw:'',display:''};
+  var inp=document.getElementById('inp'+r+'_'+c);
+  if(inp){inp.value='';inp.className='ci';}
+  document.getElementById('sim-fi').value='';
+  updateST();
+}
+function simClearAll(){
+  if(!confirm('¿Borrar todo el contenido?'))return;
+  SD={};
+  for(var r=1;r<=SROWS;r++)for(var c=1;c<=SCOLS;c++){
+    var inp=document.getElementById('inp'+r+'_'+c);
+    if(inp){inp.value='';inp.className='ci';}
+  }
+  document.getElementById('sim-fi').value='';
+  updateST();
+}
+function simInsert(f){
+  var fi=document.getElementById('sim-fi');
+  if(fi) fi.value=f;
+  // Ensure sim is initialized
+  var inp=document.getElementById('inp'+SEL.r+'_'+SEL.c);
+  if(!inp){ initSim(); inp=document.getElementById('inp'+SEL.r+'_'+SEL.c); }
+  simCommit(SEL.r,SEL.c,f);
+  notify('⚡','Fórmula insertada en '+addr(SEL.r,SEL.c));
+}
+function simCSV(){
+  var csv='';
+  for(var r=1;r<=SROWS;r++){
+    var row=[];
+    for(var c=1;c<=SCOLS;c++){var d=SD[ck(r,c)];row.push('"'+(d?d.display||'':'')+'"');}
+    csv+=row.join(',')+'\n';
+  }
+  var a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='igorexcel.csv';a.click();
+}
+
+// ── SCENARIOS ─────────────────────────────────────────────────────
+var SCENARIOS={
+  blank:{},
+  presupuesto:{
+    '1,1':{raw:'CONCEPTO',display:'CONCEPTO',bold:true},'1,2':{raw:'ENERO',display:'ENERO',bold:true},
+    '1,3':{raw:'FEBRERO',display:'FEBRERO',bold:true},'1,4':{raw:'MARZO',display:'MARZO',bold:true},
+    '1,5':{raw:'TOTAL',display:'TOTAL',bold:true},
+    '2,1':{raw:'Alquiler',display:'Alquiler'},'2,2':{raw:'800',display:'800'},
+    '2,3':{raw:'800',display:'800'},'2,4':{raw:'800',display:'800'},
+    '2,5':{raw:'=B2+C2+D2',display:'2400'},
+    '3,1':{raw:'Alimentación',display:'Alimentación'},'3,2':{raw:'320',display:'320'},
+    '3,3':{raw:'295',display:'295'},'3,4':{raw:'340',display:'340'},
+    '3,5':{raw:'=B3+C3+D3',display:'955'},
+    '4,1':{raw:'Transporte',display:'Transporte'},'4,2':{raw:'80',display:'80'},
+    '4,3':{raw:'75',display:'75'},'4,4':{raw:'90',display:'90'},
+    '4,5':{raw:'=B4+C4+D4',display:'245'},
+    '5,1':{raw:'Ocio',display:'Ocio'},'5,2':{raw:'150',display:'150'},
+    '5,3':{raw:'200',display:'200'},'5,4':{raw:'120',display:'120'},
+    '5,5':{raw:'=B5+C5+D5',display:'470'},
+    '6,1':{raw:'TOTAL MES',display:'TOTAL MES',bold:true},
+    '6,2':{raw:'=SUMA(B2:B5)',display:'1350'},
+    '6,3':{raw:'=SUMA(C2:C5)',display:'1370'},
+    '6,4':{raw:'=SUMA(D2:D5)',display:'1350'},
+    '6,5':{raw:'=SUMA(E2:E5)',display:'4070'}
+  },
+  notas:{
+    '1,1':{raw:'ALUMNO',display:'ALUMNO',bold:true},'1,2':{raw:'EXAM 1',display:'EXAM 1',bold:true},
+    '1,3':{raw:'EXAM 2',display:'EXAM 2',bold:true},'1,4':{raw:'MEDIA',display:'MEDIA',bold:true},
+    '1,5':{raw:'RESULTADO',display:'RESULTADO',bold:true},
+    '2,1':{raw:'Ana García',display:'Ana García'},'2,2':{raw:'7.5',display:'7.5'},
+    '2,3':{raw:'8.2',display:'8.2'},'2,4':{raw:'=PROMEDIO(B2:C2)',display:'7.85'},
+    '2,5':{raw:'=SI(D2>=5,"Aprobado","Suspenso")',display:'Aprobado'},
+    '3,1':{raw:'Luis Martín',display:'Luis Martín'},'3,2':{raw:'4',display:'4'},
+    '3,3':{raw:'5.5',display:'5.5'},'3,4':{raw:'=PROMEDIO(B3:C3)',display:'4.75'},
+    '3,5':{raw:'=SI(D3>=5,"Aprobado","Suspenso")',display:'Suspenso'},
+    '4,1':{raw:'Sara López',display:'Sara López'},'4,2':{raw:'9.1',display:'9.1'},
+    '4,3':{raw:'8.8',display:'8.8'},'4,4':{raw:'=PROMEDIO(B4:C4)',display:'8.95'},
+    '4,5':{raw:'=SI(D4>=5,"Aprobado","Suspenso")',display:'Aprobado'},
+    '5,1':{raw:'Carlos Ruiz',display:'Carlos Ruiz'},'5,2':{raw:'6',display:'6'},
+    '5,3':{raw:'5.8',display:'5.8'},'5,4':{raw:'=PROMEDIO(B5:C5)',display:'5.9'},
+    '5,5':{raw:'=SI(D5>=5,"Aprobado","Suspenso")',display:'Aprobado'}
+  },
+  inventario:{
+    '1,1':{raw:'PRODUCTO',display:'PRODUCTO',bold:true},'1,2':{raw:'COD.',display:'COD.',bold:true},
+    '1,3':{raw:'STOCK',display:'STOCK',bold:true},'1,4':{raw:'PRECIO',display:'PRECIO',bold:true},
+    '1,5':{raw:'VALOR TOTAL',display:'VALOR TOTAL',bold:true},
+    '2,1':{raw:'Teclado USB',display:'Teclado USB'},'2,2':{raw:'TEC-001',display:'TEC-001'},
+    '2,3':{raw:'25',display:'25'},'2,4':{raw:'29.99',display:'29.99'},
+    '2,5':{raw:'=C2*D2',display:'749.75'},
+    '3,1':{raw:'Monitor 24"',display:'Monitor 24"'},'3,2':{raw:'MON-024',display:'MON-024'},
+    '3,3':{raw:'8',display:'8'},'3,4':{raw:'189.99',display:'189.99'},
+    '3,5':{raw:'=C3*D3',display:'1519.92'},
+    '4,1':{raw:'Ratón óptico',display:'Ratón óptico'},'4,2':{raw:'RAT-005',display:'RAT-005'},
+    '4,3':{raw:'42',display:'42'},'4,4':{raw:'14.5',display:'14.5'},
+    '4,5':{raw:'=C4*D4',display:'609'},
+    '5,1':{raw:'TOTALES',display:'TOTALES',bold:true},
+    '5,3':{raw:'=SUMA(C2:C4)',display:'75'},
+    '5,5':{raw:'=SUMA(E2:E4)',display:'2878.67'}
+  },
+  ventas:{
+    '1,1':{raw:'MES',display:'MES',bold:true},'1,2':{raw:'VENTAS',display:'VENTAS',bold:true},
+    '1,3':{raw:'OBJETIVO',display:'OBJETIVO',bold:true},'1,4':{raw:'DIFERENCIA',display:'DIFERENCIA',bold:true},
+    '1,5':{raw:'CUMPLIDO',display:'CUMPLIDO',bold:true},
+    '2,1':{raw:'Enero',display:'Enero'},'2,2':{raw:'12500',display:'12500'},
+    '2,3':{raw:'12000',display:'12000'},'2,4':{raw:'=B2-C2',display:'500'},
+    '2,5':{raw:'=SI(D2>=0,"Sí","No")',display:'Sí'},
+    '3,1':{raw:'Febrero',display:'Febrero'},'3,2':{raw:'11800',display:'11800'},
+    '3,3':{raw:'12000',display:'12000'},'3,4':{raw:'=B3-C3',display:'-200'},
+    '3,5':{raw:'=SI(D3>=0,"Sí","No")',display:'No'},
+    '4,1':{raw:'Marzo',display:'Marzo'},'4,2':{raw:'13200',display:'13200'},
+    '4,3':{raw:'12000',display:'12000'},'4,4':{raw:'=B4-C4',display:'1200'},
+    '4,5':{raw:'=SI(D4>=0,"Sí","No")',display:'Sí'},
+    '5,1':{raw:'MEDIA',display:'MEDIA',bold:true},
+    '5,2':{raw:'=PROMEDIO(B2:B4)',display:'12500'}
+  }
+};
+
+function loadSC(name,btn){
+  if(btn){
+    btn.closest('.tts').querySelectorAll('.tt').forEach(function(t){t.classList.remove('active');});
+    btn.classList.add('active');
+  }
+  SD={};
+  var sc=SCENARIOS[name]||{};
+  Object.keys(sc).forEach(function(k){SD[k]=Object.assign({},sc[k]);});
+  initSim();
+  document.getElementById('sim-fn').textContent=name+'.xlsx';
+  document.getElementById('sim-fi').value='';
+  simClick(1,1);
+  notify('📄','Escenario cargado: '+name);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+updateUI();
+buildMods();
+</script>
+</body>
+</html>

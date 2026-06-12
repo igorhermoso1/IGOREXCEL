@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 Biblioteca de Fórmulas — IGOREXCEL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--eg:#217346;--egm:#2e8b57;--egl:#3daa6e;--egp:#e8f5ee;--eacc:#107c41;--ed:#1a2e1a;--gold:#f4c430;--red:#e53935}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f4f9f6;color:var(--ed);min-height:100vh}
+code{font-family:'JetBrains Mono',monospace}
+header{background:linear-gradient(135deg,var(--eg),var(--eacc));color:#fff;padding:28px 24px;box-shadow:0 4px 18px rgba(33,115,70,.3)}
+.hw{max-width:1180px;margin:0 auto}
+.hw h1{font-size:1.7rem;font-weight:800}
+.hw p{opacity:.92;margin-top:4px;font-size:.95rem}
+.hnav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.hnav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.16);padding:7px 14px;border-radius:9px;font-size:.85rem;font-weight:700;border:1px solid rgba(255,255,255,.25)}
+.hnav a:hover{background:rgba(255,255,255,.28)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.st{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:8px 16px;font-size:.83rem;font-weight:700}
+.st b{font-size:1.1rem;color:var(--gold);margin-right:5px}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 24px 60px}
+.tools{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 14px rgba(33,115,70,.1);position:sticky;top:10px;z-index:5;border:1px solid #dcebe2}
+#buscador{width:100%;padding:12px 16px;font-size:1rem;border:2px solid var(--egp);border-radius:10px;font-family:inherit;outline:none}
+#buscador:focus{border-color:var(--egl)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1.5px solid #cfe5d8;background:#fff;color:var(--ed);border-radius:999px;padding:6px 13px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+.chip:hover{border-color:var(--egl)}
+.chip.on{background:var(--eg);color:#fff;border-color:var(--eg)}
+.chips.lvls{padding-top:10px;border-top:1px dashed #dcebe2;margin-top:12px}
+#nres{margin:16px 4px 8px;font-size:.85rem;color:#5a7a66;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin-top:6px}
+.fc{background:#fff;border:1px solid #dcebe2;border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(33,115,70,.07);display:flex;flex-direction:column;gap:9px;transition:.15s}
+.fc:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(33,115,70,.16);border-color:var(--egl)}
+.fc-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fc-n{font-weight:800;font-size:1.02rem;color:var(--eacc)}
+.fc-l{font-size:.68rem;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.fc-syn{display:block;background:var(--ed);color:#bdf0d4;padding:9px 11px;border-radius:8px;font-size:.78rem;overflow-x:auto;white-space:nowrap}
+.fc-d{font-size:.85rem;line-height:1.45;color:#33493a}
+.fc-ex{background:var(--egp);border-left:3px solid var(--egl);border-radius:0 8px 8px 0;padding:7px 10px;font-size:.76rem}
+.fc-ex span{display:block;font-size:.62rem;font-weight:800;color:var(--eacc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.fc-ex code{color:var(--ed);word-break:break-all}
+.fc-cat{font-size:.7rem;color:#7a9484;font-weight:700;margin-top:auto}
+.empty{display:none;text-align:center;padding:60px 20px;color:#7a9484;font-weight:700}
+footer{text-align:center;padding:26px;color:#7a9484;font-size:.82rem}
+@media(max-width:640px){.grid{grid-template-columns:1fr}header{padding:20px 16px}.wrap{padding:16px 14px 50px}}
+</style>
+</head>
+<body>
+<header><div class="hw">
+  <h1>📖 Biblioteca de Fórmulas de Excel</h1>
+  <p>Las 194 funciones esenciales explicadas con sintaxis y ejemplo real — de cero a experto.</p>
+  <div class="hnav">
+    <a href="index.html">← Volver a IGOREXCEL</a>
+    <a href="atajos.html">⌨️ Atajos de teclado</a>
+    <a href="practicas.html">🧪 Prácticas avanzadas</a>
+  </div>
+  <div class="stats">
+    <div class="st"><b>194</b>Funciones</div>
+    <div class="st"><b>34</b>Principiante</div>
+    <div class="st"><b>70</b>Intermedio</div>
+    <div class="st"><b>67</b>Avanzado</div>
+    <div class="st"><b>23</b>Excel 365</div>
+  </div>
+</div></header>
+<div class="wrap">
+  <div class="tools">
+    <input id="buscador" type="text" placeholder="🔍 Busca una función: BUSCARV, suma condicional, fecha..." oninput="applyF()">
+    <div class="chips">
+      <button class="chip on" data-cat="*" onclick="setCat(this)">Todas las categorías</button>
+      <button class="chip" data-cat="Matemáticas" onclick="setCat(this)">➗ Matemáticas</button><button class="chip" data-cat="Estadísticas" onclick="setCat(this)">📈 Estadísticas</button><button class="chip" data-cat="Lógicas" onclick="setCat(this)">🧠 Lógicas</button><button class="chip" data-cat="Búsqueda y referencia" onclick="setCat(this)">🔍 Búsqueda y referencia</button><button class="chip" data-cat="Texto" onclick="setCat(this)">🔤 Texto</button><button class="chip" data-cat="Fecha y hora" onclick="setCat(this)">📅 Fecha y hora</button><button class="chip" data-cat="Financieras" onclick="setCat(this)">💶 Financieras</button><button class="chip" data-cat="Información" onclick="setCat(this)">ℹ️ Información</button><button class="chip" data-cat="Matrices dinámicas (365)" onclick="setCat(this)">🌊 Matrices dinámicas (365)</button><button class="chip" data-cat="Bases de datos" onclick="setCat(this)">🗄️ Bases de datos</button><button class="chip" data-cat="Ingeniería y conversión" onclick="setCat(this)">⚙️ Ingeniería y conversión</button><button class="chip" data-cat="Web y modernas" onclick="setCat(this)">🤖 Web y modernas</button>
+    </div>
+    <div class="chips lvls">
+      <button class="chip on" data-lvl="*" onclick="setLvl(this)">Todos los niveles</button>
+      <button class="chip" data-lvl="P" onclick="setLvl(this)">🌱 Principiante</button>
+      <button class="chip" data-lvl="I" onclick="setLvl(this)">⚡ Intermedio</button>
+      <button class="chip" data-lvl="A" onclick="setLvl(this)">🚀 Avanzado</button>
+      <button class="chip" data-lvl="X" onclick="setLvl(this)">🌊 Excel 365</button>
+    </div>
+  </div>
+  <div id="nres"></div>
+  <div class="grid" id="grid">
+<div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="suma =suma(rango) suma todos los números de un rango. =suma(a1:a10)">
+  <div class="fc-h"><span class="fc-n">SUMA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=SUMA(rango)</code>
+  <p class="fc-d">Suma todos los números de un rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUMA(A1:A10)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="resta (operador) =a1-b1 excel no tiene función resta: se usa el operador menos. =a1-b1">
+  <div class="fc-h"><span class="fc-n">RESTA (operador)</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=A1-B1</code>
+  <p class="fc-d">Excel no tiene función RESTA: se usa el operador menos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=A1-B1</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="producto =producto(n1;n2;...) multiplica todos sus argumentos. =producto(a1:a3)">
+  <div class="fc-h"><span class="fc-n">PRODUCTO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=PRODUCTO(n1;n2;...)</code>
+  <p class="fc-d">Multiplica todos sus argumentos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PRODUCTO(A1:A3)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="cociente =cociente(numerador;denominador) parte entera de una división. =cociente(10;3) → 3">
+  <div class="fc-h"><span class="fc-n">COCIENTE</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=COCIENTE(numerador;denominador)</code>
+  <p class="fc-d">Parte entera de una división.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=COCIENTE(10;3) → 3</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="residuo =residuo(número;divisor) resto de una división. útil para alternar filas pares/impares. =residuo(10;3) → 1">
+  <div class="fc-h"><span class="fc-n">RESIDUO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=RESIDUO(número;divisor)</code>
+  <p class="fc-d">Resto de una división. Útil para alternar filas pares/impares.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=RESIDUO(10;3) → 1</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="redondear =redondear(número;decimales) redondea al número de decimales indicado. =redondear(3,14159;2) → 3,14">
+  <div class="fc-h"><span class="fc-n">REDONDEAR</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=REDONDEAR(número;decimales)</code>
+  <p class="fc-d">Redondea al número de decimales indicado.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=REDONDEAR(3,14159;2) → 3,14</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="redondear.mas =redondear.mas(número;decimales) redondea siempre hacia arriba. =redondear.mas(3,2;0) → 4">
+  <div class="fc-h"><span class="fc-n">REDONDEAR.MAS</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=REDONDEAR.MAS(número;decimales)</code>
+  <p class="fc-d">Redondea siempre hacia arriba.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=REDONDEAR.MAS(3,2;0) → 4</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="redondear.menos =redondear.menos(número;decimales) redondea siempre hacia abajo. =redondear.menos(3,9;0) → 3">
+  <div class="fc-h"><span class="fc-n">REDONDEAR.MENOS</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=REDONDEAR.MENOS(número;decimales)</code>
+  <p class="fc-d">Redondea siempre hacia abajo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=REDONDEAR.MENOS(3,9;0) → 3</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="entero =entero(número) redondea hacia abajo al entero más próximo. =entero(7,9) → 7">
+  <div class="fc-h"><span class="fc-n">ENTERO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=ENTERO(número)</code>
+  <p class="fc-d">Redondea hacia abajo al entero más próximo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ENTERO(7,9) → 7</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="truncar =truncar(número;decimales) elimina decimales sin redondear. =truncar(3,99) → 3">
+  <div class="fc-h"><span class="fc-n">TRUNCAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=TRUNCAR(número;decimales)</code>
+  <p class="fc-d">Elimina decimales sin redondear.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TRUNCAR(3,99) → 3</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="abs =abs(número) valor absoluto (sin signo). =abs(-5) → 5">
+  <div class="fc-h"><span class="fc-n">ABS</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=ABS(número)</code>
+  <p class="fc-d">Valor absoluto (sin signo).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ABS(-5) → 5</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="raiz =raiz(número) raíz cuadrada positiva. =raiz(81) → 9">
+  <div class="fc-h"><span class="fc-n">RAIZ</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=RAIZ(número)</code>
+  <p class="fc-d">Raíz cuadrada positiva.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=RAIZ(81) → 9</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="potencia =potencia(número;exponente) eleva un número a una potencia. equivale al operador ^. =potencia(2;10) → 1024">
+  <div class="fc-h"><span class="fc-n">POTENCIA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=POTENCIA(número;exponente)</code>
+  <p class="fc-d">Eleva un número a una potencia. Equivale al operador ^.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=POTENCIA(2;10) → 1024</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="exp =exp(número) e elevado a la potencia indicada. =exp(1) → 2,718...">
+  <div class="fc-h"><span class="fc-n">EXP</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=EXP(número)</code>
+  <p class="fc-d">e elevado a la potencia indicada.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=EXP(1) → 2,718...</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="ln =ln(número) logaritmo natural (base e). =ln(10) → 2,302...">
+  <div class="fc-h"><span class="fc-n">LN</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=LN(número)</code>
+  <p class="fc-d">Logaritmo natural (base e).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LN(10) → 2,302...</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="log =log(número;base) logaritmo en la base indicada (10 por defecto). =log(8;2) → 3">
+  <div class="fc-h"><span class="fc-n">LOG</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=LOG(número;base)</code>
+  <p class="fc-d">Logaritmo en la base indicada (10 por defecto).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LOG(8;2) → 3</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="log10 =log10(número) logaritmo en base 10. =log10(1000) → 3">
+  <div class="fc-h"><span class="fc-n">LOG10</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=LOG10(número)</code>
+  <p class="fc-d">Logaritmo en base 10.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LOG10(1000) → 3</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Matemáticas" data-s="pi =pi() devuelve 3,14159265358979. =pi()*b1^2 (área círculo)">
+  <div class="fc-h"><span class="fc-n">PI</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=PI()</code>
+  <p class="fc-d">Devuelve 3,14159265358979.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PI()*B1^2 (área círculo)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="aleatorio =aleatorio() número aleatorio entre 0 y 1. se recalcula con f9. =aleatorio()">
+  <div class="fc-h"><span class="fc-n">ALEATORIO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ALEATORIO()</code>
+  <p class="fc-d">Número aleatorio entre 0 y 1. Se recalcula con F9.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ALEATORIO()</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="aleatorio.entre =aleatorio.entre(inferior;superior) entero aleatorio entre dos valores. =aleatorio.entre(1;6) (dado)">
+  <div class="fc-h"><span class="fc-n">ALEATORIO.ENTRE</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ALEATORIO.ENTRE(inferior;superior)</code>
+  <p class="fc-d">Entero aleatorio entre dos valores.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ALEATORIO.ENTRE(1;6) (dado)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="sumar.si =sumar.si(rango;criterio;[rango_suma]) suma solo las celdas que cumplen una condición. =sumar.si(a:a;&quot;norte&quot;;b:b)">
+  <div class="fc-h"><span class="fc-n">SUMAR.SI</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SUMAR.SI(rango;criterio;[rango_suma])</code>
+  <p class="fc-d">Suma solo las celdas que cumplen una condición.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUMAR.SI(A:A;&quot;Norte&quot;;B:B)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="sumar.si.conjunto =sumar.si.conjunto(rango_suma;r1;c1;r2;c2;...) suma con varias condiciones a la vez. =sumar.si.conjunto(c:c;a:a;&quot;norte&quot;;b:b;&quot;&gt;100&quot;)">
+  <div class="fc-h"><span class="fc-n">SUMAR.SI.CONJUNTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SUMAR.SI.CONJUNTO(rango_suma;r1;c1;r2;c2;...)</code>
+  <p class="fc-d">Suma con varias condiciones a la vez.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUMAR.SI.CONJUNTO(C:C;A:A;&quot;Norte&quot;;B:B;&quot;&gt;100&quot;)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="sumaproducto =sumaproducto(matriz1;matriz2;...) multiplica rangos elemento a elemento y suma el total. una navaja suiza. =sumaproducto(b2:b10;c2:c10)">
+  <div class="fc-h"><span class="fc-n">SUMAPRODUCTO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=SUMAPRODUCTO(matriz1;matriz2;...)</code>
+  <p class="fc-d">Multiplica rangos elemento a elemento y suma el total. Una navaja suiza.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUMAPRODUCTO(B2:B10;C2:C10)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="subtotales =subtotales(núm_función;rango) calcula ignorando filas ocultas por filtros. 9=suma, 1=promedio. =subtotales(9;c2:c100)">
+  <div class="fc-h"><span class="fc-n">SUBTOTALES</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SUBTOTALES(núm_función;rango)</code>
+  <p class="fc-d">Calcula ignorando filas ocultas por filtros. 9=SUMA, 1=PROMEDIO.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUBTOTALES(9;C2:C100)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="agregar =agregar(función;opciones;rango) como subtotales pero también ignora errores. =agregar(9;6;c2:c100)">
+  <div class="fc-h"><span class="fc-n">AGREGAR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=AGREGAR(función;opciones;rango)</code>
+  <p class="fc-d">Como SUBTOTALES pero también ignora errores.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=AGREGAR(9;6;C2:C100)</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="m.c.d =m.c.d(n1;n2;...) máximo común divisor. =m.c.d(12;18) → 6">
+  <div class="fc-h"><span class="fc-n">M.C.D</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=M.C.D(n1;n2;...)</code>
+  <p class="fc-d">Máximo común divisor.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=M.C.D(12;18) → 6</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="m.c.m =m.c.m(n1;n2;...) mínimo común múltiplo. =m.c.m(4;6) → 12">
+  <div class="fc-h"><span class="fc-n">M.C.M</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=M.C.M(n1;n2;...)</code>
+  <p class="fc-d">Mínimo común múltiplo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=M.C.M(4;6) → 12</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="numero.romano =numero.romano(número) convierte a números romanos. =numero.romano(2026) → mmxxvi">
+  <div class="fc-h"><span class="fc-n">NUMERO.ROMANO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=NUMERO.ROMANO(número)</code>
+  <p class="fc-d">Convierte a números romanos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NUMERO.ROMANO(2026) → MMXXVI</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Matemáticas" data-s="fact =fact(número) factorial de un número. =fact(5) → 120">
+  <div class="fc-h"><span class="fc-n">FACT</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=FACT(número)</code>
+  <p class="fc-d">Factorial de un número.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FACT(5) → 120</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Matemáticas" data-s="signo =signo(número) devuelve 1, 0 o -1 según el signo. =signo(-8) → -1">
+  <div class="fc-h"><span class="fc-n">SIGNO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SIGNO(número)</code>
+  <p class="fc-d">Devuelve 1, 0 o -1 según el signo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SIGNO(-8) → -1</code></div>
+  <div class="fc-cat">➗ Matemáticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Estadísticas" data-s="promedio =promedio(rango) media aritmética de los valores. =promedio(b2:b20)">
+  <div class="fc-h"><span class="fc-n">PROMEDIO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=PROMEDIO(rango)</code>
+  <p class="fc-d">Media aritmética de los valores.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PROMEDIO(B2:B20)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="promedio.si =promedio.si(rango;criterio;[rango_prom]) media de las celdas que cumplen una condición. =promedio.si(a:a;&quot;norte&quot;;b:b)">
+  <div class="fc-h"><span class="fc-n">PROMEDIO.SI</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=PROMEDIO.SI(rango;criterio;[rango_prom])</code>
+  <p class="fc-d">Media de las celdas que cumplen una condición.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PROMEDIO.SI(A:A;&quot;Norte&quot;;B:B)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="promedio.si.conjunto =promedio.si.conjunto(rango_prom;r1;c1;...) media con varias condiciones. =promedio.si.conjunto(c:c;a:a;&quot;sur&quot;;b:b;&quot;&gt;50&quot;)">
+  <div class="fc-h"><span class="fc-n">PROMEDIO.SI.CONJUNTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=PROMEDIO.SI.CONJUNTO(rango_prom;r1;c1;...)</code>
+  <p class="fc-d">Media con varias condiciones.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PROMEDIO.SI.CONJUNTO(C:C;A:A;&quot;Sur&quot;;B:B;&quot;&gt;50&quot;)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="mediana =mediana(rango) valor central de un conjunto ordenado. =mediana(b2:b20)">
+  <div class="fc-h"><span class="fc-n">MEDIANA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=MEDIANA(rango)</code>
+  <p class="fc-d">Valor central de un conjunto ordenado.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MEDIANA(B2:B20)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="moda.uno =moda.uno(rango) valor que más se repite. =moda.uno(b2:b20)">
+  <div class="fc-h"><span class="fc-n">MODA.UNO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=MODA.UNO(rango)</code>
+  <p class="fc-d">Valor que más se repite.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MODA.UNO(B2:B20)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Estadísticas" data-s="max =max(rango) valor máximo. =max(b2:b20)">
+  <div class="fc-h"><span class="fc-n">MAX</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=MAX(rango)</code>
+  <p class="fc-d">Valor máximo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MAX(B2:B20)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Estadísticas" data-s="min =min(rango) valor mínimo. =min(b2:b20)">
+  <div class="fc-h"><span class="fc-n">MIN</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=MIN(rango)</code>
+  <p class="fc-d">Valor mínimo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MIN(B2:B20)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="k.esimo.mayor =k.esimo.mayor(rango;k) k-ésimo valor más grande. =k.esimo.mayor(b:b;3) (el 3º mayor)">
+  <div class="fc-h"><span class="fc-n">K.ESIMO.MAYOR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=K.ESIMO.MAYOR(rango;k)</code>
+  <p class="fc-d">K-ésimo valor más grande.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=K.ESIMO.MAYOR(B:B;3) (el 3º mayor)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="k.esimo.menor =k.esimo.menor(rango;k) k-ésimo valor más pequeño. =k.esimo.menor(b:b;2)">
+  <div class="fc-h"><span class="fc-n">K.ESIMO.MENOR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=K.ESIMO.MENOR(rango;k)</code>
+  <p class="fc-d">K-ésimo valor más pequeño.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=K.ESIMO.MENOR(B:B;2)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Estadísticas" data-s="contar =contar(rango) cuenta celdas con números. =contar(a1:a100)">
+  <div class="fc-h"><span class="fc-n">CONTAR</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=CONTAR(rango)</code>
+  <p class="fc-d">Cuenta celdas con números.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONTAR(A1:A100)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Estadísticas" data-s="contara =contara(rango) cuenta celdas no vacías (números o texto). =contara(a1:a100)">
+  <div class="fc-h"><span class="fc-n">CONTARA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=CONTARA(rango)</code>
+  <p class="fc-d">Cuenta celdas no vacías (números o texto).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONTARA(A1:A100)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Estadísticas" data-s="contar.blanco =contar.blanco(rango) cuenta celdas vacías. =contar.blanco(a1:a100)">
+  <div class="fc-h"><span class="fc-n">CONTAR.BLANCO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=CONTAR.BLANCO(rango)</code>
+  <p class="fc-d">Cuenta celdas vacías.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONTAR.BLANCO(A1:A100)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="contar.si =contar.si(rango;criterio) cuenta celdas que cumplen una condición. =contar.si(a:a;&quot;&gt;100&quot;)">
+  <div class="fc-h"><span class="fc-n">CONTAR.SI</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=CONTAR.SI(rango;criterio)</code>
+  <p class="fc-d">Cuenta celdas que cumplen una condición.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONTAR.SI(A:A;&quot;&gt;100&quot;)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="contar.si.conjunto =contar.si.conjunto(r1;c1;r2;c2;...) cuenta con varias condiciones. =contar.si.conjunto(a:a;&quot;norte&quot;;b:b;&quot;&gt;100&quot;)">
+  <div class="fc-h"><span class="fc-n">CONTAR.SI.CONJUNTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=CONTAR.SI.CONJUNTO(r1;c1;r2;c2;...)</code>
+  <p class="fc-d">Cuenta con varias condiciones.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONTAR.SI.CONJUNTO(A:A;&quot;Norte&quot;;B:B;&quot;&gt;100&quot;)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="max.si.conjunto =max.si.conjunto(rango_max;r1;c1;...) máximo que cumple condiciones (2019+). =max.si.conjunto(c:c;a:a;&quot;norte&quot;)">
+  <div class="fc-h"><span class="fc-n">MAX.SI.CONJUNTO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=MAX.SI.CONJUNTO(rango_max;r1;c1;...)</code>
+  <p class="fc-d">Máximo que cumple condiciones (2019+).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MAX.SI.CONJUNTO(C:C;A:A;&quot;Norte&quot;)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="min.si.conjunto =min.si.conjunto(rango_min;r1;c1;...) mínimo que cumple condiciones (2019+). =min.si.conjunto(c:c;a:a;&quot;sur&quot;)">
+  <div class="fc-h"><span class="fc-n">MIN.SI.CONJUNTO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=MIN.SI.CONJUNTO(rango_min;r1;c1;...)</code>
+  <p class="fc-d">Mínimo que cumple condiciones (2019+).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MIN.SI.CONJUNTO(C:C;A:A;&quot;Sur&quot;)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="desvest.m =desvest.m(rango) desviación estándar de una muestra. =desvest.m(b2:b100)">
+  <div class="fc-h"><span class="fc-n">DESVEST.M</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=DESVEST.M(rango)</code>
+  <p class="fc-d">Desviación estándar de una muestra.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DESVEST.M(B2:B100)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="var.s =var.s(rango) varianza de una muestra. =var.s(b2:b100)">
+  <div class="fc-h"><span class="fc-n">VAR.S</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=VAR.S(rango)</code>
+  <p class="fc-d">Varianza de una muestra.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=VAR.S(B2:B100)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="percentil.inc =percentil.inc(rango;k) percentil k (0 a 1) de un conjunto. =percentil.inc(b:b;0,9)">
+  <div class="fc-h"><span class="fc-n">PERCENTIL.INC</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=PERCENTIL.INC(rango;k)</code>
+  <p class="fc-d">Percentil k (0 a 1) de un conjunto.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PERCENTIL.INC(B:B;0,9)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="I" data-cat="Estadísticas" data-s="jerarquia.eqv =jerarquia.eqv(número;rango;[orden]) posición de un valor en el ranking. =jerarquia.eqv(b2;b$2:b$20)">
+  <div class="fc-h"><span class="fc-n">JERARQUIA.EQV</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=JERARQUIA.EQV(número;rango;[orden])</code>
+  <p class="fc-d">Posición de un valor en el ranking.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=JERARQUIA.EQV(B2;B$2:B$20)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="frecuencia =frecuencia(datos;grupos) distribución de frecuencias por intervalos (matricial). =frecuencia(b2:b100;d2:d6)">
+  <div class="fc-h"><span class="fc-n">FRECUENCIA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=FRECUENCIA(datos;grupos)</code>
+  <p class="fc-d">Distribución de frecuencias por intervalos (matricial).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FRECUENCIA(B2:B100;D2:D6)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="tendencia =tendencia(conocido_y;conocido_x;nueva_x) proyección lineal de valores futuros. =tendencia(b2:b13;a2:a13;a14)">
+  <div class="fc-h"><span class="fc-n">TENDENCIA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=TENDENCIA(conocido_y;conocido_x;nueva_x)</code>
+  <p class="fc-d">Proyección lineal de valores futuros.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TENDENCIA(B2:B13;A2:A13;A14)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="pronostico.lineal =pronostico.lineal(x;conocido_y;conocido_x) predice un valor futuro por regresión lineal. =pronostico.lineal(13;b2:b13;a2:a13)">
+  <div class="fc-h"><span class="fc-n">PRONOSTICO.LINEAL</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=PRONOSTICO.LINEAL(x;conocido_y;conocido_x)</code>
+  <p class="fc-d">Predice un valor futuro por regresión lineal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PRONOSTICO.LINEAL(13;B2:B13;A2:A13)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="pendiente =pendiente(conocido_y;conocido_x) pendiente de la recta de regresión. =pendiente(b2:b13;a2:a13)">
+  <div class="fc-h"><span class="fc-n">PENDIENTE</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=PENDIENTE(conocido_y;conocido_x)</code>
+  <p class="fc-d">Pendiente de la recta de regresión.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PENDIENTE(B2:B13;A2:A13)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="A" data-cat="Estadísticas" data-s="coef.de.correl =coef.de.correl(matriz1;matriz2) coeficiente de correlación entre dos series (-1 a 1). =coef.de.correl(b:b;c:c)">
+  <div class="fc-h"><span class="fc-n">COEF.DE.CORREL</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=COEF.DE.CORREL(matriz1;matriz2)</code>
+  <p class="fc-d">Coeficiente de correlación entre dos series (-1 a 1).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=COEF.DE.CORREL(B:B;C:C)</code></div>
+  <div class="fc-cat">📈 Estadísticas</div>
+</div><div class="fc" data-lvl="P" data-cat="Lógicas" data-s="si =si(condición;si_verdadero;si_falso) la función de decisión por excelencia. =si(b2&gt;=5;&quot;aprobado&quot;;&quot;suspenso&quot;)">
+  <div class="fc-h"><span class="fc-n">SI</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=SI(condición;si_verdadero;si_falso)</code>
+  <p class="fc-d">La función de decisión por excelencia.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI(B2&gt;=5;&quot;Aprobado&quot;;&quot;Suspenso&quot;)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="I" data-cat="Lógicas" data-s="si anidado =si(c1;v1;si(c2;v2;v3)) varios si encadenados para más de dos resultados. =si(b2&gt;=9;&quot;sobr.&quot;;si(b2&gt;=5;&quot;aprob.&quot;;&quot;susp.&quot;))">
+  <div class="fc-h"><span class="fc-n">SI anidado</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SI(c1;v1;SI(c2;v2;v3))</code>
+  <p class="fc-d">Varios SI encadenados para más de dos resultados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI(B2&gt;=9;&quot;Sobr.&quot;;SI(B2&gt;=5;&quot;Aprob.&quot;;&quot;Susp.&quot;))</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="I" data-cat="Lógicas" data-s="si.conjunto =si.conjunto(c1;v1;c2;v2;...) sustituye a los si anidados: evalúa condiciones en orden (2019+). =si.conjunto(b2&gt;=9;&quot;sobr.&quot;;b2&gt;=5;&quot;aprob.&quot;;verdadero;&quot;susp.&quot;)">
+  <div class="fc-h"><span class="fc-n">SI.CONJUNTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SI.CONJUNTO(c1;v1;c2;v2;...)</code>
+  <p class="fc-d">Sustituye a los SI anidados: evalúa condiciones en orden (2019+).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI.CONJUNTO(B2&gt;=9;&quot;Sobr.&quot;;B2&gt;=5;&quot;Aprob.&quot;;VERDADERO;&quot;Susp.&quot;)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="P" data-cat="Lógicas" data-s="y =y(cond1;cond2;...) verdadero solo si todas las condiciones se cumplen. =si(y(b2&gt;=5;c2&gt;=5);&quot;apto&quot;;&quot;no apto&quot;)">
+  <div class="fc-h"><span class="fc-n">Y</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=Y(cond1;cond2;...)</code>
+  <p class="fc-d">VERDADERO solo si TODAS las condiciones se cumplen.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI(Y(B2&gt;=5;C2&gt;=5);&quot;Apto&quot;;&quot;No apto&quot;)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="P" data-cat="Lógicas" data-s="o =o(cond1;cond2;...) verdadero si al menos una condición se cumple. =si(o(a2=&quot;norte&quot;;a2=&quot;sur&quot;);&quot;españa&quot;;&quot;otro&quot;)">
+  <div class="fc-h"><span class="fc-n">O</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=O(cond1;cond2;...)</code>
+  <p class="fc-d">VERDADERO si AL MENOS UNA condición se cumple.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI(O(A2=&quot;Norte&quot;;A2=&quot;Sur&quot;);&quot;España&quot;;&quot;Otro&quot;)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="A" data-cat="Lógicas" data-s="xo =xo(cond1;cond2) o exclusivo: verdadero si se cumple un número impar de condiciones. =xo(a2&gt;5;b2&gt;5)">
+  <div class="fc-h"><span class="fc-n">XO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=XO(cond1;cond2)</code>
+  <p class="fc-d">O exclusivo: VERDADERO si se cumple un número impar de condiciones.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=XO(A2&gt;5;B2&gt;5)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="I" data-cat="Lógicas" data-s="no =no(condición) invierte un valor lógico. =no(esblanco(a2))">
+  <div class="fc-h"><span class="fc-n">NO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=NO(condición)</code>
+  <p class="fc-d">Invierte un valor lógico.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NO(ESBLANCO(A2))</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="I" data-cat="Lógicas" data-s="si.error =si.error(fórmula;valor_si_error) sustituye cualquier error por un valor controlado. =si.error(a2/b2;0)">
+  <div class="fc-h"><span class="fc-n">SI.ERROR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SI.ERROR(fórmula;valor_si_error)</code>
+  <p class="fc-d">Sustituye cualquier error por un valor controlado.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI.ERROR(A2/B2;0)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="I" data-cat="Lógicas" data-s="si.nd =si.nd(fórmula;valor_si_nd) solo captura el error #n/d (típico de buscarv). =si.nd(buscarv(...);&quot;no existe&quot;)">
+  <div class="fc-h"><span class="fc-n">SI.ND</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SI.ND(fórmula;valor_si_nd)</code>
+  <p class="fc-d">Solo captura el error #N/D (típico de BUSCARV).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI.ND(BUSCARV(...);&quot;No existe&quot;)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="A" data-cat="Lógicas" data-s="cambiar =cambiar(expresión;caso1;res1;...;defecto) compara una expresión contra una lista de casos (2019+). =cambiar(a2;1;&quot;lun&quot;;2;&quot;mar&quot;;&quot;otro&quot;)">
+  <div class="fc-h"><span class="fc-n">CAMBIAR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=CAMBIAR(expresión;caso1;res1;...;defecto)</code>
+  <p class="fc-d">Compara una expresión contra una lista de casos (2019+).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CAMBIAR(A2;1;&quot;Lun&quot;;2;&quot;Mar&quot;;&quot;Otro&quot;)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="P" data-cat="Lógicas" data-s="verdadero =verdadero() devuelve el valor lógico verdadero. =verdadero()">
+  <div class="fc-h"><span class="fc-n">VERDADERO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=VERDADERO()</code>
+  <p class="fc-d">Devuelve el valor lógico VERDADERO.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=VERDADERO()</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="P" data-cat="Lógicas" data-s="falso =falso() devuelve el valor lógico falso. =falso()">
+  <div class="fc-h"><span class="fc-n">FALSO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=FALSO()</code>
+  <p class="fc-d">Devuelve el valor lógico FALSO.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FALSO()</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="X" data-cat="Lógicas" data-s="let =let(nombre1;valor1;...;cálculo) define variables dentro de la fórmula: más legible y rápida (365). =let(x;a1*2;x+x^2)">
+  <div class="fc-h"><span class="fc-n">LET</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=LET(nombre1;valor1;...;cálculo)</code>
+  <p class="fc-d">Define variables dentro de la fórmula: más legible y rápida (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LET(x;A1*2;x+x^2)</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="X" data-cat="Lógicas" data-s="lambda =lambda(parámetros;cálculo) crea tus propias funciones reutilizables sin vba (365). =lambda(x;x*21%)(b2) → iva">
+  <div class="fc-h"><span class="fc-n">LAMBDA</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=LAMBDA(parámetros;cálculo)</code>
+  <p class="fc-d">Crea tus propias funciones reutilizables sin VBA (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LAMBDA(x;x*21%)(B2) → IVA</code></div>
+  <div class="fc-cat">🧠 Lógicas</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="buscarv =buscarv(valor;tabla;col;[ordenado]) busca en la 1ª columna y devuelve el valor de otra columna. usa falso para coincidencia exacta. =buscarv(a2;productos!a:d;3;falso)">
+  <div class="fc-h"><span class="fc-n">BUSCARV</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=BUSCARV(valor;tabla;col;[ordenado])</code>
+  <p class="fc-d">Busca en la 1ª columna y devuelve el valor de otra columna. Usa FALSO para coincidencia exacta.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BUSCARV(A2;Productos!A:D;3;FALSO)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="buscarh =buscarh(valor;tabla;fila;[ordenado]) como buscarv pero en horizontal. =buscarh(&quot;enero&quot;;a1:m5;3;falso)">
+  <div class="fc-h"><span class="fc-n">BUSCARH</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=BUSCARH(valor;tabla;fila;[ordenado])</code>
+  <p class="fc-d">Como BUSCARV pero en horizontal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BUSCARH(&quot;Enero&quot;;A1:M5;3;FALSO)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="X" data-cat="Búsqueda y referencia" data-s="buscarx =buscarx(valor;rango_busq;rango_dev;[si_no];[modo]) el sustituto moderno de buscarv: busca en cualquier dirección y admite valor por defecto (365/2021). =buscarx(a2;prod!a:a;prod!c:c;&quot;no existe&quot;)">
+  <div class="fc-h"><span class="fc-n">BUSCARX</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=BUSCARX(valor;rango_busq;rango_dev;[si_no];[modo])</code>
+  <p class="fc-d">El sustituto moderno de BUSCARV: busca en cualquier dirección y admite valor por defecto (365/2021).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BUSCARX(A2;Prod!A:A;Prod!C:C;&quot;No existe&quot;)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="indice =indice(rango;fila;[columna]) devuelve el valor en una posición del rango. =indice(b2:d10;3;2)">
+  <div class="fc-h"><span class="fc-n">INDICE</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=INDICE(rango;fila;[columna])</code>
+  <p class="fc-d">Devuelve el valor en una posición del rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=INDICE(B2:D10;3;2)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="coincidir =coincidir(valor;rango;0) posición de un valor dentro de un rango. =coincidir(&quot;pepe&quot;;a:a;0)">
+  <div class="fc-h"><span class="fc-n">COINCIDIR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=COINCIDIR(valor;rango;0)</code>
+  <p class="fc-d">Posición de un valor dentro de un rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=COINCIDIR(&quot;Pepe&quot;;A:A;0)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="indice+coincidir =indice(dev;coincidir(valor;busq;0)) el combo clásico: búsqueda flexible en cualquier dirección. =indice(c:c;coincidir(a2;b:b;0))">
+  <div class="fc-h"><span class="fc-n">INDICE+COINCIDIR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=INDICE(dev;COINCIDIR(valor;busq;0))</code>
+  <p class="fc-d">El combo clásico: búsqueda flexible en cualquier dirección.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=INDICE(C:C;COINCIDIR(A2;B:B;0))</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="elegir =elegir(índice;v1;v2;...) devuelve el valor de la posición indicada. =elegir(2;&quot;oro&quot;;&quot;plata&quot;;&quot;bronce&quot;) → plata">
+  <div class="fc-h"><span class="fc-n">ELEGIR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ELEGIR(índice;v1;v2;...)</code>
+  <p class="fc-d">Devuelve el valor de la posición indicada.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ELEGIR(2;&quot;Oro&quot;;&quot;Plata&quot;;&quot;Bronce&quot;) → Plata</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="desref =desref(ref;filas;cols;[alto];[ancho]) devuelve un rango desplazado desde una referencia. base de rangos dinámicos clásicos. =suma(desref(a1;1;0;5;1))">
+  <div class="fc-h"><span class="fc-n">DESREF</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=DESREF(ref;filas;cols;[alto];[ancho])</code>
+  <p class="fc-d">Devuelve un rango desplazado desde una referencia. Base de rangos dinámicos clásicos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUMA(DESREF(A1;1;0;5;1))</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="indirecto =indirecto(texto_ref) convierte un texto en referencia real. =indirecto(&quot;b&quot;&amp;a1)">
+  <div class="fc-h"><span class="fc-n">INDIRECTO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=INDIRECTO(texto_ref)</code>
+  <p class="fc-d">Convierte un texto en referencia real.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=INDIRECTO(&quot;B&quot;&amp;A1)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="fila =fila([ref]) número de fila de una referencia. =fila() en b7 → 7">
+  <div class="fc-h"><span class="fc-n">FILA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=FILA([ref])</code>
+  <p class="fc-d">Número de fila de una referencia.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FILA() en B7 → 7</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="columna =columna([ref]) número de columna de una referencia. =columna(d1) → 4">
+  <div class="fc-h"><span class="fc-n">COLUMNA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=COLUMNA([ref])</code>
+  <p class="fc-d">Número de columna de una referencia.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=COLUMNA(D1) → 4</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="filas =filas(rango) cuántas filas tiene un rango. =filas(a2:a50) → 49">
+  <div class="fc-h"><span class="fc-n">FILAS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=FILAS(rango)</code>
+  <p class="fc-d">Cuántas filas tiene un rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FILAS(A2:A50) → 49</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="columnas =columnas(rango) cuántas columnas tiene un rango. =columnas(a1:f1) → 6">
+  <div class="fc-h"><span class="fc-n">COLUMNAS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=COLUMNAS(rango)</code>
+  <p class="fc-d">Cuántas columnas tiene un rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=COLUMNAS(A1:F1) → 6</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="transponer =transponer(rango) convierte filas en columnas y viceversa. =transponer(a1:a5)">
+  <div class="fc-h"><span class="fc-n">TRANSPONER</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=TRANSPONER(rango)</code>
+  <p class="fc-d">Convierte filas en columnas y viceversa.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TRANSPONER(A1:A5)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="I" data-cat="Búsqueda y referencia" data-s="hipervinculo =hipervinculo(url;[texto]) crea un enlace clicable. =hipervinculo(&quot;https://...&quot;;&quot;web&quot;)">
+  <div class="fc-h"><span class="fc-n">HIPERVINCULO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=HIPERVINCULO(url;[texto])</code>
+  <p class="fc-d">Crea un enlace clicable.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HIPERVINCULO(&quot;https://...&quot;;&quot;Web&quot;)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="A" data-cat="Búsqueda y referencia" data-s="formulatexto =formulatexto(ref) muestra la fórmula de otra celda como texto. =formulatexto(b2)">
+  <div class="fc-h"><span class="fc-n">FORMULATEXTO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=FORMULATEXTO(ref)</code>
+  <p class="fc-d">Muestra la fórmula de otra celda como texto.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FORMULATEXTO(B2)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="X" data-cat="Búsqueda y referencia" data-s="imagen =imagen(url) inserta una imagen desde una url dentro de la celda (365). =imagen(&quot;https://.../logo.png&quot;)">
+  <div class="fc-h"><span class="fc-n">IMAGEN</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=IMAGEN(url)</code>
+  <p class="fc-d">Inserta una imagen desde una URL dentro de la celda (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=IMAGEN(&quot;https://.../logo.png&quot;)</code></div>
+  <div class="fc-cat">🔍 Búsqueda y referencia</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="concatenar / concat =concat(texto1;texto2;...) une textos. el operador &amp; hace lo mismo. =concat(a2;&quot; &quot;;b2)">
+  <div class="fc-h"><span class="fc-n">CONCATENAR / CONCAT</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=CONCAT(texto1;texto2;...)</code>
+  <p class="fc-d">Une textos. El operador &amp; hace lo mismo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONCAT(A2;&quot; &quot;;B2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="unircadenas =unircadenas(delim;ignorar_vacías;rango) une un rango con separador. adiós a concatenar a mano (2019+). =unircadenas(&quot;, &quot;;verdadero;a2:a10)">
+  <div class="fc-h"><span class="fc-n">UNIRCADENAS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=UNIRCADENAS(delim;ignorar_vacías;rango)</code>
+  <p class="fc-d">Une un rango con separador. Adiós a concatenar a mano (2019+).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=UNIRCADENAS(&quot;, &quot;;VERDADERO;A2:A10)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="izquierda =izquierda(texto;n) primeros n caracteres. =izquierda(&quot;bilbao&quot;;3) → bil">
+  <div class="fc-h"><span class="fc-n">IZQUIERDA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=IZQUIERDA(texto;n)</code>
+  <p class="fc-d">Primeros n caracteres.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=IZQUIERDA(&quot;Bilbao&quot;;3) → Bil</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="derecha =derecha(texto;n) últimos n caracteres. =derecha(&quot;bilbao&quot;;3) → bao">
+  <div class="fc-h"><span class="fc-n">DERECHA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=DERECHA(texto;n)</code>
+  <p class="fc-d">Últimos n caracteres.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DERECHA(&quot;Bilbao&quot;;3) → bao</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="extrae =extrae(texto;inicio;n) n caracteres desde una posición. =extrae(&quot;abc-123&quot;;5;3) → 123">
+  <div class="fc-h"><span class="fc-n">EXTRAE</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=EXTRAE(texto;inicio;n)</code>
+  <p class="fc-d">N caracteres desde una posición.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=EXTRAE(&quot;ABC-123&quot;;5;3) → 123</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="largo =largo(texto) número de caracteres. =largo(&quot;excel&quot;) → 5">
+  <div class="fc-h"><span class="fc-n">LARGO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=LARGO(texto)</code>
+  <p class="fc-d">Número de caracteres.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LARGO(&quot;Excel&quot;) → 5</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="mayusc =mayusc(texto) todo a mayúsculas. =mayusc(a2)">
+  <div class="fc-h"><span class="fc-n">MAYUSC</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=MAYUSC(texto)</code>
+  <p class="fc-d">Todo a mayúsculas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MAYUSC(A2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="minusc =minusc(texto) todo a minúsculas. =minusc(a2)">
+  <div class="fc-h"><span class="fc-n">MINUSC</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=MINUSC(texto)</code>
+  <p class="fc-d">Todo a minúsculas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MINUSC(A2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Texto" data-s="nompropio =nompropio(texto) primera letra de cada palabra en mayúscula. =nompropio(&quot;juan garcía&quot;) → juan garcía">
+  <div class="fc-h"><span class="fc-n">NOMPROPIO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=NOMPROPIO(texto)</code>
+  <p class="fc-d">Primera letra de cada palabra en mayúscula.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NOMPROPIO(&quot;juan garcía&quot;) → Juan García</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="espacios =espacios(texto) elimina espacios sobrantes (limpieza de datos). =espacios(&quot;  hola   mundo &quot;)">
+  <div class="fc-h"><span class="fc-n">ESPACIOS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESPACIOS(texto)</code>
+  <p class="fc-d">Elimina espacios sobrantes (limpieza de datos).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESPACIOS(&quot;  hola   mundo &quot;)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="limpiar =limpiar(texto) elimina caracteres no imprimibles. =limpiar(a2)">
+  <div class="fc-h"><span class="fc-n">LIMPIAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=LIMPIAR(texto)</code>
+  <p class="fc-d">Elimina caracteres no imprimibles.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=LIMPIAR(A2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="sustituir =sustituir(texto;buscar;nuevo;[instancia]) reemplaza texto por contenido. =sustituir(a2;&quot;.&quot;;&quot;,&quot;)">
+  <div class="fc-h"><span class="fc-n">SUSTITUIR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SUSTITUIR(texto;buscar;nuevo;[instancia])</code>
+  <p class="fc-d">Reemplaza texto por contenido.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SUSTITUIR(A2;&quot;.&quot;;&quot;,&quot;)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="reemplazar =reemplazar(texto;inicio;n;nuevo) reemplaza por posición. =reemplazar(a2;1;3;&quot;xxx&quot;)">
+  <div class="fc-h"><span class="fc-n">REEMPLAZAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=REEMPLAZAR(texto;inicio;n;nuevo)</code>
+  <p class="fc-d">Reemplaza por posición.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=REEMPLAZAR(A2;1;3;&quot;XXX&quot;)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="encontrar =encontrar(buscar;texto;[inicio]) posición de un texto (distingue mayúsculas). =encontrar(&quot;@&quot;;a2)">
+  <div class="fc-h"><span class="fc-n">ENCONTRAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ENCONTRAR(buscar;texto;[inicio])</code>
+  <p class="fc-d">Posición de un texto (distingue mayúsculas).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ENCONTRAR(&quot;@&quot;;A2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="hallar =hallar(buscar;texto;[inicio]) como encontrar pero sin distinguir mayúsculas y admite comodines. =hallar(&quot;excel&quot;;a2)">
+  <div class="fc-h"><span class="fc-n">HALLAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=HALLAR(buscar;texto;[inicio])</code>
+  <p class="fc-d">Como ENCONTRAR pero sin distinguir mayúsculas y admite comodines.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HALLAR(&quot;excel&quot;;A2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="texto =texto(valor;formato) convierte un número a texto con formato. =texto(hoy();&quot;dddd&quot;) → viernes">
+  <div class="fc-h"><span class="fc-n">TEXTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=TEXTO(valor;formato)</code>
+  <p class="fc-d">Convierte un número a texto con formato.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TEXTO(HOY();&quot;dddd&quot;) → viernes</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="valor =valor(texto) convierte texto numérico en número. =valor(&quot;1.234,5&quot;)">
+  <div class="fc-h"><span class="fc-n">VALOR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=VALOR(texto)</code>
+  <p class="fc-d">Convierte texto numérico en número.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=VALOR(&quot;1.234,5&quot;)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="moneda =moneda(número;decimales) número como texto en formato moneda. =moneda(1234,5;2)">
+  <div class="fc-h"><span class="fc-n">MONEDA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=MONEDA(número;decimales)</code>
+  <p class="fc-d">Número como texto en formato moneda.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MONEDA(1234,5;2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="repetir =repetir(texto;veces) repite un texto n veces. útil para minigráficos. =repetir(&quot;★&quot;;b2)">
+  <div class="fc-h"><span class="fc-n">REPETIR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=REPETIR(texto;veces)</code>
+  <p class="fc-d">Repite un texto n veces. Útil para minigráficos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=REPETIR(&quot;★&quot;;B2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="A" data-cat="Texto" data-s="caracter =caracter(número) carácter del código ansi indicado. =caracter(10) → salto de línea">
+  <div class="fc-h"><span class="fc-n">CARACTER</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=CARACTER(número)</code>
+  <p class="fc-d">Carácter del código ANSI indicado.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CARACTER(10) → salto de línea</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="A" data-cat="Texto" data-s="codigo =codigo(texto) código numérico del primer carácter. =codigo(&quot;a&quot;) → 65">
+  <div class="fc-h"><span class="fc-n">CODIGO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=CODIGO(texto)</code>
+  <p class="fc-d">Código numérico del primer carácter.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CODIGO(&quot;A&quot;) → 65</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="I" data-cat="Texto" data-s="igual =igual(texto1;texto2) compara dos textos distinguiendo mayúsculas. =igual(a2;b2)">
+  <div class="fc-h"><span class="fc-n">IGUAL</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=IGUAL(texto1;texto2)</code>
+  <p class="fc-d">Compara dos textos distinguiendo mayúsculas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=IGUAL(A2;B2)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="X" data-cat="Texto" data-s="textoantes =textoantes(texto;delim) devuelve lo anterior a un delimitador (365). =textoantes(&quot;ana@mail.com&quot;;&quot;@&quot;) → ana">
+  <div class="fc-h"><span class="fc-n">TEXTOANTES</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=TEXTOANTES(texto;delim)</code>
+  <p class="fc-d">Devuelve lo anterior a un delimitador (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TEXTOANTES(&quot;ana@mail.com&quot;;&quot;@&quot;) → ana</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="X" data-cat="Texto" data-s="textodespues =textodespues(texto;delim) devuelve lo posterior a un delimitador (365). =textodespues(a2;&quot;@&quot;)">
+  <div class="fc-h"><span class="fc-n">TEXTODESPUES</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=TEXTODESPUES(texto;delim)</code>
+  <p class="fc-d">Devuelve lo posterior a un delimitador (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TEXTODESPUES(A2;&quot;@&quot;)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="X" data-cat="Texto" data-s="dividirtexto =dividirtexto(texto;delim_col) divide un texto en varias celdas por delimitador (365). =dividirtexto(a2;&quot;;&quot;)">
+  <div class="fc-h"><span class="fc-n">DIVIDIRTEXTO</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=DIVIDIRTEXTO(texto;delim_col)</code>
+  <p class="fc-d">Divide un texto en varias celdas por delimitador (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DIVIDIRTEXTO(A2;&quot;;&quot;)</code></div>
+  <div class="fc-cat">🔤 Texto</div>
+</div><div class="fc" data-lvl="P" data-cat="Fecha y hora" data-s="hoy =hoy() fecha actual (sin hora). se actualiza sola. =hoy()">
+  <div class="fc-h"><span class="fc-n">HOY</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=HOY()</code>
+  <p class="fc-d">Fecha actual (sin hora). Se actualiza sola.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HOY()</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="P" data-cat="Fecha y hora" data-s="ahora =ahora() fecha y hora actuales. =ahora()">
+  <div class="fc-h"><span class="fc-n">AHORA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=AHORA()</code>
+  <p class="fc-d">Fecha y hora actuales.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=AHORA()</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="P" data-cat="Fecha y hora" data-s="dia =dia(fecha) día del mes (1-31). =dia(hoy())">
+  <div class="fc-h"><span class="fc-n">DIA</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=DIA(fecha)</code>
+  <p class="fc-d">Día del mes (1-31).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DIA(HOY())</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="P" data-cat="Fecha y hora" data-s="mes =mes(fecha) mes del año (1-12). =mes(a2)">
+  <div class="fc-h"><span class="fc-n">MES</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=MES(fecha)</code>
+  <p class="fc-d">Mes del año (1-12).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MES(A2)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="P" data-cat="Fecha y hora" data-s="año =año(fecha) año de una fecha. =año(hoy()) → 2026">
+  <div class="fc-h"><span class="fc-n">AÑO</span><span class="fc-l" style="background:#3daa6e1a;color:#3daa6e;border:1px solid #3daa6e55">Principiante</span></div>
+  <code class="fc-syn">=AÑO(fecha)</code>
+  <p class="fc-d">Año de una fecha.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=AÑO(HOY()) → 2026</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="fecha =fecha(año;mes;día) construye una fecha desde sus partes. =fecha(2026;6;12)">
+  <div class="fc-h"><span class="fc-n">FECHA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=FECHA(año;mes;día)</code>
+  <p class="fc-d">Construye una fecha desde sus partes.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FECHA(2026;6;12)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="diasem =diasem(fecha;[tipo]) día de la semana como número. tipo 2: lunes=1. =diasem(hoy();2)">
+  <div class="fc-h"><span class="fc-n">DIASEM</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=DIASEM(fecha;[tipo])</code>
+  <p class="fc-d">Día de la semana como número. Tipo 2: lunes=1.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DIASEM(HOY();2)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="num.de.semana =num.de.semana(fecha;[tipo]) número de semana del año. =num.de.semana(hoy();21) (iso)">
+  <div class="fc-h"><span class="fc-n">NUM.DE.SEMANA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=NUM.DE.SEMANA(fecha;[tipo])</code>
+  <p class="fc-d">Número de semana del año.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NUM.DE.SEMANA(HOY();21) (ISO)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="dias =dias(fecha_fin;fecha_inicio) días entre dos fechas. =dias(b2;a2)">
+  <div class="fc-h"><span class="fc-n">DIAS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=DIAS(fecha_fin;fecha_inicio)</code>
+  <p class="fc-d">Días entre dos fechas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DIAS(B2;A2)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="dias.lab =dias.lab(inicio;fin;[festivos]) días laborables entre dos fechas, descontando fines de semana y festivos. =dias.lab(a2;b2;festivos!a:a)">
+  <div class="fc-h"><span class="fc-n">DIAS.LAB</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=DIAS.LAB(inicio;fin;[festivos])</code>
+  <p class="fc-d">Días laborables entre dos fechas, descontando fines de semana y festivos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DIAS.LAB(A2;B2;Festivos!A:A)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="dia.lab =dia.lab(inicio;días;[festivos]) fecha resultante de sumar días laborables. =dia.lab(hoy();10)">
+  <div class="fc-h"><span class="fc-n">DIA.LAB</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=DIA.LAB(inicio;días;[festivos])</code>
+  <p class="fc-d">Fecha resultante de sumar días laborables.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DIA.LAB(HOY();10)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="A" data-cat="Fecha y hora" data-s="sifecha =sifecha(inicio;fin;unidad) diferencia en años (y), meses (m) o días (d). no aparece en el asistente pero funciona. =sifecha(a2;hoy();&quot;y&quot;) → edad">
+  <div class="fc-h"><span class="fc-n">SIFECHA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=SIFECHA(inicio;fin;unidad)</code>
+  <p class="fc-d">Diferencia en años (Y), meses (M) o días (D). No aparece en el asistente pero funciona.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SIFECHA(A2;HOY();&quot;Y&quot;) → edad</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="fecha.mes =fecha.mes(fecha;meses) suma o resta meses a una fecha. =fecha.mes(a2;3)">
+  <div class="fc-h"><span class="fc-n">FECHA.MES</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=FECHA.MES(fecha;meses)</code>
+  <p class="fc-d">Suma o resta meses a una fecha.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FECHA.MES(A2;3)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="fin.mes =fin.mes(fecha;meses) último día del mes, n meses después. =fin.mes(hoy();0)">
+  <div class="fc-h"><span class="fc-n">FIN.MES</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=FIN.MES(fecha;meses)</code>
+  <p class="fc-d">Último día del mes, n meses después.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FIN.MES(HOY();0)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="hora =hora(hora) componente hora (0-23). =hora(ahora())">
+  <div class="fc-h"><span class="fc-n">HORA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=HORA(hora)</code>
+  <p class="fc-d">Componente hora (0-23).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HORA(AHORA())</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="minuto =minuto(hora) componente minutos. =minuto(ahora())">
+  <div class="fc-h"><span class="fc-n">MINUTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=MINUTO(hora)</code>
+  <p class="fc-d">Componente minutos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MINUTO(AHORA())</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="segundo =segundo(hora) componente segundos. =segundo(ahora())">
+  <div class="fc-h"><span class="fc-n">SEGUNDO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SEGUNDO(hora)</code>
+  <p class="fc-d">Componente segundos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SEGUNDO(AHORA())</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="nshora =nshora(h;m;s) construye una hora desde sus partes. =nshora(9;30;0)">
+  <div class="fc-h"><span class="fc-n">NSHORA</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=NSHORA(h;m;s)</code>
+  <p class="fc-d">Construye una hora desde sus partes.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NSHORA(9;30;0)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="I" data-cat="Fecha y hora" data-s="fechanumero =fechanumero(texto) convierte un texto en fecha de excel. =fechanumero(&quot;12/06/2026&quot;)">
+  <div class="fc-h"><span class="fc-n">FECHANUMERO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=FECHANUMERO(texto)</code>
+  <p class="fc-d">Convierte un texto en fecha de Excel.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FECHANUMERO(&quot;12/06/2026&quot;)</code></div>
+  <div class="fc-cat">📅 Fecha y hora</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="pago =pago(tasa;núm_per;va) cuota periódica de un préstamo. =pago(4%/12;240;150000) → cuota hipoteca">
+  <div class="fc-h"><span class="fc-n">PAGO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=PAGO(tasa;núm_per;va)</code>
+  <p class="fc-d">Cuota periódica de un préstamo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PAGO(4%/12;240;150000) → cuota hipoteca</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="pagoint =pagoint(tasa;periodo;núm_per;va) parte de intereses de una cuota concreta. =pagoint(4%/12;1;240;150000)">
+  <div class="fc-h"><span class="fc-n">PAGOINT</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=PAGOINT(tasa;periodo;núm_per;va)</code>
+  <p class="fc-d">Parte de intereses de una cuota concreta.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PAGOINT(4%/12;1;240;150000)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="pagoprin =pagoprin(tasa;periodo;núm_per;va) parte de amortización (capital) de una cuota. =pagoprin(4%/12;1;240;150000)">
+  <div class="fc-h"><span class="fc-n">PAGOPRIN</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=PAGOPRIN(tasa;periodo;núm_per;va)</code>
+  <p class="fc-d">Parte de amortización (capital) de una cuota.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=PAGOPRIN(4%/12;1;240;150000)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="vf =vf(tasa;núm_per;pago;[va]) valor futuro de una inversión con aportaciones. =vf(3%/12;120;-200) → ahorro a 10 años">
+  <div class="fc-h"><span class="fc-n">VF</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=VF(tasa;núm_per;pago;[va])</code>
+  <p class="fc-d">Valor futuro de una inversión con aportaciones.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=VF(3%/12;120;-200) → ahorro a 10 años</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="va =va(tasa;núm_per;pago) valor actual de una serie de pagos. =va(5%;10;-1000)">
+  <div class="fc-h"><span class="fc-n">VA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=VA(tasa;núm_per;pago)</code>
+  <p class="fc-d">Valor actual de una serie de pagos.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=VA(5%;10;-1000)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="vna =vna(tasa;flujos) valor actual neto de flujos de caja. =vna(8%;b2:b6)+b1">
+  <div class="fc-h"><span class="fc-n">VNA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=VNA(tasa;flujos)</code>
+  <p class="fc-d">Valor actual neto de flujos de caja.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=VNA(8%;B2:B6)+B1</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="tir =tir(flujos) tasa interna de retorno de una inversión. =tir(b1:b6)">
+  <div class="fc-h"><span class="fc-n">TIR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=TIR(flujos)</code>
+  <p class="fc-d">Tasa interna de retorno de una inversión.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TIR(B1:B6)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="tasa =tasa(núm_per;pago;va) tipo de interés por periodo de un préstamo. =tasa(240;-700;150000)*12">
+  <div class="fc-h"><span class="fc-n">TASA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=TASA(núm_per;pago;va)</code>
+  <p class="fc-d">Tipo de interés por periodo de un préstamo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TASA(240;-700;150000)*12</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="nper =nper(tasa;pago;va) número de periodos para amortizar/ahorrar. =nper(4%/12;-700;150000)">
+  <div class="fc-h"><span class="fc-n">NPER</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=NPER(tasa;pago;va)</code>
+  <p class="fc-d">Número de periodos para amortizar/ahorrar.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NPER(4%/12;-700;150000)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="sln =sln(coste;residual;vida) depreciación lineal por periodo. =sln(20000;2000;5)">
+  <div class="fc-h"><span class="fc-n">SLN</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=SLN(coste;residual;vida)</code>
+  <p class="fc-d">Depreciación lineal por periodo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SLN(20000;2000;5)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="db =db(coste;residual;vida;periodo) depreciación por saldo decreciente. =db(20000;2000;5;1)">
+  <div class="fc-h"><span class="fc-n">DB</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=DB(coste;residual;vida;periodo)</code>
+  <p class="fc-d">Depreciación por saldo decreciente.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DB(20000;2000;5;1)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="A" data-cat="Financieras" data-s="int.efectivo =int.efectivo(tasa_nominal;núm_per) tae a partir del interés nominal. =int.efectivo(4%;12)">
+  <div class="fc-h"><span class="fc-n">INT.EFECTIVO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=INT.EFECTIVO(tasa_nominal;núm_per)</code>
+  <p class="fc-d">TAE a partir del interés nominal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=INT.EFECTIVO(4%;12)</code></div>
+  <div class="fc-cat">💶 Financieras</div>
+</div><div class="fc" data-lvl="I" data-cat="Información" data-s="esblanco =esblanco(ref) verdadero si la celda está vacía. =si(esblanco(a2);&quot;falta&quot;;&quot;ok&quot;)">
+  <div class="fc-h"><span class="fc-n">ESBLANCO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESBLANCO(ref)</code>
+  <p class="fc-d">VERDADERO si la celda está vacía.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SI(ESBLANCO(A2);&quot;Falta&quot;;&quot;OK&quot;)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="I" data-cat="Información" data-s="esnumero =esnumero(valor) verdadero si es un número. =esnumero(a2)">
+  <div class="fc-h"><span class="fc-n">ESNUMERO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESNUMERO(valor)</code>
+  <p class="fc-d">VERDADERO si es un número.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESNUMERO(A2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="I" data-cat="Información" data-s="estexto =estexto(valor) verdadero si es texto. =estexto(a2)">
+  <div class="fc-h"><span class="fc-n">ESTEXTO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESTEXTO(valor)</code>
+  <p class="fc-d">VERDADERO si es texto.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESTEXTO(A2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="I" data-cat="Información" data-s="eserror =eserror(valor) verdadero ante cualquier error. =eserror(a2/b2)">
+  <div class="fc-h"><span class="fc-n">ESERROR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESERROR(valor)</code>
+  <p class="fc-d">VERDADERO ante cualquier error.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESERROR(A2/B2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="eserr =eserr(valor) como eserror pero ignora #n/d. =eserr(a2)">
+  <div class="fc-h"><span class="fc-n">ESERR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=ESERR(valor)</code>
+  <p class="fc-d">Como ESERROR pero ignora #N/D.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESERR(A2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="esnod =esnod(valor) verdadero solo si el error es #n/d. =esnod(buscarv(...))">
+  <div class="fc-h"><span class="fc-n">ESNOD</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=ESNOD(valor)</code>
+  <p class="fc-d">VERDADERO solo si el error es #N/D.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESNOD(BUSCARV(...))</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="I" data-cat="Información" data-s="espar =espar(número) verdadero si el número es par. =espar(fila()) → bandas alternas">
+  <div class="fc-h"><span class="fc-n">ESPAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESPAR(número)</code>
+  <p class="fc-d">VERDADERO si el número es par.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESPAR(FILA()) → bandas alternas</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="I" data-cat="Información" data-s="esimpar =esimpar(número) verdadero si es impar. =esimpar(a2)">
+  <div class="fc-h"><span class="fc-n">ESIMPAR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=ESIMPAR(número)</code>
+  <p class="fc-d">VERDADERO si es impar.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ESIMPAR(A2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="tipo =tipo(valor) tipo de dato: 1 número, 2 texto, 4 lógico, 16 error, 64 matriz. =tipo(a2)">
+  <div class="fc-h"><span class="fc-n">TIPO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=TIPO(valor)</code>
+  <p class="fc-d">Tipo de dato: 1 número, 2 texto, 4 lógico, 16 error, 64 matriz.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TIPO(A2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="tipo.de.error =tipo.de.error(valor) código numérico del error (2=#¡div/0!, 7=#n/d...). =tipo.de.error(a2)">
+  <div class="fc-h"><span class="fc-n">TIPO.DE.ERROR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=TIPO.DE.ERROR(valor)</code>
+  <p class="fc-d">Código numérico del error (2=#¡DIV/0!, 7=#N/D...).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TIPO.DE.ERROR(A2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="celda =celda(tipo_info;[ref]) información de una celda: formato, dirección, archivo... =celda(&quot;direccion&quot;;b2)">
+  <div class="fc-h"><span class="fc-n">CELDA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=CELDA(tipo_info;[ref])</code>
+  <p class="fc-d">Información de una celda: formato, dirección, archivo...</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CELDA(&quot;direccion&quot;;B2)</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="n =n(valor) convierte a número (fechas a serie, lógicos a 1/0, texto a 0). =n(verdadero) → 1">
+  <div class="fc-h"><span class="fc-n">N</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=N(valor)</code>
+  <p class="fc-d">Convierte a número (fechas a serie, lógicos a 1/0, texto a 0).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=N(VERDADERO) → 1</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="nod =nod() genera el error #n/d a propósito. =nod()">
+  <div class="fc-h"><span class="fc-n">NOD</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=NOD()</code>
+  <p class="fc-d">Genera el error #N/D a propósito.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=NOD()</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="hoja =hoja([ref]) número de la hoja de una referencia. =hoja()">
+  <div class="fc-h"><span class="fc-n">HOJA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=HOJA([ref])</code>
+  <p class="fc-d">Número de la hoja de una referencia.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HOJA()</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="A" data-cat="Información" data-s="hojas =hojas() número total de hojas del libro. =hojas()">
+  <div class="fc-h"><span class="fc-n">HOJAS</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=HOJAS()</code>
+  <p class="fc-d">Número total de hojas del libro.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HOJAS()</code></div>
+  <div class="fc-cat">ℹ️ Información</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="unicos =unicos(rango) lista de valores sin duplicados que se desborda automáticamente. =unicos(a2:a100)">
+  <div class="fc-h"><span class="fc-n">UNICOS</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=UNICOS(rango)</code>
+  <p class="fc-d">Lista de valores sin duplicados que se desborda automáticamente.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=UNICOS(A2:A100)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="ordenar =ordenar(rango;[col];[orden]) devuelve el rango ordenado sin tocar el original. =ordenar(a2:c100;3;-1)">
+  <div class="fc-h"><span class="fc-n">ORDENAR</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=ORDENAR(rango;[col];[orden])</code>
+  <p class="fc-d">Devuelve el rango ordenado sin tocar el original.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ORDENAR(A2:C100;3;-1)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="ordenarpor =ordenarpor(rango;rango_orden;orden) ordena un rango según otro rango. =ordenarpor(a2:a10;b2:b10;-1)">
+  <div class="fc-h"><span class="fc-n">ORDENARPOR</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=ORDENARPOR(rango;rango_orden;orden)</code>
+  <p class="fc-d">Ordena un rango según otro rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ORDENARPOR(A2:A10;B2:B10;-1)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="filtrar =filtrar(rango;condición;[si_vacío]) filtra con fórmula: el resultado se actualiza solo. =filtrar(a2:c100;b2:b100&gt;500;&quot;sin datos&quot;)">
+  <div class="fc-h"><span class="fc-n">FILTRAR</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=FILTRAR(rango;condición;[si_vacío])</code>
+  <p class="fc-d">Filtra con fórmula: el resultado se actualiza solo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=FILTRAR(A2:C100;B2:B100&gt;500;&quot;Sin datos&quot;)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="secuencia =secuencia(filas;[cols];[inicio];[paso]) genera series numéricas automáticas. =secuencia(10) → 1 a 10">
+  <div class="fc-h"><span class="fc-n">SECUENCIA</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=SECUENCIA(filas;[cols];[inicio];[paso])</code>
+  <p class="fc-d">Genera series numéricas automáticas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SECUENCIA(10) → 1 a 10</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="matrizaleat =matrizaleat([filas];[cols];[min];[max];[entero]) matriz de números aleatorios. =matrizaleat(5;1;1;100;verdadero)">
+  <div class="fc-h"><span class="fc-n">MATRIZALEAT</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=MATRIZALEAT([filas];[cols];[min];[max];[entero])</code>
+  <p class="fc-d">Matriz de números aleatorios.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=MATRIZALEAT(5;1;1;100;VERDADERO)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="apilarv =apilarv(rango1;rango2;...) apila rangos en vertical (unión de tablas sin power query). =apilarv(enero!a2:c50;febrero!a2:c40)">
+  <div class="fc-h"><span class="fc-n">APILARV</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=APILARV(rango1;rango2;...)</code>
+  <p class="fc-d">Apila rangos en vertical (unión de tablas sin Power Query).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=APILARV(Enero!A2:C50;Febrero!A2:C40)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="apilarh =apilarh(rango1;rango2;...) apila rangos en horizontal. =apilarh(a2:a10;c2:c10)">
+  <div class="fc-h"><span class="fc-n">APILARH</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=APILARH(rango1;rango2;...)</code>
+  <p class="fc-d">Apila rangos en horizontal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=APILARH(A2:A10;C2:C10)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="tomar =tomar(rango;filas;[cols]) primeras (o últimas, con negativo) filas de un rango. =tomar(ordenar(a2:b100;2;-1);5) → top 5">
+  <div class="fc-h"><span class="fc-n">TOMAR</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=TOMAR(rango;filas;[cols])</code>
+  <p class="fc-d">Primeras (o últimas, con negativo) filas de un rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TOMAR(ORDENAR(A2:B100;2;-1);5) → top 5</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="excluir =excluir(rango;filas;[cols]) elimina filas o columnas del resultado. =excluir(a1:c100;1) → sin cabecera">
+  <div class="fc-h"><span class="fc-n">EXCLUIR</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=EXCLUIR(rango;filas;[cols])</code>
+  <p class="fc-d">Elimina filas o columnas del resultado.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=EXCLUIR(A1:C100;1) → sin cabecera</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="ajustarfilas =ajustarfilas(vector;n) reorganiza un vector en una matriz de n columnas... por filas. =ajustarfilas(a1:a12;3)">
+  <div class="fc-h"><span class="fc-n">AJUSTARFILAS</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=AJUSTARFILAS(vector;n)</code>
+  <p class="fc-d">Reorganiza un vector en una matriz de n columnas... por filas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=AJUSTARFILAS(A1:A12;3)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="elegircols =elegircols(rango;n1;n2;...) extrae solo las columnas indicadas. =elegircols(a1:f100;1;3;5)">
+  <div class="fc-h"><span class="fc-n">ELEGIRCOLS</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=ELEGIRCOLS(rango;n1;n2;...)</code>
+  <p class="fc-d">Extrae solo las columnas indicadas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ELEGIRCOLS(A1:F100;1;3;5)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="X" data-cat="Matrices dinámicas (365)" data-s="agruparpor =agruparpor(filas;valores;función) resumen tipo tabla dinámica con una sola fórmula (365 insider/reciente). =agruparpor(a2:a100;c2:c100;suma)">
+  <div class="fc-h"><span class="fc-n">AGRUPARPOR</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">=AGRUPARPOR(filas;valores;función)</code>
+  <p class="fc-d">Resumen tipo tabla dinámica con una sola fórmula (365 Insider/reciente).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=AGRUPARPOR(A2:A100;C2:C100;SUMA)</code></div>
+  <div class="fc-cat">🌊 Matrices dinámicas (365)</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="bdsuma =bdsuma(base;campo;criterios) suma registros que cumplen criterios complejos definidos en un rango. =bdsuma(a1:f100;&quot;ventas&quot;;h1:i2)">
+  <div class="fc-h"><span class="fc-n">BDSUMA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BDSUMA(base;campo;criterios)</code>
+  <p class="fc-d">Suma registros que cumplen criterios complejos definidos en un rango.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BDSUMA(A1:F100;&quot;Ventas&quot;;H1:I2)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="bdpromedio =bdpromedio(base;campo;criterios) media de los registros filtrados. =bdpromedio(a1:f100;&quot;edad&quot;;h1:i2)">
+  <div class="fc-h"><span class="fc-n">BDPROMEDIO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BDPROMEDIO(base;campo;criterios)</code>
+  <p class="fc-d">Media de los registros filtrados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BDPROMEDIO(A1:F100;&quot;Edad&quot;;H1:I2)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="bdcontar =bdcontar(base;campo;criterios) cuenta registros numéricos filtrados. =bdcontar(a1:f100;&quot;id&quot;;h1:i2)">
+  <div class="fc-h"><span class="fc-n">BDCONTAR</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BDCONTAR(base;campo;criterios)</code>
+  <p class="fc-d">Cuenta registros numéricos filtrados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BDCONTAR(A1:F100;&quot;ID&quot;;H1:I2)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="bdmax =bdmax(base;campo;criterios) máximo de los registros filtrados. =bdmax(a1:f100;&quot;ventas&quot;;h1:i2)">
+  <div class="fc-h"><span class="fc-n">BDMAX</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BDMAX(base;campo;criterios)</code>
+  <p class="fc-d">Máximo de los registros filtrados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BDMAX(A1:F100;&quot;Ventas&quot;;H1:I2)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="bdmin =bdmin(base;campo;criterios) mínimo de los registros filtrados. =bdmin(a1:f100;&quot;ventas&quot;;h1:i2)">
+  <div class="fc-h"><span class="fc-n">BDMIN</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BDMIN(base;campo;criterios)</code>
+  <p class="fc-d">Mínimo de los registros filtrados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BDMIN(A1:F100;&quot;Ventas&quot;;H1:I2)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="bdextraer =bdextraer(base;campo;criterios) extrae un único registro que cumple los criterios. =bdextraer(a1:f100;&quot;email&quot;;h1:i2)">
+  <div class="fc-h"><span class="fc-n">BDEXTRAER</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BDEXTRAER(base;campo;criterios)</code>
+  <p class="fc-d">Extrae un único registro que cumple los criterios.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BDEXTRAER(A1:F100;&quot;Email&quot;;H1:I2)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="A" data-cat="Bases de datos" data-s="importardatosdinamicos =importardatosdinamicos(campo;tabla_dinámica;...) extrae un valor concreto de una tabla dinámica. =importardatosdinamicos(&quot;ventas&quot;;$a$3;&quot;zona&quot;;&quot;norte&quot;)">
+  <div class="fc-h"><span class="fc-n">IMPORTARDATOSDINAMICOS</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=IMPORTARDATOSDINAMICOS(campo;tabla_dinámica;...)</code>
+  <p class="fc-d">Extrae un valor concreto de una tabla dinámica.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=IMPORTARDATOSDINAMICOS(&quot;Ventas&quot;;$A$3;&quot;Zona&quot;;&quot;Norte&quot;)</code></div>
+  <div class="fc-cat">🗄️ Bases de datos</div>
+</div><div class="fc" data-lvl="I" data-cat="Ingeniería y conversión" data-s="convertir =convertir(número;de;a) convierte entre unidades: km, mi, kg, lb, °c, °f... =convertir(100;&quot;km&quot;;&quot;mi&quot;)">
+  <div class="fc-h"><span class="fc-n">CONVERTIR</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=CONVERTIR(número;de;a)</code>
+  <p class="fc-d">Convierte entre unidades: km, mi, kg, lb, °C, °F...</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=CONVERTIR(100;&quot;km&quot;;&quot;mi&quot;)</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="A" data-cat="Ingeniería y conversión" data-s="dec.a.bin =dec.a.bin(número) decimal a binario. =dec.a.bin(10) → 1010">
+  <div class="fc-h"><span class="fc-n">DEC.A.BIN</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=DEC.A.BIN(número)</code>
+  <p class="fc-d">Decimal a binario.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DEC.A.BIN(10) → 1010</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="A" data-cat="Ingeniería y conversión" data-s="bin.a.dec =bin.a.dec(número) binario a decimal. =bin.a.dec(1010) → 10">
+  <div class="fc-h"><span class="fc-n">BIN.A.DEC</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=BIN.A.DEC(número)</code>
+  <p class="fc-d">Binario a decimal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=BIN.A.DEC(1010) → 10</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="A" data-cat="Ingeniería y conversión" data-s="dec.a.hex =dec.a.hex(número) decimal a hexadecimal. =dec.a.hex(255) → ff">
+  <div class="fc-h"><span class="fc-n">DEC.A.HEX</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=DEC.A.HEX(número)</code>
+  <p class="fc-d">Decimal a hexadecimal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DEC.A.HEX(255) → FF</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="A" data-cat="Ingeniería y conversión" data-s="hex.a.dec =hex.a.dec(número) hexadecimal a decimal. =hex.a.dec(&quot;ff&quot;) → 255">
+  <div class="fc-h"><span class="fc-n">HEX.A.DEC</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=HEX.A.DEC(número)</code>
+  <p class="fc-d">Hexadecimal a decimal.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=HEX.A.DEC(&quot;FF&quot;) → 255</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="I" data-cat="Ingeniería y conversión" data-s="grados =grados(radianes) radianes a grados. =grados(pi()) → 180">
+  <div class="fc-h"><span class="fc-n">GRADOS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=GRADOS(radianes)</code>
+  <p class="fc-d">Radianes a grados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=GRADOS(PI()) → 180</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="I" data-cat="Ingeniería y conversión" data-s="radianes =radianes(grados) grados a radianes. =radianes(180)">
+  <div class="fc-h"><span class="fc-n">RADIANES</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=RADIANES(grados)</code>
+  <p class="fc-d">Grados a radianes.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=RADIANES(180)</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="I" data-cat="Ingeniería y conversión" data-s="seno =seno(radianes) seno de un ángulo en radianes. =seno(radianes(30)) → 0,5">
+  <div class="fc-h"><span class="fc-n">SENO</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=SENO(radianes)</code>
+  <p class="fc-d">Seno de un ángulo en radianes.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SENO(RADIANES(30)) → 0,5</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="I" data-cat="Ingeniería y conversión" data-s="cos =cos(radianes) coseno de un ángulo. =cos(radianes(60)) → 0,5">
+  <div class="fc-h"><span class="fc-n">COS</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=COS(radianes)</code>
+  <p class="fc-d">Coseno de un ángulo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=COS(RADIANES(60)) → 0,5</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="I" data-cat="Ingeniería y conversión" data-s="tan =tan(radianes) tangente de un ángulo. =tan(radianes(45)) → 1">
+  <div class="fc-h"><span class="fc-n">TAN</span><span class="fc-l" style="background:#f4a6231a;color:#f4a623;border:1px solid #f4a62355">Intermedio</span></div>
+  <code class="fc-syn">=TAN(radianes)</code>
+  <p class="fc-d">Tangente de un ángulo.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=TAN(RADIANES(45)) → 1</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="A" data-cat="Ingeniería y conversión" data-s="delta =delta(n1;n2) 1 si los números son iguales, 0 si no. =delta(5;5) → 1">
+  <div class="fc-h"><span class="fc-n">DELTA</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=DELTA(n1;n2)</code>
+  <p class="fc-d">1 si los números son iguales, 0 si no.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=DELTA(5;5) → 1</code></div>
+  <div class="fc-cat">⚙️ Ingeniería y conversión</div>
+</div><div class="fc" data-lvl="A" data-cat="Web y modernas" data-s="encodeurl =encodeurl(texto) codifica un texto para usarlo en una url. =encodeurl(&quot;país vasco&quot;)">
+  <div class="fc-h"><span class="fc-n">ENCODEURL</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=ENCODEURL(texto)</code>
+  <p class="fc-d">Codifica un texto para usarlo en una URL.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=ENCODEURL(&quot;País Vasco&quot;)</code></div>
+  <div class="fc-cat">🤖 Web y modernas</div>
+</div><div class="fc" data-lvl="A" data-cat="Web y modernas" data-s="servicioweb =servicioweb(url) descarga datos de un servicio web (solo escritorio). =servicioweb(&quot;https://api...&quot;)">
+  <div class="fc-h"><span class="fc-n">SERVICIOWEB</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=SERVICIOWEB(url)</code>
+  <p class="fc-d">Descarga datos de un servicio web (solo escritorio).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=SERVICIOWEB(&quot;https://api...&quot;)</code></div>
+  <div class="fc-cat">🤖 Web y modernas</div>
+</div><div class="fc" data-lvl="A" data-cat="Web y modernas" data-s="xmlfiltro =xmlfiltro(xml;xpath) extrae datos de un xml con xpath. =xmlfiltro(a1;&quot;//precio&quot;)">
+  <div class="fc-h"><span class="fc-n">XMLFILTRO</span><span class="fc-l" style="background:#e539351a;color:#e53935;border:1px solid #e5393555">Avanzado</span></div>
+  <code class="fc-syn">=XMLFILTRO(xml;xpath)</code>
+  <p class="fc-d">Extrae datos de un XML con XPath.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>=XMLFILTRO(A1;&quot;//precio&quot;)</code></div>
+  <div class="fc-cat">🤖 Web y modernas</div>
+</div><div class="fc" data-lvl="X" data-cat="Web y modernas" data-s="valordemoneda / tipos de datos datos &gt; cotizaciones / geografía tipos de datos vinculados: acciones, divisas y geografía actualizados desde la nube (365). celda con &#x27;msft&#x27; → .price">
+  <div class="fc-h"><span class="fc-n">VALORDEMONEDA / TIPOS DE DATOS</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">Datos &gt; Cotizaciones / Geografía</code>
+  <p class="fc-d">Tipos de datos vinculados: acciones, divisas y geografía actualizados desde la nube (365).</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>Celda con &#x27;MSFT&#x27; → .Price</code></div>
+  <div class="fc-cat">🤖 Web y modernas</div>
+</div><div class="fc" data-lvl="X" data-cat="Web y modernas" data-s="analizarautomaticamente (analyze data) inicio &gt; análisis de datos la ia de excel responde preguntas en lenguaje natural sobre tus datos y propone gráficos y dinámicas. &quot;¿total de ventas por región?&quot;">
+  <div class="fc-h"><span class="fc-n">ANALIZARAUTOMATICAMENTE (Analyze Data)</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">Inicio &gt; Análisis de datos</code>
+  <p class="fc-d">La IA de Excel responde preguntas en lenguaje natural sobre tus datos y propone gráficos y dinámicas.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>&quot;¿Total de ventas por región?&quot;</code></div>
+  <div class="fc-cat">🤖 Web y modernas</div>
+</div><div class="fc" data-lvl="X" data-cat="Web y modernas" data-s="copilot pestaña copilot (365 con licencia) el asistente de ia de microsoft 365: genera fórmulas, resume tablas, crea columnas calculadas y explica resultados. &quot;añade una columna con el margen %&quot;">
+  <div class="fc-h"><span class="fc-n">COPILOT</span><span class="fc-l" style="background:#7b5cd61a;color:#7b5cd6;border:1px solid #7b5cd655">Excel 365</span></div>
+  <code class="fc-syn">Pestaña Copilot (365 con licencia)</code>
+  <p class="fc-d">El asistente de IA de Microsoft 365: genera fórmulas, resume tablas, crea columnas calculadas y explica resultados.</p>
+  <div class="fc-ex"><span>Ejemplo</span><code>&quot;Añade una columna con el margen %&quot;</code></div>
+  <div class="fc-cat">🤖 Web y modernas</div>
+</div>
+  </div>
+  <div class="empty" id="empty">🔍 Ninguna función coincide con tu búsqueda.<br>Prueba con otro término o quita los filtros.</div>
+</div>
+<footer>IGOREXCEL · Biblioteca de fórmulas v1.0 · 194 funciones documentadas · Hecho con 💚 para Igor</footer>
+<script>
+var CAT='*', LVL='*';
+function setCat(btn){
+  CAT=btn.dataset.cat;
+  document.querySelectorAll('.chip[data-cat]').forEach(function(c){c.classList.toggle('on',c===btn);});
+  applyF();
+}
+function setLvl(btn){
+  LVL=btn.dataset.lvl;
+  document.querySelectorAll('.chip[data-lvl]').forEach(function(c){c.classList.toggle('on',c===btn);});
+  applyF();
+}
+function applyF(){
+  var q=document.getElementById('buscador').value.toLowerCase().trim();
+  var n=0;
+  document.querySelectorAll('.fc').forEach(function(c){
+    var ok=(CAT==='*'||c.dataset.cat===CAT)&&(LVL==='*'||c.dataset.lvl===LVL)&&(q===''||c.dataset.s.indexOf(q)!==-1);
+    c.style.display=ok?'':'none';
+    if(ok)n++;
+  });
+  document.getElementById('nres').textContent='Mostrando '+n+' de 194 funciones';
+  document.getElementById('empty').style.display=n===0?'block':'none';
+}
+applyF();
+</script>
+</body>
+</html>

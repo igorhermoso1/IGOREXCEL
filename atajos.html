@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⌨️ Atajos de Teclado — IGOREXCEL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--eg:#217346;--egm:#2e8b57;--egl:#3daa6e;--egp:#e8f5ee;--eacc:#107c41;--ed:#1a2e1a;--gold:#f4c430}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f4f9f6;color:var(--ed)}
+header{background:linear-gradient(135deg,var(--eg),var(--eacc));color:#fff;padding:28px 24px;box-shadow:0 4px 18px rgba(33,115,70,.3)}
+.hw{max-width:980px;margin:0 auto}
+.hw h1{font-size:1.7rem;font-weight:800}
+.hw p{opacity:.92;margin-top:4px;font-size:.95rem}
+.hnav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.hnav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.16);padding:7px 14px;border-radius:9px;font-size:.85rem;font-weight:700;border:1px solid rgba(255,255,255,.25)}
+.hnav a:hover{background:rgba(255,255,255,.28)}
+.wrap{max-width:980px;margin:0 auto;padding:22px 24px 60px}
+.tools{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 14px rgba(33,115,70,.1);position:sticky;top:10px;z-index:5;border:1px solid #dcebe2}
+#buscador{width:100%;padding:12px 16px;font-size:1rem;border:2px solid var(--egp);border-radius:10px;font-family:inherit;outline:none}
+#buscador:focus{border-color:var(--egl)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1.5px solid #cfe5d8;background:#fff;border-radius:999px;padding:6px 13px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ed);transition:.15s}
+.chip:hover{border-color:var(--egl)}
+.chip.on{background:var(--eg);color:#fff;border-color:var(--eg)}
+#nres{margin:16px 4px 4px;font-size:.85rem;color:#5a7a66;font-weight:700}
+.cat-h h2{margin:22px 4px 10px;font-size:1.05rem;color:var(--eacc);display:flex;align-items:center;gap:8px}
+.cat-h h2 span{background:var(--egp);color:var(--eacc);font-size:.7rem;border-radius:999px;padding:2px 9px}
+.at{background:#fff;border:1px solid #dcebe2;border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:16px;margin-bottom:7px;transition:.15s}
+.at:hover{border-color:var(--egl);box-shadow:0 3px 10px rgba(33,115,70,.12)}
+.keys{display:flex;gap:5px;flex-wrap:wrap;min-width:230px}
+kbd{font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:600;background:linear-gradient(180deg,#fff,#eef6f1);border:1px solid #c4dccd;border-bottom-width:3px;border-radius:6px;padding:3px 8px;color:var(--eacc);white-space:nowrap}
+.desc{font-size:.87rem;color:#33493a}
+.empty{display:none;text-align:center;padding:60px 20px;color:#7a9484;font-weight:700}
+footer{text-align:center;padding:26px;color:#7a9484;font-size:.82rem}
+@media(max-width:640px){.at{flex-direction:column;align-items:flex-start;gap:7px}.keys{min-width:0}header{padding:20px 16px}.wrap{padding:16px 14px 50px}}
+</style>
+</head>
+<body>
+<header><div class="hw">
+  <h1>⌨️ Atajos de Teclado de Excel</h1>
+  <p>129 atajos organizados en 12 categorías — Excel para Windows en español. Domínalos y multiplica tu velocidad.</p>
+  <div class="hnav">
+    <a href="index.html">← Volver a IGOREXCEL</a>
+    <a href="formulas.html">📖 Biblioteca de fórmulas</a>
+    <a href="practicas.html">🧪 Prácticas avanzadas</a>
+  </div>
+</div></header>
+<div class="wrap">
+  <div class="tools">
+    <input id="buscador" type="text" placeholder="🔍 Busca un atajo: guardar, F4, tabla dinámica..." oninput="applyF()">
+    <div class="chips">
+      <button class="chip on" data-cat="*" onclick="setCat(this)">Todas</button>
+      <button class="chip" data-cat="Básicos y archivo" onclick="setCat(this)">💾 Básicos y archivo</button><button class="chip" data-cat="Navegación" onclick="setCat(this)">🧭 Navegación</button><button class="chip" data-cat="Selección" onclick="setCat(this)">🎯 Selección</button><button class="chip" data-cat="Edición de celdas" onclick="setCat(this)">✏️ Edición de celdas</button><button class="chip" data-cat="Formato" onclick="setCat(this)">🎨 Formato</button><button class="chip" data-cat="Fórmulas y funciones" onclick="setCat(this)">🔢 Fórmulas y funciones</button><button class="chip" data-cat="Filas, columnas y hojas" onclick="setCat(this)">📐 Filas, columnas y hojas</button><button class="chip" data-cat="Tablas y datos" onclick="setCat(this)">🗂️ Tablas y datos</button><button class="chip" data-cat="Tablas dinámicas" onclick="setCat(this)">🔄 Tablas dinámicas</button><button class="chip" data-cat="Macros y VBA" onclick="setCat(this)">🤖 Macros y VBA</button><button class="chip" data-cat="Vista y ventanas" onclick="setCat(this)">🪟 Vista y ventanas</button><button class="chip" data-cat="Productividad y trucos" onclick="setCat(this)">⚡ Productividad y trucos</button>
+    </div>
+  </div>
+  <div id="nres"></div>
+  <div id="lista">
+<div class="cat-h" data-cat="Básicos y archivo"><h2>💾 Básicos y archivo <span>12</span></h2></div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + g / ctrl + s guardar el libro">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>G / Ctrl</kbd><kbd>S</kbd></div>
+  <div class="desc">Guardar el libro</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="f12 guardar como">
+  <div class="keys"><kbd>F12</kbd></div>
+  <div class="desc">Guardar como</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + a abrir archivo">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>A</kbd></div>
+  <div class="desc">Abrir archivo</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + u libro nuevo">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>U</kbd></div>
+  <div class="desc">Libro nuevo</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + p imprimir">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>P</kbd></div>
+  <div class="desc">Imprimir</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + w cerrar libro">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>W</kbd></div>
+  <div class="desc">Cerrar libro</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="alt + f4 cerrar excel">
+  <div class="keys"><kbd>Alt</kbd><kbd>F4</kbd></div>
+  <div class="desc">Cerrar Excel</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + z deshacer">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Z</kbd></div>
+  <div class="desc">Deshacer</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="ctrl + y rehacer">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Y</kbd></div>
+  <div class="desc">Rehacer</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="f1 ayuda">
+  <div class="keys"><kbd>F1</kbd></div>
+  <div class="desc">Ayuda</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="esc cancelar entrada o cerrar diálogo">
+  <div class="keys"><kbd>Esc</kbd></div>
+  <div class="desc">Cancelar entrada o cerrar diálogo</div>
+</div><div class="at" data-cat="Básicos y archivo" data-s="alt + q búsqueda inteligente (información)">
+  <div class="keys"><kbd>Alt</kbd><kbd>Q</kbd></div>
+  <div class="desc">Búsqueda inteligente (Información)</div>
+</div><div class="cat-h" data-cat="Navegación"><h2>🧭 Navegación <span>12</span></h2></div><div class="at" data-cat="Navegación" data-s="ctrl + inicio ir a la celda a1">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Inicio</kbd></div>
+  <div class="desc">Ir a la celda A1</div>
+</div><div class="at" data-cat="Navegación" data-s="ctrl + fin ir a la última celda con datos">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Fin</kbd></div>
+  <div class="desc">Ir a la última celda con datos</div>
+</div><div class="at" data-cat="Navegación" data-s="ctrl + flecha saltar al borde de la región de datos">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Flecha</kbd></div>
+  <div class="desc">Saltar al borde de la región de datos</div>
+</div><div class="at" data-cat="Navegación" data-s="inicio ir al inicio de la fila">
+  <div class="keys"><kbd>Inicio</kbd></div>
+  <div class="desc">Ir al inicio de la fila</div>
+</div><div class="at" data-cat="Navegación" data-s="av pág / re pág bajar / subir una pantalla">
+  <div class="keys"><kbd>Av Pág / Re Pág</kbd></div>
+  <div class="desc">Bajar / subir una pantalla</div>
+</div><div class="at" data-cat="Navegación" data-s="alt + av pág una pantalla a la derecha">
+  <div class="keys"><kbd>Alt</kbd><kbd>Av Pág</kbd></div>
+  <div class="desc">Una pantalla a la derecha</div>
+</div><div class="at" data-cat="Navegación" data-s="ctrl + av pág hoja siguiente">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Av Pág</kbd></div>
+  <div class="desc">Hoja siguiente</div>
+</div><div class="at" data-cat="Navegación" data-s="ctrl + re pág hoja anterior">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Re Pág</kbd></div>
+  <div class="desc">Hoja anterior</div>
+</div><div class="at" data-cat="Navegación" data-s="f5 / ctrl + i ir a... (celda o rango concreto)">
+  <div class="keys"><kbd>F5 / Ctrl</kbd><kbd>I</kbd></div>
+  <div class="desc">Ir a... (celda o rango concreto)</div>
+</div><div class="at" data-cat="Navegación" data-s="tab / mayús + tab celda derecha / izquierda">
+  <div class="keys"><kbd>Tab / Mayús</kbd><kbd>Tab</kbd></div>
+  <div class="desc">Celda derecha / izquierda</div>
+</div><div class="at" data-cat="Navegación" data-s="intro / mayús + intro celda abajo / arriba">
+  <div class="keys"><kbd>Intro / Mayús</kbd><kbd>Intro</kbd></div>
+  <div class="desc">Celda abajo / arriba</div>
+</div><div class="at" data-cat="Navegación" data-s="ctrl + retroceso volver a mostrar la celda activa">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Retroceso</kbd></div>
+  <div class="desc">Volver a mostrar la celda activa</div>
+</div><div class="cat-h" data-cat="Selección"><h2>🎯 Selección <span>12</span></h2></div><div class="at" data-cat="Selección" data-s="ctrl + e seleccionar todo / región actual">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>E</kbd></div>
+  <div class="desc">Seleccionar todo / región actual</div>
+</div><div class="at" data-cat="Selección" data-s="mayús + flecha extender selección celda a celda">
+  <div class="keys"><kbd>Mayús</kbd><kbd>Flecha</kbd></div>
+  <div class="desc">Extender selección celda a celda</div>
+</div><div class="at" data-cat="Selección" data-s="ctrl + mayús + flecha extender hasta el final de la región">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>Flecha</kbd></div>
+  <div class="desc">Extender hasta el final de la región</div>
+</div><div class="at" data-cat="Selección" data-s="mayús + espacio seleccionar fila completa">
+  <div class="keys"><kbd>Mayús</kbd><kbd>Espacio</kbd></div>
+  <div class="desc">Seleccionar fila completa</div>
+</div><div class="at" data-cat="Selección" data-s="ctrl + espacio seleccionar columna completa">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Espacio</kbd></div>
+  <div class="desc">Seleccionar columna completa</div>
+</div><div class="at" data-cat="Selección" data-s="ctrl + mayús + inicio extender selección hasta a1">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>Inicio</kbd></div>
+  <div class="desc">Extender selección hasta A1</div>
+</div><div class="at" data-cat="Selección" data-s="ctrl + mayús + fin extender hasta la última celda usada">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>Fin</kbd></div>
+  <div class="desc">Extender hasta la última celda usada</div>
+</div><div class="at" data-cat="Selección" data-s="f8 modo extender selección">
+  <div class="keys"><kbd>F8</kbd></div>
+  <div class="desc">Modo extender selección</div>
+</div><div class="at" data-cat="Selección" data-s="mayús + f8 añadir rango no adyacente a la selección">
+  <div class="keys"><kbd>Mayús</kbd><kbd>F8</kbd></div>
+  <div class="desc">Añadir rango no adyacente a la selección</div>
+</div><div class="at" data-cat="Selección" data-s="ctrl + clic seleccionar celdas no contiguas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>clic</kbd></div>
+  <div class="desc">Seleccionar celdas no contiguas</div>
+</div><div class="at" data-cat="Selección" data-s="mayús + clic seleccionar rango hasta la celda clicada">
+  <div class="keys"><kbd>Mayús</kbd><kbd>clic</kbd></div>
+  <div class="desc">Seleccionar rango hasta la celda clicada</div>
+</div><div class="at" data-cat="Selección" data-s="ctrl + . (punto) rotar por las esquinas de la selección">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>. (punto)</kbd></div>
+  <div class="desc">Rotar por las esquinas de la selección</div>
+</div><div class="cat-h" data-cat="Edición de celdas"><h2>✏️ Edición de celdas <span>15</span></h2></div><div class="at" data-cat="Edición de celdas" data-s="f2 editar la celda activa">
+  <div class="keys"><kbd>F2</kbd></div>
+  <div class="desc">Editar la celda activa</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="supr borrar contenido">
+  <div class="keys"><kbd>Supr</kbd></div>
+  <div class="desc">Borrar contenido</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + c / ctrl + x / ctrl + v copiar / cortar / pegar">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>C / Ctrl</kbd><kbd>X / Ctrl</kbd><kbd>V</kbd></div>
+  <div class="desc">Copiar / cortar / pegar</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + alt + v pegado especial">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>V</kbd></div>
+  <div class="desc">Pegado especial</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + j rellenar hacia abajo (copia la celda superior)">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>J</kbd></div>
+  <div class="desc">Rellenar hacia abajo (copia la celda superior)</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + d rellenar hacia la derecha">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>D</kbd></div>
+  <div class="desc">Rellenar hacia la derecha</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + &#x27; (apóstrofo) copiar fórmula de la celda superior">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>&#x27; (apóstrofo)</kbd></div>
+  <div class="desc">Copiar fórmula de la celda superior</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="alt + intro salto de línea dentro de la celda">
+  <div class="keys"><kbd>Alt</kbd><kbd>Intro</kbd></div>
+  <div class="desc">Salto de línea dentro de la celda</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + intro rellenar todas las celdas seleccionadas con la entrada">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Intro</kbd></div>
+  <div class="desc">Rellenar todas las celdas seleccionadas con la entrada</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="f4 (editando) repetir última acción">
+  <div class="keys"><kbd>F4 (editando)</kbd></div>
+  <div class="desc">Repetir última acción</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + mayús + &quot;  copiar valor de la celda superior">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>&quot;</kbd></div>
+  <div class="desc">Copiar valor de la celda superior</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + - (menos) eliminar celdas/filas/columnas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>- (menos)</kbd></div>
+  <div class="desc">Eliminar celdas/filas/columnas</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + + (más) insertar celdas/filas/columnas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd></kbd><kbd>(más)</kbd></div>
+  <div class="desc">Insertar celdas/filas/columnas</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + b buscar">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>B</kbd></div>
+  <div class="desc">Buscar</div>
+</div><div class="at" data-cat="Edición de celdas" data-s="ctrl + l reemplazar">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>L</kbd></div>
+  <div class="desc">Reemplazar</div>
+</div><div class="cat-h" data-cat="Formato"><h2>🎨 Formato <span>13</span></h2></div><div class="at" data-cat="Formato" data-s="ctrl + 1 formato de celdas (el diálogo maestro)">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>1</kbd></div>
+  <div class="desc">Formato de celdas (el diálogo maestro)</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + n negrita">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>N</kbd></div>
+  <div class="desc">Negrita</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + k cursiva">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>K</kbd></div>
+  <div class="desc">Cursiva</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + s (formato) subrayado (excel en inglés: ctrl+u)">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>S (formato)</kbd></div>
+  <div class="desc">Subrayado (Excel en inglés: Ctrl+U)</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + 5 tachado">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>5</kbd></div>
+  <div class="desc">Tachado</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + $ formato moneda">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>$</kbd></div>
+  <div class="desc">Formato moneda</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + % formato porcentaje">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>%</kbd></div>
+  <div class="desc">Formato porcentaje</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + # formato fecha">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>#</kbd></div>
+  <div class="desc">Formato fecha</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + @ formato hora">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>@</kbd></div>
+  <div class="desc">Formato hora</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + ! formato número con miles">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>!</kbd></div>
+  <div class="desc">Formato número con miles</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + &amp; borde de contorno">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>&amp;</kbd></div>
+  <div class="desc">Borde de contorno</div>
+</div><div class="at" data-cat="Formato" data-s="ctrl + mayús + _ quitar bordes">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>_</kbd></div>
+  <div class="desc">Quitar bordes</div>
+</div><div class="at" data-cat="Formato" data-s="alt + o + 1 (secuencia) acceso por teclado a la cinta inicio">
+  <div class="keys"><kbd>Alt</kbd><kbd>O</kbd><kbd>1 (secuencia)</kbd></div>
+  <div class="desc">Acceso por teclado a la cinta Inicio</div>
+</div><div class="cat-h" data-cat="Fórmulas y funciones"><h2>🔢 Fórmulas y funciones <span>12</span></h2></div><div class="at" data-cat="Fórmulas y funciones" data-s="= (igual) iniciar fórmula">
+  <div class="keys"><kbd>= (igual)</kbd></div>
+  <div class="desc">Iniciar fórmula</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="alt + =  autosuma del rango contiguo">
+  <div class="keys"><kbd>Alt</kbd><kbd>=</kbd></div>
+  <div class="desc">Autosuma del rango contiguo</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="f4 (en referencia) alternar referencia: a1 → $a$1 → a$1 → $a1">
+  <div class="keys"><kbd>F4 (en referencia)</kbd></div>
+  <div class="desc">Alternar referencia: A1 → $A$1 → A$1 → $A1</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="f9 recalcular todo el libro">
+  <div class="keys"><kbd>F9</kbd></div>
+  <div class="desc">Recalcular todo el libro</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="mayús + f9 recalcular solo la hoja activa">
+  <div class="keys"><kbd>Mayús</kbd><kbd>F9</kbd></div>
+  <div class="desc">Recalcular solo la hoja activa</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="f9 sobre parte de la fórmula evaluar ese fragmento">
+  <div class="keys"><kbd>F9 sobre parte de la fórmula</kbd></div>
+  <div class="desc">Evaluar ese fragmento</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="ctrl + mayús + intro fórmula matricial heredada {{}}">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>Intro</kbd></div>
+  <div class="desc">Fórmula matricial heredada {{}}</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="mayús + f3 insertar función (asistente)">
+  <div class="keys"><kbd>Mayús</kbd><kbd>F3</kbd></div>
+  <div class="desc">Insertar función (asistente)</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="ctrl + mayús + a insertar nombres de argumentos de la función">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>A</kbd></div>
+  <div class="desc">Insertar nombres de argumentos de la función</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="alt + mayús + f10 (o ctrl+alt+f5) actualizar conexiones de datos">
+  <div class="keys"><kbd>Alt</kbd><kbd>Mayús</kbd><kbd>F10 (o Ctrl</kbd><kbd>Alt</kbd><kbd>F5)</kbd></div>
+  <div class="desc">Actualizar conexiones de datos</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="ctrl + ` (acento grave) mostrar fórmulas en vez de resultados">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>` (acento grave)</kbd></div>
+  <div class="desc">Mostrar fórmulas en vez de resultados</div>
+</div><div class="at" data-cat="Fórmulas y funciones" data-s="f3 pegar nombre definido en la fórmula">
+  <div class="keys"><kbd>F3</kbd></div>
+  <div class="desc">Pegar nombre definido en la fórmula</div>
+</div><div class="cat-h" data-cat="Filas, columnas y hojas"><h2>📐 Filas, columnas y hojas <span>9</span></h2></div><div class="at" data-cat="Filas, columnas y hojas" data-s="ctrl + 9 ocultar filas seleccionadas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>9</kbd></div>
+  <div class="desc">Ocultar filas seleccionadas</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="ctrl + mayús + 9 / ( mostrar filas ocultas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>9 / (</kbd></div>
+  <div class="desc">Mostrar filas ocultas</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="ctrl + 0 ocultar columnas seleccionadas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>0</kbd></div>
+  <div class="desc">Ocultar columnas seleccionadas</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="mayús + f11 insertar hoja nueva">
+  <div class="keys"><kbd>Mayús</kbd><kbd>F11</kbd></div>
+  <div class="desc">Insertar hoja nueva</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="alt + h + o + r (secuencia) renombrar hoja">
+  <div class="keys"><kbd>Alt</kbd><kbd>H</kbd><kbd>O</kbd><kbd>R (secuencia)</kbd></div>
+  <div class="desc">Renombrar hoja</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="doble clic en borde de cabecera autoajustar ancho de columna">
+  <div class="keys"><kbd>Doble clic en borde de cabecera</kbd></div>
+  <div class="desc">Autoajustar ancho de columna</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="alt + h + o + i (secuencia) autoajustar ancho con teclado">
+  <div class="keys"><kbd>Alt</kbd><kbd>H</kbd><kbd>O</kbd><kbd>I (secuencia)</kbd></div>
+  <div class="desc">Autoajustar ancho con teclado</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="ctrl + arrastrar pestaña duplicar hoja">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>arrastrar pestaña</kbd></div>
+  <div class="desc">Duplicar hoja</div>
+</div><div class="at" data-cat="Filas, columnas y hojas" data-s="alt + clic en signo de agrupación expandir/contraer esquemas">
+  <div class="keys"><kbd>Alt</kbd><kbd>clic en signo de agrupación</kbd></div>
+  <div class="desc">Expandir/contraer esquemas</div>
+</div><div class="cat-h" data-cat="Tablas y datos"><h2>🗂️ Tablas y datos <span>10</span></h2></div><div class="at" data-cat="Tablas y datos" data-s="ctrl + t / ctrl + q crear tabla de excel">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>T / Ctrl</kbd><kbd>Q</kbd></div>
+  <div class="desc">Crear tabla de Excel</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="ctrl + mayús + l activar/desactivar filtros">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>L</kbd></div>
+  <div class="desc">Activar/desactivar filtros</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="alt + flecha abajo (en cabecera) abrir menú de filtro">
+  <div class="keys"><kbd>Alt</kbd><kbd>Flecha abajo (en cabecera)</kbd></div>
+  <div class="desc">Abrir menú de filtro</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="ctrl + mayús + u expandir/contraer la barra de fórmulas">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>U</kbd></div>
+  <div class="desc">Expandir/contraer la barra de fórmulas</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="alt + a + s + s (secuencia) ordenar personalizado">
+  <div class="keys"><kbd>Alt</kbd><kbd>A</kbd><kbd>S</kbd><kbd>S (secuencia)</kbd></div>
+  <div class="desc">Ordenar personalizado</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="ctrl + e (en columna) relleno rápido (flash fill)">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>E (en columna)</kbd></div>
+  <div class="desc">Relleno rápido (Flash Fill)</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="alt + n + v (secuencia) insertar tabla dinámica">
+  <div class="keys"><kbd>Alt</kbd><kbd>N</kbd><kbd>V (secuencia)</kbd></div>
+  <div class="desc">Insertar tabla dinámica</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="alt + f1 gráfico rápido en la misma hoja">
+  <div class="keys"><kbd>Alt</kbd><kbd>F1</kbd></div>
+  <div class="desc">Gráfico rápido en la misma hoja</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="f11 gráfico rápido en hoja nueva">
+  <div class="keys"><kbd>F11</kbd></div>
+  <div class="desc">Gráfico rápido en hoja nueva</div>
+</div><div class="at" data-cat="Tablas y datos" data-s="ctrl + 8 mostrar/ocultar símbolos de esquema">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>8</kbd></div>
+  <div class="desc">Mostrar/ocultar símbolos de esquema</div>
+</div><div class="cat-h" data-cat="Tablas dinámicas"><h2>🔄 Tablas dinámicas <span>7</span></h2></div><div class="at" data-cat="Tablas dinámicas" data-s="alt + n + v crear tabla dinámica">
+  <div class="keys"><kbd>Alt</kbd><kbd>N</kbd><kbd>V</kbd></div>
+  <div class="desc">Crear tabla dinámica</div>
+</div><div class="at" data-cat="Tablas dinámicas" data-s="alt + jy (secuencia) pestañas de herramientas de td">
+  <div class="keys"><kbd>Alt</kbd><kbd>JY (secuencia)</kbd></div>
+  <div class="desc">Pestañas de herramientas de TD</div>
+</div><div class="at" data-cat="Tablas dinámicas" data-s="ctrl + - sobre campo quitar campo">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>- sobre campo</kbd></div>
+  <div class="desc">Quitar campo</div>
+</div><div class="at" data-cat="Tablas dinámicas" data-s="alt + mayús + flecha derecha agrupar elementos seleccionados">
+  <div class="keys"><kbd>Alt</kbd><kbd>Mayús</kbd><kbd>Flecha derecha</kbd></div>
+  <div class="desc">Agrupar elementos seleccionados</div>
+</div><div class="at" data-cat="Tablas dinámicas" data-s="alt + mayús + flecha izquierda desagrupar">
+  <div class="keys"><kbd>Alt</kbd><kbd>Mayús</kbd><kbd>Flecha izquierda</kbd></div>
+  <div class="desc">Desagrupar</div>
+</div><div class="at" data-cat="Tablas dinámicas" data-s="f5 + alt + s + ... selección especial dentro de td">
+  <div class="keys"><kbd>F5</kbd><kbd>Alt</kbd><kbd>S</kbd><kbd>...</kbd></div>
+  <div class="desc">Selección especial dentro de TD</div>
+</div><div class="at" data-cat="Tablas dinámicas" data-s="doble clic en un valor drill-down: ver registros de detalle">
+  <div class="keys"><kbd>Doble clic en un valor</kbd></div>
+  <div class="desc">Drill-down: ver registros de detalle</div>
+</div><div class="cat-h" data-cat="Macros y VBA"><h2>🤖 Macros y VBA <span>7</span></h2></div><div class="at" data-cat="Macros y VBA" data-s="alt + f11 abrir el editor de vba">
+  <div class="keys"><kbd>Alt</kbd><kbd>F11</kbd></div>
+  <div class="desc">Abrir el editor de VBA</div>
+</div><div class="at" data-cat="Macros y VBA" data-s="alt + f8 lista de macros (ejecutar)">
+  <div class="keys"><kbd>Alt</kbd><kbd>F8</kbd></div>
+  <div class="desc">Lista de macros (ejecutar)</div>
+</div><div class="at" data-cat="Macros y VBA" data-s="f5 (en vba) ejecutar procedimiento">
+  <div class="keys"><kbd>F5 (en VBA)</kbd></div>
+  <div class="desc">Ejecutar procedimiento</div>
+</div><div class="at" data-cat="Macros y VBA" data-s="f8 (en vba) ejecutar paso a paso">
+  <div class="keys"><kbd>F8 (en VBA)</kbd></div>
+  <div class="desc">Ejecutar paso a paso</div>
+</div><div class="at" data-cat="Macros y VBA" data-s="ctrl + mayús + f8 (vba) salir del procedimiento actual">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>F8 (VBA)</kbd></div>
+  <div class="desc">Salir del procedimiento actual</div>
+</div><div class="at" data-cat="Macros y VBA" data-s="alt + l + r (secuencia) grabar macro">
+  <div class="keys"><kbd>Alt</kbd><kbd>L</kbd><kbd>R (secuencia)</kbd></div>
+  <div class="desc">Grabar macro</div>
+</div><div class="at" data-cat="Macros y VBA" data-s="ctrl + pausa interrumpir macro en ejecución">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Pausa</kbd></div>
+  <div class="desc">Interrumpir macro en ejecución</div>
+</div><div class="cat-h" data-cat="Vista y ventanas"><h2>🪟 Vista y ventanas <span>8</span></h2></div><div class="at" data-cat="Vista y ventanas" data-s="ctrl + f1 mostrar/ocultar la cinta de opciones">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>F1</kbd></div>
+  <div class="desc">Mostrar/ocultar la cinta de opciones</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="alt + w + i (secuencia) vista previa de salto de página">
+  <div class="keys"><kbd>Alt</kbd><kbd>W</kbd><kbd>I (secuencia)</kbd></div>
+  <div class="desc">Vista previa de salto de página</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="ctrl + rueda del ratón zoom">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>rueda del ratón</kbd></div>
+  <div class="desc">Zoom</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="alt + w + f (secuencia) inmovilizar paneles">
+  <div class="keys"><kbd>Alt</kbd><kbd>W</kbd><kbd>F (secuencia)</kbd></div>
+  <div class="desc">Inmovilizar paneles</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="ctrl + f6 cambiar entre libros abiertos">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>F6</kbd></div>
+  <div class="desc">Cambiar entre libros abiertos</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="win + flecha acoplar ventana a un lado">
+  <div class="keys"><kbd>Win</kbd><kbd>Flecha</kbd></div>
+  <div class="desc">Acoplar ventana a un lado</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="alt + w + q diálogo de zoom">
+  <div class="keys"><kbd>Alt</kbd><kbd>W</kbd><kbd>Q</kbd></div>
+  <div class="desc">Diálogo de zoom</div>
+</div><div class="at" data-cat="Vista y ventanas" data-s="ctrl + mayús + f1 pantalla completa (oculta cinta y barras)">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>F1</kbd></div>
+  <div class="desc">Pantalla completa (oculta cinta y barras)</div>
+</div><div class="cat-h" data-cat="Productividad y trucos"><h2>⚡ Productividad y trucos <span>12</span></h2></div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + ; (punto y coma) insertar la fecha de hoy (estática)">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>; (punto y coma)</kbd></div>
+  <div class="desc">Insertar la fecha de hoy (estática)</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + mayús + ;  insertar la hora actual">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>;</kbd></div>
+  <div class="desc">Insertar la hora actual</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="alt + intro (en fórmula) saltos de línea para fórmulas legibles">
+  <div class="keys"><kbd>Alt</kbd><kbd>Intro (en fórmula)</kbd></div>
+  <div class="desc">Saltos de línea para fórmulas legibles</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + mayús + o seleccionar celdas con comentarios">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>O</kbd></div>
+  <div class="desc">Seleccionar celdas con comentarios</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="mayús + f2 insertar o editar comentario/nota">
+  <div class="keys"><kbd>Mayús</kbd><kbd>F2</kbd></div>
+  <div class="desc">Insertar o editar comentario/nota</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + mayús + v (365) pegar solo valores">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>V (365)</kbd></div>
+  <div class="desc">Pegar solo valores</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="alt + h + fc (secuencia) color de fuente desde teclado">
+  <div class="keys"><kbd>Alt</kbd><kbd>H</kbd><kbd>FC (secuencia)</kbd></div>
+  <div class="desc">Color de fuente desde teclado</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + alt + f9 recalcular absolutamente todo">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>F9</kbd></div>
+  <div class="desc">Recalcular absolutamente todo</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="f7 ortografía">
+  <div class="keys"><kbd>F7</kbd></div>
+  <div class="desc">Ortografía</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="alt + flecha abajo lista desplegable con valores ya usados en la columna">
+  <div class="keys"><kbd>Alt</kbd><kbd>flecha abajo</kbd></div>
+  <div class="desc">Lista desplegable con valores ya usados en la columna</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + mayús + f3 crear nombres desde la selección">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>Mayús</kbd><kbd>F3</kbd></div>
+  <div class="desc">Crear nombres desde la selección</div>
+</div><div class="at" data-cat="Productividad y trucos" data-s="ctrl + f3 administrador de nombres">
+  <div class="keys"><kbd>Ctrl</kbd><kbd>F3</kbd></div>
+  <div class="desc">Administrador de nombres</div>
+</div>
+  </div>
+  <div class="empty" id="empty">🔍 Ningún atajo coincide con tu búsqueda.</div>
+</div>
+<footer>IGOREXCEL · Guía de atajos v1.0 · 129 atajos · Hecho con 💚 para Igor</footer>
+<script>
+var CAT='*';
+function setCat(btn){
+  CAT=btn.dataset.cat;
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===btn);});
+  applyF();
+}
+function applyF(){
+  var q=document.getElementById('buscador').value.toLowerCase().trim();
+  var n=0, vis={};
+  document.querySelectorAll('.at').forEach(function(c){
+    var ok=(CAT==='*'||c.dataset.cat===CAT)&&(q===''||c.dataset.s.indexOf(q)!==-1);
+    c.style.display=ok?'':'none';
+    if(ok){n++;vis[c.dataset.cat]=true;}
+  });
+  document.querySelectorAll('.cat-h').forEach(function(h){
+    h.style.display=vis[h.dataset.cat]?'':'none';
+  });
+  document.getElementById('nres').textContent='Mostrando '+n+' de 129 atajos';
+  document.getElementById('empty').style.display=n===0?'block':'none';
+}
+applyF();
+</script>
+</body>
+</html>
